@@ -1,0 +1,6 @@
+runtime: nodejs
+env: flex
+env_variables:
+  ENV: "PROD"
+  DB_LOCAL_URI: "mongodb://localhost:27017/job_tracker"
+  DB_CLOUD_URI: "mongodb+srv://ziyang:QW6syyu90z7nWGUt@cluster0.xfdrgzt.mongodb.net/job_tracker"

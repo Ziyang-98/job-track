@@ -23,5 +23,8 @@
     "express": "^4.18.1",
     "mongoose": "^6.5.4",
     "uuid": "^9.0.0"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
