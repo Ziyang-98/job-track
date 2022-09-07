@@ -1,6 +1,6 @@
 # job-tracker
 
-A single page application to record and track your job applications
+A single page application to record and track your job applications.
 
 # Set-up
 

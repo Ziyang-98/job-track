@@ -128,6 +128,8 @@ app.delete("/user/job-apps/contacts", async (req, res) => {
   }
 });
 
-app.listen(8000, () => console.log("user-service listening on port 8000"));
+const port = process.env.PORT || 8000;
+
+app.listen(port, () => console.log(`user-service listening on port ${port}`));
 
 export default app;
