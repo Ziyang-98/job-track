@@ -8,7 +8,7 @@ import {
   addContactForJobApp,
   updateContactForJobApp,
   deleteContactForJobApp,
-} from "./model/repository.js";
+} from "./models/repository.js";
 import express from "express";
 import cors from "cors";
 import { v4 } from "uuid";
@@ -129,3 +129,5 @@ app.delete("/user/job-apps/contacts", async (req, res) => {
 });
 
 app.listen(8000, () => console.log("user-service listening on port 8000"));
+
+export default app;
