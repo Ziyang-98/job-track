@@ -30,6 +30,10 @@ jobs:
         ENV: "PROD"
         DB_LOCAL_URI: "mongodb://localhost:27017/job_tracker"
         DB_CLOUD_URI: "mongodb+srv://ziyang:QW6syyu90z7nWGUt@cluster0.xfdrgzt.mongodb.net/test"
+        PORT: 8000
+        file_name: .env
+        directory: backend
+        fail_on_empty: false
     - name: Install dependencies
       run: npm install
     - name: Run tests
