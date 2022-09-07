@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 chai.should();
 
 describe("Job Applications", () => {
-  describe("POST /", () => {
+  describe("POST /user/job-apps/contacts", () => {
     it("should return error 400 when unknown user id and unknown job id are provided for adding contact", (done) => {
       chai
         .request(app)
@@ -34,7 +34,7 @@ describe("Job Applications", () => {
     });
   });
 
-  describe("PUT /", () => {
+  describe("PUT /user/job-apps/contacts", () => {
     it("should return error 400 when unknown user id, unknown job id, and unknown contact id are provided for updating contact", (done) => {
       chai
         .request(app)

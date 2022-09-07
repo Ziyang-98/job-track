@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 chai.should();
 
 describe("User", () => {
-  describe("GET /", () => {
+  describe("GET /user", () => {
     it(" it should create user and return userid if no userId is present in body,", (done) => {
       chai
         .request(app)
