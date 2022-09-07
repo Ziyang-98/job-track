@@ -38,57 +38,69 @@ app.get("/user", async (req, res) => {
 });
 
 app.get("/user/job-apps", async (req, res) => {
-  const { userId } = req.body;
-  const jobApps = await getJobApplicationsForUser({ userId });
-  if (jobApps) {
+  try {
+    const { userId } = req.body;
+    const jobApps = await getJobApplicationsForUser({ userId });
     res.status(200).json({ jobApps });
-  } else {
-    res.status(400).json({ msg: "Invalid user id!" });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(400)
+      .json({ msg: "Encountered error getting job applications!" });
   }
 });
 
 app.post("/user/job-apps", async (req, res) => {
-  const { userId, jobApp } = req.body;
   try {
+    const { userId, jobApp } = req.body;
     await addJobApplicationForUser({ userId }, { ...jobApp });
     res.status(200).json({ msg: "Job application added!" });
   } catch (err) {
     console.error(err);
-    res.status(400).json({ msg: "Invalid job parameters!" });
+    res.status(400).json({ msg: "Encountered error adding job application!" });
   }
 });
 
 app.put("/user/job-apps", async (req, res) => {
-  const { userId, jobApp } = req.body;
   try {
+    const { userId, jobApp } = req.body;
     await updateJobApplicationForUser({ userId }, { ...jobApp });
     res.status(200).json({ msg: "Job application updated!" });
   } catch (err) {
     console.error(err);
-    res.status(400).json({ msg: "Invalid job parameters!" });
+    res
+      .status(400)
+      .json({ msg: "Encountered error updating job application!" });
   }
 });
 
 app.delete("/user/job-apps", async (req, res) => {
-  const { userId, jobAppId } = req.body;
-  await deleteJobApplicationForUser({ userId }, { _id: jobAppId });
-  res.status(200).json({ msg: "Job application deleted!" });
+  try {
+    const { userId, jobAppId } = req.body;
+    await deleteJobApplicationForUser({ userId }, { _id: jobAppId });
+    res.status(200).json({ msg: "Job application deleted!" });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(400)
+      .json({ msg: "Encountered error deleting job application!" });
+  }
 });
 
 app.post("/user/job-apps/contacts", async (req, res) => {
-  const { userId, jobAppId, contact } = req.body;
   try {
+    const { userId, jobAppId, contact } = req.body;
     await addContactForJobApp({ userId }, { _id: jobAppId }, { ...contact });
     res.status(200).json({ msg: "Contact added!" });
   } catch (err) {
     console.error(err);
-    res.status(400).json({ msg: "Encountered error updating contact!" });
+    res.status(400).json({ msg: "Encountered error adding contact!" });
   }
 });
 
 app.put("/user/job-apps/contacts", async (req, res) => {
-  const { userId, jobAppId, contact } = req.body;
   try {
+    const { userId, jobAppId, contact } = req.body;
     await updateContactForJobApp({ userId }, { _id: jobAppId }, { ...contact });
     res.status(200).json({ msg: "Contact updated!" });
   } catch (err) {
@@ -98,8 +110,8 @@ app.put("/user/job-apps/contacts", async (req, res) => {
 });
 
 app.delete("/user/job-apps/contacts", async (req, res) => {
-  const { userId, jobAppId, contactId } = req.body;
   try {
+    const { userId, jobAppId, contactId } = req.body;
     await deleteContactForJobApp(
       { userId },
       { _id: jobAppId },
@@ -108,7 +120,7 @@ app.delete("/user/job-apps/contacts", async (req, res) => {
     res.status(200).json({ msg: "Contact deleted!" });
   } catch (err) {
     console.error(err);
-    res.status(400).json({ msg: "Encountered error updating contact!" });
+    res.status(400).json({ msg: "Encountered error deleting contact!" });
   }
 });
 

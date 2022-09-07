@@ -14,22 +14,46 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 let db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+async function findUser({ userId }) {
+  const user = await UserModel.findOne({ userId });
+  if (!user) {
+    throw new Error("Invalid user id provided, unable to find user");
+  }
+  return user;
+}
+
 function replaceDoc(docArray, newParams) {
+  let replaced = false;
   for (let i = 0; i < docArray.length; i++) {
     if (docArray[i]._id.toString() === newParams._id) {
       docArray[i] = newParams;
+      replaced = true;
       break;
     }
+  }
+  if (!replaced) {
+    throw new Error("Invalid subdocument id, unable to replace subdocument");
   }
   return docArray;
 }
 
 function removeDoc(docArray, params) {
-  return docArray.filter((item) => !(item._id.toString() === params._id));
+  const prevLength = docArray.length;
+  const newDocArray = docArray.filter(
+    (item) => !(item._id.toString() === params._id)
+  );
+  if (newDocArray.length === prevLength) {
+    throw new Error("Invalid subdocument id, unable to remove subdocument");
+  }
+  return newDocArray;
 }
 
 function findDoc(docArray, params) {
-  return docArray.find((item) => item._id.toString() === params._id);
+  const subDoc = docArray.find((item) => item._id.toString() === params._id);
+  if (!subDoc) {
+    throw new Error("Invalid subdocument id, unable to find subdocument");
+  }
+  return subDoc;
 }
 
 export async function createUser(params) {
@@ -39,29 +63,29 @@ export async function createUser(params) {
 }
 
 export async function getUser(params) {
-  return await UserModel.findOne(params);
+  const user = await UserModel.findOne(params);
+  return user;
 }
 
 export async function getJobApplicationsForUser(userParams) {
-  const user = await UserModel.findOne(userParams);
-  return user?.jobApplications;
+  const user = await findUser(userParams);
+  return user.jobApplications;
 }
 
 export async function addJobApplicationForUser(userParams, newJobAppParams) {
-  const user = await UserModel.findOne(userParams);
+  const user = await findUser(userParams);
   user.jobApplications.push(newJobAppParams);
   await user.save();
 }
 
 export async function updateJobApplicationForUser(userParams, newJobAppParams) {
-  const user = await UserModel.findOne(userParams);
+  const user = await findUser(userParams);
   user.jobApplications = replaceDoc(user.jobApplications, newJobAppParams);
-  console.log(user.jobApplications);
   await user.save();
 }
 
 export async function deleteJobApplicationForUser(userParams, jobAppParams) {
-  const user = await UserModel.findOne(userParams);
+  const user = await findUser(userParams);
   user.jobApplications = removeDoc(user.jobApplications, jobAppParams);
   await user.save();
 }
@@ -71,11 +95,10 @@ export async function addContactForJobApp(
   jobAppParams,
   newContactParams
 ) {
-  const user = await UserModel.findOne(userParams);
+  const user = await findUser(userParams);
+
   const jobApp = findDoc(user.jobApplications, jobAppParams);
-  if (!jobApp) {
-    throw new Error("Invalid job id provided, unable to find job application");
-  }
+
   jobApp.contacts.push(newContactParams);
 
   await user.save();
@@ -86,11 +109,8 @@ export async function updateContactForJobApp(
   jobAppParams,
   newContactParams
 ) {
-  const user = await UserModel.findOne(userParams);
+  const user = await findUser(userParams);
   const jobApp = findDoc(user.jobApplications, jobAppParams);
-  if (!jobApp) {
-    throw new Error("Invalid job id provided, unable to find job application");
-  }
   jobApp.contacts = replaceDoc(jobApp.contacts, newContactParams);
   await user.save();
 }
@@ -100,11 +120,9 @@ export async function deleteContactForJobApp(
   jobAppParams,
   contactParams
 ) {
-  const user = await UserModel.findOne(userParams);
+  const user = await findUser(userParams);
   const jobApp = findDoc(user.jobApplications, jobAppParams);
-  if (!jobApp) {
-    throw new Error("Invalid job id provided, unable to find job application");
-  }
+
   jobApp.contacts = removeDoc(jobApp.contacts, contactParams);
   await user.save();
 }
