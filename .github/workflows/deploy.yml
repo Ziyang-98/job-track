@@ -13,10 +13,15 @@ jobs:
     environment: Secrets
     name: Deploy to App Engine
     runs-on: ubuntu-latest
+    
     steps:
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v0'
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Google App Engine
+      uses: google-github-actions/deploy-appengine@v0.4.0
       with:
-        credentials_json: '${{ secrets.GCP_SA_KEY }}'
-    - id: 'deploy'
-      uses: 'google-github-actions/deploy-appengine@v0'
+        project_id: job-application-tracker-361814
+        version: main
+        credentials: ${{secrets.GOOGLE_APP_ENGINE_KEY}}
+        flags: --no-cache
+        deliverables: app.yaml
