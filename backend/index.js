@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/user", async (req, res) => {
-  let { userId = "" } = req.body;
+  let { userId = "" } = req.query;
   let user = await getUser({ userId });
   let msg = "User retrieved!";
   if (!user) {
@@ -39,7 +39,7 @@ app.get("/user", async (req, res) => {
 
 app.get("/user/job-apps", async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.query;
     const jobApps = await getJobApplicationsForUser({ userId });
     res.status(200).json({ jobApps });
   } catch (err) {
