@@ -22,8 +22,6 @@ jobs:
       with:
         project_id: job-application-tracker-361814
         working_directory: backend
-        version: main
         credentials: ${{secrets.GOOGLE_APP_ENGINE_KEY}}
-        flags: --no-cache
-        deliverables: /backend/app.yaml
+        deliverables: app.yaml
         
