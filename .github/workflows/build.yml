@@ -28,7 +28,8 @@ jobs:
       uses: SpicyPizza/create-envfile@v1.3
       with:
         ENV: "PROD"
-        DB_CLOUD_URI: "mongodb+srv:QW6syyu90z7nWGUt//ziyang:@cluster0.xfdrgzt.mongodb.net/test"
+        DB_LOCAL_URI: "mongodb://localhost:27017/job_tracker"
+        DB_CLOUD_URI: "mongodb+srv://ziyang:QW6syyu90z7nWGUt@cluster0.xfdrgzt.mongodb.net/test"
     - name: Install dependencies
       run: npm install
     - name: Run tests
