@@ -14,9 +14,9 @@ defaults:
     working-directory: backend
 jobs:
   build_and_test_on_ubuntu:
-
+    environment: Secrets
     runs-on: ubuntu-latest
-
+    
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
