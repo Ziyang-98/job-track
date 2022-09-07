@@ -30,7 +30,7 @@ jobs:
         envkey_ENV: "PROD"
         envkey_DB_LOCAL_URI: "mongodb://localhost:27017/job_tracker"
         envkey_DB_CLOUD_URI: "mongodb+srv://ziyang:QW6syyu90z7nWGUt@cluster0.xfdrgzt.mongodb.net/test"
-        PORT: 8000
+        envkey_PORT: 8000
         file_name: .env
         directory: backend
         fail_on_empty: false
