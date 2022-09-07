@@ -74,8 +74,10 @@ export async function getJobApplicationsForUser(userParams) {
 
 export async function addJobApplicationForUser(userParams, newJobAppParams) {
   const user = await findUser(userParams);
-  user.jobApplications.push(newJobAppParams);
+  const newJobApp = user.jobApplications.create(newJobAppParams);
+  user.jobApplications.push(newJobApp);
   await user.save();
+  return newJobApp;
 }
 
 export async function updateJobApplicationForUser(userParams, newJobAppParams) {
@@ -96,12 +98,11 @@ export async function addContactForJobApp(
   newContactParams
 ) {
   const user = await findUser(userParams);
-
   const jobApp = findDoc(user.jobApplications, jobAppParams);
-
-  jobApp.contacts.push(newContactParams);
-
+  const newContact = jobApp.contacts.create(newContactParams);
+  jobApp.contacts.push(newContact);
   await user.save();
+  return newContact;
 }
 
 export async function updateContactForJobApp(

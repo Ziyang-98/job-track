@@ -53,8 +53,8 @@ app.get("/user/job-apps", async (req, res) => {
 app.post("/user/job-apps", async (req, res) => {
   try {
     const { userId, jobApp } = req.body;
-    await addJobApplicationForUser({ userId }, { ...jobApp });
-    res.status(200).json({ msg: "Job application added!" });
+    const newJobApp = await addJobApplicationForUser({ userId }, { ...jobApp });
+    res.status(200).json({ msg: "Job application added!", jobApp: newJobApp });
   } catch (err) {
     console.error(err);
     res.status(400).json({ msg: "Encountered error adding job application!" });
@@ -90,8 +90,12 @@ app.delete("/user/job-apps", async (req, res) => {
 app.post("/user/job-apps/contacts", async (req, res) => {
   try {
     const { userId, jobAppId, contact } = req.body;
-    await addContactForJobApp({ userId }, { _id: jobAppId }, { ...contact });
-    res.status(200).json({ msg: "Contact added!" });
+    const newContact = await addContactForJobApp(
+      { userId },
+      { _id: jobAppId },
+      { ...contact }
+    );
+    res.status(200).json({ msg: "Contact added!", contact: newContact });
   } catch (err) {
     console.error(err);
     res.status(400).json({ msg: "Encountered error adding contact!" });
