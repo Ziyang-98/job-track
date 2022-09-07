@@ -18,12 +18,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Google App Engine
-      uses: google-github-actions/deploy-appengine@v0.8.0
+      uses: google-github-actions/deploy-appengine@v0
       with:
         project_id: job-application-tracker-361814
         working_directory: backend
         version: main
         credentials: ${{secrets.GOOGLE_APP_ENGINE_KEY}}
         flags: --no-cache
-        deliverables: app.yaml
+        deliverables: /backend/app.yaml
         
