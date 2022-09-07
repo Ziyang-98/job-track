@@ -73,6 +73,9 @@ export async function addContactForJobApp(
 ) {
   const user = await UserModel.findOne(userParams);
   const jobApp = findDoc(user.jobApplications, jobAppParams);
+  if (!jobApp) {
+    throw new Error("Invalid job id provided, unable to find job application");
+  }
   jobApp.contacts.push(newContactParams);
 
   await user.save();
@@ -85,6 +88,9 @@ export async function updateContactForJobApp(
 ) {
   const user = await UserModel.findOne(userParams);
   const jobApp = findDoc(user.jobApplications, jobAppParams);
+  if (!jobApp) {
+    throw new Error("Invalid job id provided, unable to find job application");
+  }
   jobApp.contacts = replaceDoc(jobApp.contacts, newContactParams);
   await user.save();
 }
@@ -96,6 +102,9 @@ export async function deleteContactForJobApp(
 ) {
   const user = await UserModel.findOne(userParams);
   const jobApp = findDoc(user.jobApplications, jobAppParams);
+  if (!jobApp) {
+    throw new Error("Invalid job id provided, unable to find job application");
+  }
   jobApp.contacts = removeDoc(jobApp.contacts, contactParams);
   await user.save();
 }
