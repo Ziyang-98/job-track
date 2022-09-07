@@ -1,0 +1,22 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+    - main
+  
+defaults:
+  run:
+    working-directory: backend
+jobs:
+  deploy:
+    environment: Secrets
+    name: Deploy to App Engine
+    runs-on: ubuntu-latest
+    steps:
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+    - id: 'deploy'
+      uses: 'google-github-actions/deploy-appengine@v0'
