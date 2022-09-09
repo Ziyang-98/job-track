@@ -7,11 +7,17 @@ import ExportIcon from "@mui/icons-material/FileDownloadOutlined";
 import Tooltip from "@mui/material/Tooltip";
 
 import { styles } from "./styles.js";
-const CreateButton = () => {
+
+const CreateButton = ({ handleClickCreate }) => {
   return (
     <Box>
       <Tooltip title="Add new Job Application">
-        <IconButton aria-label="create" size="large" sx={styles.button}>
+        <IconButton
+          aria-label="create"
+          size="large"
+          sx={styles.button}
+          onClick={handleClickCreate}
+        >
           <AddIcon />
         </IconButton>
       </Tooltip>

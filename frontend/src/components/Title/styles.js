@@ -3,7 +3,7 @@ export const styles = {
     paddingTop: 2,
   },
   title: {
-    color: "secondary.main",
+    color: "primary.main",
     letterSpacing: ".1rem",
   },
 };

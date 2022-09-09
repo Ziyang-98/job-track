@@ -7,14 +7,14 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   m: `0 0 ${grid}px 0`,
   borderRadius: 2,
   // change background colour if dragging
-  bgcolor: "secondary.lessLight",
+  bgcolor: "primary.lessLight",
 
   // styles we need to apply on draggables
   ...draggableStyle,
 });
 
 const getListStyle = (isDraggingOver) => ({
-  bgcolor: "secondary.light",
+  bgcolor: "primary.light",
   marginBottom: 2,
   height: "100%",
   width: "90%",
@@ -23,7 +23,7 @@ const getListStyle = (isDraggingOver) => ({
 
 export const styles = {
   mainList: {
-    bgcolor: "secondary.light",
+    bgcolor: "primary.light",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -38,7 +38,7 @@ export const styles = {
     borderRadius: 1.5,
   },
   listTitle: {
-    color: "primary.dark",
+    color: "secondary.dark",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

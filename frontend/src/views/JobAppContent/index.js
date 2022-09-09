@@ -7,12 +7,14 @@ import useDnd from "hooks/useDnd";
 import useJobApps from "hooks/useJobApps";
 import JobAppDroppableList from "components/JobAppDroppableList";
 
+import { styles } from "./styles";
+
 const JobAppContent = () => {
   const { jobApps, setJobApps, updateStatus, handleDeleteJobApp } =
     useJobApps();
   const { onDragEnd } = useDnd(jobApps, setJobApps, updateStatus);
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
+    <Box sx={styles.contentContainer}>
       <DragDropContext onDragEnd={onDragEnd}>
         {jobApps.map((jobAppsSameStatus, ind) => (
           <JobAppDroppableList

@@ -3,12 +3,18 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 import Title from "components/Title";
-import CreateButton from "components/ActionButtons";
+import ActionButtons from "components/ActionButtons";
 import JobAppContent from "views/JobAppContent";
-
+import CreateDialog from "components/CreateDialog";
+import useCreateDialog from "hooks/useCreateDialog";
 import { styles } from "./styles";
 
 const Layout = () => {
+  const {
+    createDialogProps,
+    handleClickOpen: handleClickCreate,
+    handleClose,
+  } = useCreateDialog();
   return (
     <Box sx={styles.mainContainer}>
       <Grid
@@ -23,7 +29,7 @@ const Layout = () => {
 
         <Grid xs={10} container item justifyContent={"flex-end"}>
           <Grid item>
-            <CreateButton />
+            <ActionButtons handleClickCreate={handleClickCreate} />
           </Grid>
         </Grid>
 
@@ -31,6 +37,7 @@ const Layout = () => {
           <JobAppContent />
         </Grid>
       </Grid>
+      <CreateDialog dialogProps={createDialogProps} handleClose={handleClose} />
     </Box>
   );
 };
