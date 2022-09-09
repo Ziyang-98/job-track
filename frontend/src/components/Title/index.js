@@ -6,8 +6,11 @@ import { styles } from "./styles.js";
 const Title = () => {
   return (
     <Box sx={styles.titleHolder}>
-      <Typography variant="h2" gutterBottom>
-        JobTrack
+      <Typography variant="h2" gutterBottom sx={styles.title}>
+        Job Track
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom sx={styles.title}>
+        Keeping track of your job applications has never been simpler
       </Typography>
     </Box>
   );
