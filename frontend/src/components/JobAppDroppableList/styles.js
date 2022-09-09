@@ -3,7 +3,7 @@ const grid = 4;
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
-  p: 2,
+  p: 1,
   m: `0 0 ${grid}px 0`,
   borderRadius: 2,
   // change background colour if dragging
@@ -44,7 +44,13 @@ export const styles = {
     alignItems: "center",
     height: "10%",
     width: "100%",
+    paddingBottom: 2,
   },
   useListStyle: getListStyle,
   useItemStyle: getItemStyle,
+  draggableContent: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 };

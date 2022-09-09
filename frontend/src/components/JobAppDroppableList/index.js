@@ -1,6 +1,8 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 import { jobAppStatusMap } from "common/jobAppStatus";
@@ -39,22 +41,16 @@ const JobAppDroppableList = ({
                       provided.draggableProps.style
                     )}
                   >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                      }}
-                    >
-                      {jobAppStatusMap[jobApp.status]}
-                      <button
-                        type="button"
+                    <Box sx={styles.draggableContent}>
+                      <Typography>{jobApp.company}</Typography>
+                      <IconButton
                         onClick={() => {
                           handleDeleteJobApp(rawStatusType, index, jobApp._id);
                         }}
                       >
-                        delete
-                      </button>
-                    </div>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Box>
                   </Box>
                 )}
               </Draggable>
