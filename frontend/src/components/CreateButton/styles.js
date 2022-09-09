@@ -1,7 +1,7 @@
 export const styles = {
   button: {
     bgcolor: "secondary.light",
-    textColor: "secondary.contrastText",
+    color: "primary.dark",
     "&:hover": {
       bgcolor: "secondary.main",
     },
