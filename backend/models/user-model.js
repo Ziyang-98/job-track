@@ -49,7 +49,6 @@ let UserModelSchema = new Schema({
         },
         dateApplied: {
           type: String,
-          required: true,
         },
         lastContactDate: {
           type: String,

@@ -14,7 +14,9 @@ const Layout = () => {
     createDialogProps,
     handleClickOpen: handleClickCreate,
     handleClose,
+    handleCreateJobApp,
   } = useCreateDialog();
+
   return (
     <Box sx={styles.mainContainer}>
       <Grid
@@ -37,7 +39,11 @@ const Layout = () => {
           <JobAppContent />
         </Grid>
       </Grid>
-      <CreateDialog dialogProps={createDialogProps} handleClose={handleClose} />
+      <CreateDialog
+        dialogProps={createDialogProps}
+        handleClose={handleClose}
+        handleCreateJobApp={handleCreateJobApp}
+      />
     </Box>
   );
 };
