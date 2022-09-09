@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 import Title from "components/Title";
-import CreateButton from "components/CreateButton";
+import CreateButton from "components/ActionButtons";
 import JobAppContent from "views/JobAppContent";
 
 import { styles } from "./styles";
