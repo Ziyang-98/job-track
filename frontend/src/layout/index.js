@@ -1,18 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Title from "components/Title";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
-import { styles } from "./styles";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+import Title from "components/Title";
+import CreateButton from "components/CreateButton";
+
+import { styles } from "./styles";
 
 const Layout = () => {
   return (
@@ -23,15 +16,13 @@ const Layout = () => {
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <Grid xs={12} item />
-
         <Grid xs={11} item>
           <Title />
         </Grid>
 
         <Grid xs={11} container item justifyContent={"flex-end"}>
-          <Grid>
-            <Item>Create button</Item>
+          <Grid item>
+            <CreateButton />
           </Grid>
         </Grid>
 

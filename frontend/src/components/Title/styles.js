@@ -1,5 +1,5 @@
 export const styles = {
   titleHolder: {
-    display: "flex",
+    paddingTop: 2,
   },
 };
