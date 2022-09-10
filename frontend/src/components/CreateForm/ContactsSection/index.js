@@ -9,6 +9,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Tooltip from "@mui/material/Tooltip";
 
 import { styles } from "./styles";
 const ContactsSection = ({
@@ -87,15 +88,16 @@ const ContactsSection = ({
               </IconButton>
             </Box>
           ))}
-
-          <IconButton
-            aria-label="create"
-            size="large"
-            sx={styles.button}
-            onClick={handleAddContact}
-          >
-            <AddIcon />
-          </IconButton>
+          <Tooltip title="Add a Contact">
+            <IconButton
+              aria-label="create"
+              size="large"
+              sx={styles.button}
+              onClick={handleAddContact}
+            >
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
         </AccordionDetails>
       </Accordion>
     </Box>

@@ -5,7 +5,7 @@ import { getUserIdFromLocalStorage } from "common/utils";
 
 const useCreateDialog = (refreshJobApps) => {
   const [open, setOpen] = useState(false);
-  const [contacts, setContacts] = useState([{ ...DEFAULT_CONTACT }]);
+  const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -14,7 +14,7 @@ const useCreateDialog = (refreshJobApps) => {
   };
 
   const reset = () => {
-    setContacts([{ ...DEFAULT_CONTACT }]);
+    setContacts([]);
     setLoading(false);
     setError(false);
   };
