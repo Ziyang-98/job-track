@@ -7,6 +7,8 @@ import ActionButtons from "components/ActionButtons";
 import JobAppContent from "views/JobAppContent";
 import CreateDialog from "components/CreateOrEditDialog";
 import useCreateDialog from "hooks/useCreateDialog";
+import Footer from "components/Footer";
+
 import { styles } from "./styles";
 
 const Layout = () => {
@@ -47,6 +49,7 @@ const Layout = () => {
         formContactSuite={formContactSuite}
         type={"create"}
       />
+      <Footer />
     </Box>
   );
 };
