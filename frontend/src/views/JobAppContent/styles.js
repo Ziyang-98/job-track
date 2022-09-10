@@ -3,5 +3,6 @@ export const styles = {
     display: "flex",
     justifyContent: "center",
     flexWrap: "wrap",
+    paddingBottom: 4,
   },
 };

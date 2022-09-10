@@ -21,9 +21,9 @@ export const useStyles = (index) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    margin: 2,
-    width: 250,
-    minWidth: 160,
+    margin: "8px 8px",
+    width: "15%",
+    minWidth: 180,
 
     minHeight: 300,
     height: 500,

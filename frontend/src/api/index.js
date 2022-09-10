@@ -20,10 +20,12 @@ export async function getJobApps(userId) {
 
 export async function createJobApp(userId, jobAppBody) {
   const body = { userId, jobApp: jobAppBody };
-  console.log(body);
-  const response = await new axios.post(JOB_APP_ENDPOINT, {
-    userId,
-    jobApp: jobAppBody,
-  });
+  const response = await new axios.post(JOB_APP_ENDPOINT, body);
+  return response;
+}
+
+export async function updateJobApp(userId, jobAppBody) {
+  const body = { userId, jobApp: jobAppBody };
+  const response = await new axios.post(JOB_APP_ENDPOINT, body);
   return response;
 }
