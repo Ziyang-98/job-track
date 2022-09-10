@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 
-import { getJobApps, getUser, updateJobApp } from "api";
+import { deleteJobApp, getJobApps, getUser, updateJobApp } from "api";
 import { JobAppStatus } from "common/jobAppStatus";
 import {
   getUserIdFromLocalStorage,
@@ -145,6 +145,7 @@ const useJobApps = () => {
     // TODO: Update Job from database with new status
     console.log(jobApp);
     updateJobApp(getUserIdFromLocalStorage(), jobApp).catch((err) => {
+      setError(error);
       console.error(err);
     });
   };
@@ -155,8 +156,12 @@ const useJobApps = () => {
     setJobApps(newJobApps);
 
     // TODO: Delete Job from database with jobAppId
+    deleteJobApp(getUserIdFromLocalStorage(), jobAppId).catch((err) => {
+      setError(error);
+      console.error(err);
+    });
 
-    refreshJobApps();
+    // refreshJobApps();
   };
   return {
     jobApps,

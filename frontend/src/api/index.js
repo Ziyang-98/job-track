@@ -29,3 +29,9 @@ export async function updateJobApp(userId, jobAppBody) {
   const response = await new axios.put(JOB_APP_ENDPOINT, body);
   return response;
 }
+
+export async function deleteJobApp(userId, jobAppId) {
+  const body = { userId, jobAppId: jobAppId };
+  const response = await new axios.delete(JOB_APP_ENDPOINT, { data: body });
+  return response;
+}
