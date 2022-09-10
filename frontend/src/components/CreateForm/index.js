@@ -11,6 +11,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { jobAppStatusMap } from "common/jobAppStatus";
 
+import ContactsSection from "./ContactsSection";
+
 import { styles } from "./styles";
 
 const statues = Object.values(jobAppStatusMap);
@@ -40,7 +42,7 @@ const CreateForm = () => {
         variant="outlined"
         sx={styles.formItem}
       />
-      <FormControl fullWidth sx={styles.formItem}>
+      <FormControl sx={styles.formItem}>
         <InputLabel id="status-select-label">Job Application Status</InputLabel>
         <Select
           labelId="status-select-label"
@@ -81,7 +83,7 @@ const CreateForm = () => {
         sx={styles.formItem}
       />
 
-      {/* TODO: Add contact form*/}
+      <ContactsSection />
       <TextField
         autoFocus
         margin="dense"
