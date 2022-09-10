@@ -7,6 +7,8 @@ import ActionButtons from "components/ActionButtons";
 import JobAppContent from "views/JobAppContent";
 import CreateDialog from "components/CreateOrEditDialog";
 import useCreateDialog from "hooks/useCreateDialog";
+import ExportDialog from "components/ExportDialog";
+import useExportDialog from "hooks/useExportDialog";
 import Footer from "components/Footer";
 
 import { styles } from "./styles";
@@ -15,10 +17,17 @@ const Layout = () => {
   const {
     createDialogProps,
     handleOpenCreateDialog,
-    handleClose,
+    handleClose: handleCreateDialogClose,
     handleCreateJobApp,
     formContactSuite,
   } = useCreateDialog();
+
+  const {
+    exportDialogProps,
+    handleOpenExportDialog,
+    handleClose: handleExportDialogClose,
+    userId,
+  } = useExportDialog();
 
   return (
     <Box sx={styles.mainContainer}>
@@ -34,7 +43,10 @@ const Layout = () => {
 
         <Grid xs={10} container item justifyContent={"flex-end"}>
           <Grid item>
-            <ActionButtons handleClickCreate={handleOpenCreateDialog} />
+            <ActionButtons
+              handleClickCreate={handleOpenCreateDialog}
+              handleClickExport={handleOpenExportDialog}
+            />
           </Grid>
         </Grid>
 
@@ -44,10 +56,15 @@ const Layout = () => {
       </Grid>
       <CreateDialog
         dialogProps={createDialogProps}
-        handleClose={handleClose}
+        handleClose={handleCreateDialogClose}
         onSubmit={handleCreateJobApp}
         formContactSuite={formContactSuite}
         type={"create"}
+      />
+      <ExportDialog
+        dialogProps={exportDialogProps}
+        userId={userId}
+        handleClose={handleExportDialogClose}
       />
       <Footer />
     </Box>

@@ -8,7 +8,7 @@ import Tooltip from "@mui/material/Tooltip";
 
 import { styles } from "./styles.js";
 
-const CreateButton = ({ handleClickCreate }) => {
+const CreateButton = ({ handleClickCreate, handleClickExport }) => {
   return (
     <Box>
       <Tooltip title="Add new Job Application">
@@ -27,7 +27,12 @@ const CreateButton = ({ handleClickCreate }) => {
         </IconButton>
       </Tooltip>
       <Tooltip title="Export current data">
-        <IconButton aria-label="export" size="large" sx={styles.button}>
+        <IconButton
+          aria-label="export"
+          size="large"
+          sx={styles.button}
+          onClick={handleClickExport}
+        >
           <ExportIcon />
         </IconButton>
       </Tooltip>
