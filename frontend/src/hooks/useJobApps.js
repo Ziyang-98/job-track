@@ -1,3 +1,5 @@
+import { JobAppStatus } from "common/jobAppStatus";
+import dayjs from "dayjs";
 import { useState } from "react";
 const dummyJobApps = [
   [
@@ -8,8 +10,8 @@ const dummyJobApps = [
       location: "Singapore",
       contacts: [],
       jobPosting: "",
-      dateApplied: "",
-      lastContactDate: "",
+      dateApplied: null,
+      lastContactDate: null,
       notes: "Interview round 3",
       _id: "5474",
     },
@@ -92,10 +94,16 @@ const dummyJobApps = [
 ];
 
 const useJobApps = () => {
-  const [jobApps, setJobApps] = useState(dummyJobApps);
+  const [jobApps, setJobApps] = useState([...dummyJobApps]);
 
   const updateStatus = (jobApp, newStatus) => {
-    jobApp.status = newStatus;
+    if (jobApp.status === JobAppStatus.planning) {
+      // Set date applied as current date if job app is moved from planning status
+      jobApp.dateApplied = dayjs().format("DD/MM/YYYY").toString();
+      jobApp.lastContactDate = null;
+    }
+
+    jobApp.status = parseInt(newStatus);
     // TODO: Update Job from database with new status
   };
 

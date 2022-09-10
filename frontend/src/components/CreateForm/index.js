@@ -9,7 +9,7 @@ import FormControl from "@mui/material/FormControl";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { jobAppStatusMap } from "common/jobAppStatus";
+import { JobAppStatus, jobAppStatusMap } from "common/jobAppStatus";
 import { convertStringToDayjs } from "common/utils";
 
 import ContactsSection from "./ContactsSection";
@@ -35,7 +35,11 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
   } = formContactSuite;
 
   const hasApplied = () => {
-    return status !== 0;
+    const statusToCheck = type === "create" ? status : jobApp.status;
+    console.log("statusToCheck", statusToCheck);
+    console.log("JobAppStatus.planning", JobAppStatus.planning);
+
+    return statusToCheck !== JobAppStatus.planning;
   };
 
   const handleChange = (event) => {
@@ -65,6 +69,7 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
           name="status"
           label="Job Application Status"
           required
+          disabled={type === "edit"}
           onChange={handleChange}
         >
           {statues.map((s, index) => (
