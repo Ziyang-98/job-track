@@ -155,13 +155,10 @@ const useJobApps = () => {
     newJobApps[rawStatusType].splice(jobAppIndex, 1);
     setJobApps(newJobApps);
 
-    // TODO: Delete Job from database with jobAppId
     deleteJobApp(getUserIdFromLocalStorage(), jobAppId).catch((err) => {
       setError(error);
       console.error(err);
     });
-
-    // refreshJobApps();
   };
   return {
     jobApps,
