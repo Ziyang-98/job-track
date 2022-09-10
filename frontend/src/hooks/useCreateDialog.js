@@ -3,7 +3,7 @@ import { DEFAULT_CONTACT } from "common/constants";
 import { createJobApp } from "api";
 import { getUserIdFromLocalStorage } from "common/utils";
 
-const useCreateDialog = (refreshJobApps) => {
+const useCreateDialog = (refreshJobApps, handleOpenNotification) => {
   const [open, setOpen] = useState(false);
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -59,12 +59,25 @@ const useCreateDialog = (refreshJobApps) => {
       notes: data.get("notes"),
     };
 
-    await createJobApp(getUserIdFromLocalStorage(), body).catch((err) => {
-      console.error(err);
-      setError(true);
-    });
+    await createJobApp(getUserIdFromLocalStorage(), body)
+      .then(() => {
+        refreshJobApps().then(() => {
+          handleOpenNotification(
+            "Job Application Entry created successfully!",
+            1500,
+            "success"
+          );
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        handleOpenNotification(
+          "Error creating entry. Please refresh and try again later!",
+          4000,
+          "error"
+        );
+      });
 
-    await refreshJobApps();
     setLoading(false);
 
     handleClose();

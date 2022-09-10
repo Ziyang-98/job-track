@@ -91,6 +91,7 @@ const Layout = () => {
         handleClose={handleCreateDialogClose}
         onSubmit={handleCreateJobApp}
         formContactSuite={formContactSuite}
+        loading={createLoading}
         type={"create"}
       />
       <ImportDialog

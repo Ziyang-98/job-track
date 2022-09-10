@@ -9,6 +9,8 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import { jobAppStatusMap } from "common/jobAppStatus";
 import useEditDialog from "hooks/useEditDialog";
 import EditDialog from "components/CreateOrEditDialog";
+import useNotification from "hooks/useNotification";
+import Notification from "components/Notification";
 
 import { useStyles } from "./styles";
 
@@ -18,6 +20,9 @@ const JobAppDroppableList = ({
   handleDeleteJobApp,
   refreshJobApps,
 }) => {
+  const { handleOpenNotification, snackbarProps, alertProps, message } =
+    useNotification();
+
   const {
     editDialogProps,
     handleClose,
@@ -25,7 +30,8 @@ const JobAppDroppableList = ({
     handleUpdate,
     jobApp,
     formContactSuite,
-  } = useEditDialog(refreshJobApps);
+    loading: editLoading,
+  } = useEditDialog(refreshJobApps, handleOpenNotification);
 
   const styles = useStyles(rawStatusType);
   return (
@@ -98,7 +104,13 @@ const JobAppDroppableList = ({
         onSubmit={handleUpdate}
         formContactSuite={formContactSuite}
         jobApp={jobApp}
+        loading={editLoading}
         type={"edit"}
+      />
+      <Notification
+        snackbarProps={snackbarProps}
+        alertProps={alertProps}
+        message={message}
       />
     </Box>
   );

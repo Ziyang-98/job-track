@@ -3,20 +3,19 @@ import { DEFAULT_CONTACT, DEFAULT_JOB_APP } from "common/constants";
 import { updateJobApp } from "api";
 import { getUserIdFromLocalStorage } from "common/utils";
 
-const useEditDialog = (refreshJobApps) => {
+const useEditDialog = (refreshJobApps, handleOpenNotification) => {
   const [open, setOpen] = useState(false);
   const [jobApp, setJobApp] = useState({ ...DEFAULT_JOB_APP });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
 
   const handleReset = () => {
     setLoading(false);
-    setError(false);
     setJobApp({ ...DEFAULT_JOB_APP });
   };
 
   const handleClose = () => {
-    handleReset();
+    // Set timeout for smoother transition when user closes dialog
+    setTimeout(handleReset, 200);
     setOpen(false);
   };
 
@@ -70,12 +69,25 @@ const useEditDialog = (refreshJobApps) => {
       _id: jobApp._id,
     };
 
-    await updateJobApp(getUserIdFromLocalStorage(), body).catch((err) => {
-      setError(true);
-      console.error(err);
-    });
+    await updateJobApp(getUserIdFromLocalStorage(), body)
+      .then(() => {
+        refreshJobApps().then(() => {
+          handleOpenNotification(
+            "Job Application Entry updated successfully!",
+            1500,
+            "success"
+          );
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        handleOpenNotification(
+          "Error updating entry. Please refresh and try again later!",
+          4000,
+          "error"
+        );
+      });
 
-    await refreshJobApps();
     setLoading(false);
     handleClose();
   };
@@ -90,7 +102,6 @@ const useEditDialog = (refreshJobApps) => {
     handleUpdate,
     jobApp,
     loading,
-    error,
     formContactSuite: {
       contacts: jobApp.contacts,
       handleAddContact,

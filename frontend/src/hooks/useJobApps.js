@@ -27,7 +27,7 @@ const useJobApps = (handleOpenNotification) => {
         console.error(err);
         handleOpenNotification(
           "Error connecting to server. Please refresh and try again later!",
-          5000,
+          4000,
           "error"
         );
       });
@@ -60,7 +60,7 @@ const useJobApps = (handleOpenNotification) => {
       console.error(err);
       handleOpenNotification(
         "Error updating status. Please refresh and try again later!",
-        5000,
+        4000,
         "error"
       );
     });
@@ -79,7 +79,7 @@ const useJobApps = (handleOpenNotification) => {
         console.error(err);
         handleOpenNotification(
           "Error deleting entry. Please refresh and try again later!",
-          5000,
+          4000,
           "error"
         );
       });

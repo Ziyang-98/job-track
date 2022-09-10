@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -10,12 +11,13 @@ import { DEFAULT_JOB_APP } from "common/constants";
 
 import { styles } from "./styles";
 
-const CreateDialog = ({
+const CreateOrEditDialog = ({
   dialogProps,
   handleClose,
   onSubmit,
   formContactSuite,
   type,
+  loading,
   jobApp = DEFAULT_JOB_APP,
 }) => {
   return (
@@ -37,13 +39,13 @@ const CreateDialog = ({
           <Button sx={styles.button} onClick={handleClose}>
             Cancel
           </Button>
-          <Button sx={styles.button} type="submit">
+          <LoadingButton loading={loading} sx={styles.button} type="submit">
             {type === "create" ? "Create" : "Update"}
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </Dialog>
     </form>
   );
 };
 
-export default CreateDialog;
+export default CreateOrEditDialog;
