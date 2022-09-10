@@ -39,11 +39,11 @@ const useJobApps = (handleOpenNotification) => {
       .then((res) => {
         const { userId } = res.data;
         storeUserIdFromLocalStorage(userId);
+        refreshJobApps();
       })
       .catch((err) => {
-        console.error(err);
+        refreshJobApps();
       });
-    refreshJobApps();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -55,7 +55,6 @@ const useJobApps = (handleOpenNotification) => {
     }
 
     jobApp.status = newStatus;
-    console.log(jobApp);
     updateJobApp(getUserIdFromLocalStorage(), jobApp).catch((err) => {
       console.error(err);
       handleOpenNotification(

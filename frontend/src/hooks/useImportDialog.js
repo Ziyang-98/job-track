@@ -19,10 +19,6 @@ const useImportDialog = (refreshJobApps, handleOpenNotification) => {
     setLoading(true);
     const data = new FormData(event.currentTarget);
     const newUserId = data.get("userId");
-    await new Promise((resolve) => {
-      console.log(`Retrieving UserId : ${newUserId}`);
-      setTimeout(() => resolve(), 3000);
-    });
 
     await getJobApps(newUserId)
       .then(() => {
@@ -38,7 +34,7 @@ const useImportDialog = (refreshJobApps, handleOpenNotification) => {
       .catch((err) => {
         // setError(true);
         handleOpenNotification(
-          "Error importing data. Please check if the userId is correct, or if your connection is stable!",
+          "Error importing data. Please check if the user ID is correct, or if your connection is stable!",
           5000,
           "error"
         );
