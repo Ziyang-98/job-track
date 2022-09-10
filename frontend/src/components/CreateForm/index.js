@@ -126,6 +126,7 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
                 setDateApplied(newValue);
               }}
               defaultValue={jobApp.dateApplied}
+              inputFormat={"DD/MM/YYYY"}
               renderInput={(params) => (
                 <TextField
                   name="dateApplied"
@@ -143,6 +144,7 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
                 setLastContactDate(newValue);
               }}
               defaultValue={jobApp.lastContactDate}
+              inputFormat={"DD/MM/YYYY"}
               renderInput={(params) => (
                 <TextField
                   name="lastContactDate"

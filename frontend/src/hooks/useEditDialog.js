@@ -17,7 +17,6 @@ const useEditDialog = (refreshJobApps) => {
   const updateJobApp = (prop, newVal) => {
     const newJobApp = { ...jobApp };
     newJobApp[prop] = newVal;
-    console.log(newJobApp);
     setJobApp(newJobApp);
   };
 
@@ -44,7 +43,19 @@ const useEditDialog = (refreshJobApps) => {
 
   const handleUpdate = async (event) => {
     event.preventDefault();
-    const body = { ...jobApp };
+    const data = new FormData(event.currentTarget);
+
+    const body = {
+      company: data.get("company"),
+      status: jobApp.status,
+      role: data.get("role"),
+      location: data.get("location"),
+      contacts: jobApp.contacts,
+      jobPosting: data.get("jobPosting"),
+      dateApplied: data.get("dateApplied"),
+      lastContactDate: data.get("lastContactDate"),
+      notes: data.get("notes"),
+    };
 
     // TODO: Update job app in the backend;
     console.log(body);

@@ -58,7 +58,7 @@ const dummyJobApps = [
       contacts: [],
       jobPosting: "",
       dateApplied: "24/08/2022",
-      lastContactDate: "26-08-2022",
+      lastContactDate: "26/08/2022",
       notes: "Interview round 3",
       _id: "7543",
     },
