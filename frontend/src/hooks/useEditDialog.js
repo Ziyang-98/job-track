@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { DEFAULT_CONTACT, DEFAULT_JOB_APP } from "common/constants";
 
-const useEditDialog = () => {
+const useEditDialog = (refreshJobApps) => {
   const [open, setOpen] = useState(false);
   const [jobApp, setJobApp] = useState({ ...DEFAULT_JOB_APP });
 
@@ -45,6 +45,8 @@ const useEditDialog = () => {
     event.preventDefault();
     const body = { ...jobApp };
     console.log(body);
+
+    await refreshJobApps();
     handleClose();
   };
 

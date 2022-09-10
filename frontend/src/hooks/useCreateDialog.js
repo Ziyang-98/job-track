@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { DEFAULT_CONTACT } from "common/constants";
 
-const useCreateDialog = () => {
+const useCreateDialog = (refreshJobApps) => {
   const [open, setOpen] = useState(false);
   const [contacts, setContacts] = useState([{ ...DEFAULT_CONTACT }]);
 
@@ -47,7 +47,12 @@ const useCreateDialog = () => {
       lastContactDate: data.get("lastContactDate"),
       notes: data.get("notes"),
     };
+
+    // TODO: Create Job App through backend
     console.log(body);
+
+    await refreshJobApps();
+    handleClose();
   };
 
   return {

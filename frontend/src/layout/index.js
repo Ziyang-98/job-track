@@ -9,18 +9,27 @@ import CreateDialog from "components/CreateOrEditDialog";
 import useCreateDialog from "hooks/useCreateDialog";
 import ExportDialog from "components/ExportDialog";
 import useExportDialog from "hooks/useExportDialog";
+import useJobApps from "hooks/useJobApps";
 import Footer from "components/Footer";
 
 import { styles } from "./styles";
 
 const Layout = () => {
   const {
+    jobApps,
+    setJobApps,
+    updateStatus,
+    handleDeleteJobApp,
+    refreshJobApps,
+  } = useJobApps();
+
+  const {
     createDialogProps,
     handleOpenCreateDialog,
     handleClose: handleCreateDialogClose,
     handleCreateJobApp,
     formContactSuite,
-  } = useCreateDialog();
+  } = useCreateDialog(refreshJobApps);
 
   const {
     exportDialogProps,
@@ -51,7 +60,13 @@ const Layout = () => {
         </Grid>
 
         <Grid item xs={11}>
-          <JobAppContent />
+          <JobAppContent
+            jobApps={jobApps}
+            setJobApps={setJobApps}
+            updateStatus={updateStatus}
+            handleDeleteJobApp={handleDeleteJobApp}
+            refreshJobApps={refreshJobApps}
+          />
         </Grid>
       </Grid>
       <CreateDialog

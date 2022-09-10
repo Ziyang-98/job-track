@@ -4,14 +4,17 @@ import Box from "@mui/material/Box";
 import { DragDropContext } from "react-beautiful-dnd";
 
 import useDnd from "hooks/useDnd";
-import useJobApps from "hooks/useJobApps";
 import JobAppDroppableList from "components/JobAppDroppableList";
 
 import { styles } from "./styles";
 
-const JobAppContent = () => {
-  const { jobApps, setJobApps, updateStatus, handleDeleteJobApp } =
-    useJobApps();
+const JobAppContent = ({
+  jobApps,
+  setJobApps,
+  updateStatus,
+  handleDeleteJobApp,
+  refreshJobApps,
+}) => {
   const { onDragEnd } = useDnd(jobApps, setJobApps, updateStatus);
   return (
     <Box sx={styles.contentContainer}>
@@ -22,6 +25,7 @@ const JobAppContent = () => {
             jobApps={jobAppsSameStatus}
             rawStatusType={ind}
             handleDeleteJobApp={handleDeleteJobApp}
+            refreshJobApps={refreshJobApps}
           />
         ))}
       </DragDropContext>

@@ -16,6 +16,7 @@ const JobAppDroppableList = ({
   jobApps,
   rawStatusType,
   handleDeleteJobApp,
+  refreshJobApps,
 }) => {
   const {
     editDialogProps,
@@ -24,7 +25,7 @@ const JobAppDroppableList = ({
     handleUpdate,
     jobApp,
     formContactSuite,
-  } = useEditDialog();
+  } = useEditDialog(refreshJobApps);
 
   return (
     <Box sx={styles.mainList}>

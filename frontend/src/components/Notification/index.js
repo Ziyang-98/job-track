@@ -11,16 +11,16 @@ const Notification = ({
   type,
   timeout,
   copied,
-  handleCloseSnackbar,
+  handleCloseNotification,
 }) => {
   return (
     <Snackbar
       open={copied}
       autoHideDuration={timeout}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      onClose={handleCloseSnackbar}
+      onClose={handleCloseNotification}
     >
-      <Alert onClose={handleCloseSnackbar} severity={type}>
+      <Alert onClose={handleCloseNotification} severity={type}>
         {message}
       </Alert>
     </Snackbar>

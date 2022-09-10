@@ -41,7 +41,7 @@ const ExportDialog = ({ dialogProps, handleClose, userId }) => {
       <Notification
         type="success"
         message="User ID copied to clipboard!"
-        timeout={2000}
+        timeout={1500}
         copied={copied}
         handleCloseNotification={handleCloseNotification}
       />
