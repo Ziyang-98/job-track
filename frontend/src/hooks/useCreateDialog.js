@@ -1,17 +1,11 @@
 import { useState } from "react";
-
-const defaultContact = {
-  name: "",
-  email: "",
-  role: "",
-  met: "",
-};
+import { DEFAULT_CONTACT } from "common/constants";
 
 const useCreateDialog = () => {
   const [open, setOpen] = useState(false);
-  const [contacts, setContacts] = useState([{ ...defaultContact }]);
+  const [contacts, setContacts] = useState([{ ...DEFAULT_CONTACT }]);
 
-  const handleClickOpen = () => {
+  const handleOpenCreateDialog = () => {
     setOpen(true);
   };
 
@@ -21,7 +15,7 @@ const useCreateDialog = () => {
 
   const handleAddContact = () => {
     const newContacts = [...contacts];
-    newContacts.push({ ...defaultContact });
+    newContacts.push({ ...DEFAULT_CONTACT });
     setContacts(newContacts);
   };
 
@@ -62,7 +56,7 @@ const useCreateDialog = () => {
       onClose: handleClose,
     },
     handleClose,
-    handleClickOpen,
+    handleOpenCreateDialog,
     handleCreateJobApp,
     formContactSuite: {
       contacts,

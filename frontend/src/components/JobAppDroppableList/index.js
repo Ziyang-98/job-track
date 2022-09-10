@@ -3,9 +3,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 import { jobAppStatusMap } from "common/jobAppStatus";
+import useEditDialog from "hooks/useEditDialog";
+import EditDialog from "components/CreateOrEditDialog";
+
 import { styles } from "./styles";
 
 const JobAppDroppableList = ({
@@ -13,6 +17,15 @@ const JobAppDroppableList = ({
   rawStatusType,
   handleDeleteJobApp,
 }) => {
+  const {
+    editDialogProps,
+    handleClose,
+    handleOpenEditDialog,
+    handleUpdate,
+    jobApp,
+    formContactSuite,
+  } = useEditDialog();
+
   return (
     <Box sx={styles.mainList}>
       <Typography sx={styles.listTitle} variant="h6">
@@ -43,13 +56,29 @@ const JobAppDroppableList = ({
                   >
                     <Box sx={styles.draggableContent}>
                       <Typography>{jobApp.company}</Typography>
-                      <IconButton
-                        onClick={() => {
-                          handleDeleteJobApp(rawStatusType, index, jobApp._id);
-                        }}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
+
+                      <Box>
+                        <IconButton
+                          onClick={() => {
+                            handleOpenEditDialog(jobApp);
+                          }}
+                          sx={styles.button}
+                        >
+                          <InfoOutlinedIcon />
+                        </IconButton>
+                        <IconButton
+                          onClick={() => {
+                            handleDeleteJobApp(
+                              rawStatusType,
+                              index,
+                              jobApp._id
+                            );
+                          }}
+                          sx={styles.button}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Box>
                     </Box>
                   </Box>
                 )}
@@ -59,6 +88,14 @@ const JobAppDroppableList = ({
           </Box>
         )}
       </Droppable>
+      <EditDialog
+        dialogProps={editDialogProps}
+        handleClose={handleClose}
+        onSubmit={handleUpdate}
+        formContactSuite={formContactSuite}
+        jobApp={jobApp}
+        type={"edit"}
+      />
     </Box>
   );
 };

@@ -5,14 +5,14 @@ import Grid from "@mui/material/Grid";
 import Title from "components/Title";
 import ActionButtons from "components/ActionButtons";
 import JobAppContent from "views/JobAppContent";
-import CreateDialog from "components/CreateDialog";
+import CreateDialog from "components/CreateOrEditDialog";
 import useCreateDialog from "hooks/useCreateDialog";
 import { styles } from "./styles";
 
 const Layout = () => {
   const {
     createDialogProps,
-    handleClickOpen: handleClickCreate,
+    handleOpenCreateDialog,
     handleClose,
     handleCreateJobApp,
     formContactSuite,
@@ -32,7 +32,7 @@ const Layout = () => {
 
         <Grid xs={10} container item justifyContent={"flex-end"}>
           <Grid item>
-            <ActionButtons handleClickCreate={handleClickCreate} />
+            <ActionButtons handleClickCreate={handleOpenCreateDialog} />
           </Grid>
         </Grid>
 
@@ -43,8 +43,9 @@ const Layout = () => {
       <CreateDialog
         dialogProps={createDialogProps}
         handleClose={handleClose}
-        handleCreateJobApp={handleCreateJobApp}
+        onSubmit={handleCreateJobApp}
         formContactSuite={formContactSuite}
+        type={"create"}
       />
     </Box>
   );

@@ -10,6 +10,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { jobAppStatusMap } from "common/jobAppStatus";
+import { convertStringToDayjs } from "common/utils";
 
 import ContactsSection from "./ContactsSection";
 
@@ -17,10 +18,14 @@ import { styles } from "./styles";
 
 const statues = Object.values(jobAppStatusMap);
 
-const CreateForm = ({ formContactSuite }) => {
-  const [status, setStatus] = React.useState(0);
-  const [dateApplied, setDateApplied] = React.useState(null);
-  const [lastContactDate, setLastContactDate] = React.useState(null);
+const CreateForm = ({ formContactSuite, type, jobApp }) => {
+  const [status, setStatus] = React.useState(jobApp.status);
+  const [dateApplied, setDateApplied] = React.useState(
+    convertStringToDayjs(jobApp.dateApplied)
+  );
+  const [lastContactDate, setLastContactDate] = React.useState(
+    convertStringToDayjs(jobApp.lastContactDate)
+  );
 
   const {
     contacts,
@@ -39,7 +44,7 @@ const CreateForm = ({ formContactSuite }) => {
   return (
     <Box sx={styles.form}>
       <TextField
-        autoFocus
+        autoFocus={type === "create"}
         required
         margin="dense"
         name="company"
@@ -47,6 +52,7 @@ const CreateForm = ({ formContactSuite }) => {
         label="Company"
         type="company"
         variant="outlined"
+        defaultValue={jobApp.company}
         sx={styles.formItem}
       />
       <FormControl sx={styles.formItem}>
@@ -54,6 +60,7 @@ const CreateForm = ({ formContactSuite }) => {
         <Select
           labelId="status-select-label"
           id="status-simple-select"
+          defaultValue={jobApp.status}
           value={status}
           name="status"
           label="Job Application Status"
@@ -68,7 +75,6 @@ const CreateForm = ({ formContactSuite }) => {
         </Select>
       </FormControl>
       <TextField
-        autoFocus
         required
         margin="dense"
         name="role"
@@ -76,17 +82,18 @@ const CreateForm = ({ formContactSuite }) => {
         label="Role"
         type="role"
         variant="outlined"
+        defaultValue={jobApp.role}
         sx={styles.formItem}
       />
 
       <TextField
-        autoFocus
         margin="dense"
         id="location"
         label="Location"
         name="location"
         type="location"
         variant="outlined"
+        defaultValue={jobApp.location}
         sx={styles.formItem}
       />
 
@@ -97,13 +104,13 @@ const CreateForm = ({ formContactSuite }) => {
         handleUpdateContacts={handleUpdateContacts}
       />
       <TextField
-        autoFocus
         margin="dense"
         id="jobPosting"
         label="Job Posting Link"
         name="jobPosting"
         type="jobPosting"
         variant="outlined"
+        defaultValue={jobApp.jobPosting}
         sx={styles.formItem}
       />
       {hasApplied() && (
@@ -115,6 +122,7 @@ const CreateForm = ({ formContactSuite }) => {
               onChange={(newValue) => {
                 setDateApplied(newValue);
               }}
+              defaultValue={jobApp.dateApplied}
               renderInput={(params) => (
                 <TextField
                   name="dateApplied"
@@ -131,6 +139,7 @@ const CreateForm = ({ formContactSuite }) => {
               onChange={(newValue) => {
                 setLastContactDate(newValue);
               }}
+              defaultValue={jobApp.lastContactDate}
               renderInput={(params) => (
                 <TextField
                   name="lastContactDate"
@@ -143,7 +152,6 @@ const CreateForm = ({ formContactSuite }) => {
         </>
       )}
       <TextField
-        autoFocus
         margin="dense"
         id="notes"
         label="Additional notes"
@@ -152,6 +160,7 @@ const CreateForm = ({ formContactSuite }) => {
         name="notes"
         multiline
         rows={2}
+        defaultValue={jobApp.notes}
         sx={styles.formItem}
       />
     </Box>

@@ -27,7 +27,6 @@ const ContactsSection = ({
           {contacts.map((contact, index) => (
             <Box sx={styles.singleContactDetails} key={index}>
               <TextField
-                autoFocus
                 margin="dense"
                 name="name"
                 id="name"
@@ -41,7 +40,6 @@ const ContactsSection = ({
                 sx={styles.formItem}
               />
               <TextField
-                autoFocus
                 margin="dense"
                 name="email"
                 id="email"
@@ -55,7 +53,6 @@ const ContactsSection = ({
                 sx={styles.formItem}
               />
               <TextField
-                autoFocus
                 margin="dense"
                 name="role"
                 id="role"
@@ -69,7 +66,6 @@ const ContactsSection = ({
                 sx={styles.formItem}
               />
               <TextField
-                autoFocus
                 margin="dense"
                 name="met"
                 id="met"

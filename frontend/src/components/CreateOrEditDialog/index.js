@@ -6,28 +6,39 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
 import CreateForm from "components/CreateForm";
+import { DEFAULT_JOB_APP } from "common/constants";
 
 import { styles } from "./styles";
 
 const CreateDialog = ({
   dialogProps,
   handleClose,
-  handleCreateJobApp,
+  onSubmit,
   formContactSuite,
+  type,
+  jobApp = DEFAULT_JOB_APP,
 }) => {
   return (
-    <form onSubmit={handleCreateJobApp}>
+    <form onSubmit={onSubmit}>
       <Dialog {...dialogProps} maxWidth={"sm"} fullWidth disablePortal>
-        <DialogTitle>Create an entry for Job Application</DialogTitle>
+        <DialogTitle>
+          {type === "create"
+            ? "Create an entry for Job Application"
+            : "Details for Job Application"}
+        </DialogTitle>
         <DialogContent>
-          <CreateForm formContactSuite={formContactSuite} />
+          <CreateForm
+            formContactSuite={formContactSuite}
+            type={type}
+            jobApp={jobApp}
+          />
         </DialogContent>
         <DialogActions>
           <Button sx={styles.button} onClick={handleClose}>
             Cancel
           </Button>
           <Button sx={styles.button} type="submit">
-            Create
+            {type === "create" ? "Create" : "Update"}
           </Button>
         </DialogActions>
       </Dialog>
