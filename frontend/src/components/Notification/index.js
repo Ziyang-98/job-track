@@ -10,12 +10,12 @@ const Notification = ({
   message,
   type,
   timeout,
-  copied,
+  open,
   handleCloseNotification,
 }) => {
   return (
     <Snackbar
-      open={copied}
+      open={open}
       autoHideDuration={timeout}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       onClose={handleCloseNotification}

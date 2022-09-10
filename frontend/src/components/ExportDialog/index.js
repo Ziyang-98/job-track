@@ -13,11 +13,11 @@ import useNotification from "hooks/useNotification";
 import { styles } from "./styles";
 
 const ExportDialog = ({ dialogProps, handleClose, userId }) => {
-  const { copied, handleCopied, handleCloseNotification } = useNotification();
+  const { open, handleOpen, handleCloseNotification } = useNotification();
 
   return (
     <>
-      <Dialog {...dialogProps} maxWidth={"sm"} fullWidth disablePortal>
+      <Dialog {...dialogProps} maxWidth={"sm"} fullWidth>
         <DialogTitle>Click on your unique ID to copy to clipboard</DialogTitle>
         <DialogContent>
           <Box sx={styles.userIdContainer}>
@@ -27,7 +27,7 @@ const ExportDialog = ({ dialogProps, handleClose, userId }) => {
               underline="none"
               onClick={() => {
                 navigator.clipboard.writeText(userId);
-                handleCopied();
+                handleOpen();
               }}
             >
               {userId}
@@ -42,7 +42,7 @@ const ExportDialog = ({ dialogProps, handleClose, userId }) => {
         type="success"
         message="User ID copied to clipboard!"
         timeout={1500}
-        copied={copied}
+        open={open}
         handleCloseNotification={handleCloseNotification}
       />
     </>

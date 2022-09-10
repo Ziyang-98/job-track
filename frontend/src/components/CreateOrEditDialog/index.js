@@ -23,8 +23,8 @@ const CreateDialog = ({
       <Dialog {...dialogProps} maxWidth={"sm"} fullWidth disablePortal>
         <DialogTitle>
           {type === "create"
-            ? "Create an entry for Job Application"
-            : "Details for Job Application"}
+            ? "Create an entry for the Job Application"
+            : "Details for the Job Application"}
         </DialogTitle>
         <DialogContent>
           <CreateForm

@@ -9,6 +9,8 @@ import CreateDialog from "components/CreateOrEditDialog";
 import useCreateDialog from "hooks/useCreateDialog";
 import ExportDialog from "components/ExportDialog";
 import useExportDialog from "hooks/useExportDialog";
+import ImportDialog from "components/ImportDialog";
+import useImportDialog from "hooks/useImportDialog";
 import useJobApps from "hooks/useJobApps";
 import Footer from "components/Footer";
 
@@ -30,6 +32,15 @@ const Layout = () => {
     handleCreateJobApp,
     formContactSuite,
   } = useCreateDialog(refreshJobApps);
+
+  const {
+    importDialogProps,
+    handleOpenImportDialog,
+    handleClose: handleImportDialogClose,
+    handleImportData,
+    error: importError,
+    loading: importLoading,
+  } = useImportDialog(refreshJobApps);
 
   const {
     exportDialogProps,
@@ -54,6 +65,7 @@ const Layout = () => {
           <Grid item>
             <ActionButtons
               handleClickCreate={handleOpenCreateDialog}
+              handleClickImport={handleOpenImportDialog}
               handleClickExport={handleOpenExportDialog}
             />
           </Grid>
@@ -75,6 +87,13 @@ const Layout = () => {
         onSubmit={handleCreateJobApp}
         formContactSuite={formContactSuite}
         type={"create"}
+      />
+      <ImportDialog
+        dialogProps={importDialogProps}
+        handleClose={handleImportDialogClose}
+        handleImportData={handleImportData}
+        error={importError}
+        loading={importLoading}
       />
       <ExportDialog
         dialogProps={exportDialogProps}

@@ -1,22 +1,22 @@
 import { useState } from "react";
 
 const useNotification = () => {
-  const [copied, setCopied] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const handleCopied = () => {
-    setCopied(true);
+  const handleOpen = () => {
+    setOpen(true);
   };
 
   const handleCloseNotification = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setCopied(false);
+    setOpen(false);
   };
 
   return {
-    copied,
-    handleCopied,
+    open,
+    handleOpen,
     handleCloseNotification,
   };
 };
