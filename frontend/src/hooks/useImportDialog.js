@@ -1,3 +1,5 @@
+import { getJobApps } from "api";
+import { storeUserIdFromLocalStorage } from "common/utils";
 import { useState } from "react";
 
 const useImportDialog = (refreshJobApps) => {
@@ -22,11 +24,16 @@ const useImportDialog = (refreshJobApps) => {
       console.log(`Retrieving UserId : ${newUserId}`);
       setTimeout(() => resolve(), 3000);
     });
-    // TODO: Check user id is valid
 
-    // TODO: Change localStorage to new user id
-    console.log(newUserId);
-    setError(true);
+    await getJobApps(newUserId)
+      .then(() => {
+        storeUserIdFromLocalStorage(newUserId);
+      })
+      .catch((err) => {
+        setError(true);
+        console.err(err);
+      });
+
     await refreshJobApps();
     setLoading(false);
     handleClose();

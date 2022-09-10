@@ -142,7 +142,6 @@ const useJobApps = () => {
     }
 
     jobApp.status = newStatus;
-    // TODO: Update Job from database with new status
     console.log(jobApp);
     updateJobApp(getUserIdFromLocalStorage(), jobApp).catch((err) => {
       setError(error);

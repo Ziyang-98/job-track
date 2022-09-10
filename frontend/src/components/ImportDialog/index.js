@@ -54,10 +54,10 @@ const ImportDialog = ({
         type={error ? "error" : "success"}
         message={
           error
-            ? "Encountered issues retriving data. Check if the user ID is correct?"
+            ? "Encountered issues retrieving data. Check the user ID is correct, or if your internet is stable?"
             : "Successfully imported data!"
         }
-        timeout={3000}
+        timeout={error ? 8000 : 3000}
         open={open}
         handleCloseNotification={handleCloseNotification}
       />

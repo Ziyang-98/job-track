@@ -64,8 +64,6 @@ const useCreateDialog = (refreshJobApps) => {
       setError(true);
     });
 
-    // TODO: Create Job App through backend
-
     await refreshJobApps();
     setLoading(false);
 

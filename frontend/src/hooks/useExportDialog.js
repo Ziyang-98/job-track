@@ -10,7 +10,6 @@ const useExportDialog = () => {
   };
 
   const handleOpenExportDialog = () => {
-    // TODO: Get user id from localstorage and set it to userId
     const userId = getUserIdFromLocalStorage();
     setUserId(userId);
 
