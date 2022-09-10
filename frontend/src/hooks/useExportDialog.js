@@ -1,3 +1,4 @@
+import { getUserIdFromLocalStorage } from "common/utils";
 import { useState } from "react";
 
 const useExportDialog = () => {
@@ -10,7 +11,8 @@ const useExportDialog = () => {
 
   const handleOpenExportDialog = () => {
     // TODO: Get user id from localstorage and set it to userId
-    setUserId("8510928509805121");
+    const userId = getUserIdFromLocalStorage();
+    setUserId(userId);
 
     setOpen(true);
   };

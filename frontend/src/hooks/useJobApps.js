@@ -1,6 +1,14 @@
-import { JobAppStatus } from "common/jobAppStatus";
+import { useState, useEffect } from "react";
 import dayjs from "dayjs";
-import { useState } from "react";
+
+import { getJobApps, getUser } from "api";
+import { JobAppStatus } from "common/jobAppStatus";
+import {
+  getUserIdFromLocalStorage,
+  storeUserIdFromLocalStorage,
+  formatRawJobAppData,
+} from "common/utils";
+
 const dummyJobApps = [
   [
     {
@@ -95,13 +103,35 @@ const dummyJobApps = [
 
 const useJobApps = () => {
   const [jobApps, setJobApps] = useState([...dummyJobApps]);
+  const [error, setError] = useState(false);
 
   const refreshJobApps = async () => {
-    console.log("refreshing job apps");
-    // TODO: Pull data from backend and setJobApps to data
+    const userId = getUserIdFromLocalStorage();
+
+    getJobApps(userId)
+      .then((res) => {
+        const { jobApps } = res.data;
+        const formattedJobApps = formatRawJobAppData(jobApps);
+        setJobApps(formattedJobApps);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
-  // TODO: Implement useEffect logic to pull data when importing
+  useEffect(() => {
+    const userId = getUserIdFromLocalStorage();
+    getUser(userId)
+      .then((res) => {
+        const { userId } = res.data;
+        storeUserIdFromLocalStorage(userId);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(true);
+      });
+    refreshJobApps();
+  }, []);
 
   const updateStatus = (jobApp, newStatus) => {
     if (jobApp.status === JobAppStatus.planning) {
@@ -131,6 +161,7 @@ const useJobApps = () => {
     updateStatus,
     handleDeleteJobApp,
     refreshJobApps,
+    error,
   };
 };
 

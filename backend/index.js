@@ -39,7 +39,7 @@ app.get("/user", async (req, res) => {
 
 app.get("/user/job-apps", async (req, res) => {
   try {
-    const { userId } = req.query;
+    const { userId = "" } = req.query;
     const jobApps = await getJobApplicationsForUser({ userId });
     res.status(200).json({ jobApps });
   } catch (err) {
