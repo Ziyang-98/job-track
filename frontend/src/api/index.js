@@ -26,6 +26,6 @@ export async function createJobApp(userId, jobAppBody) {
 
 export async function updateJobApp(userId, jobAppBody) {
   const body = { userId, jobApp: jobAppBody };
-  const response = await new axios.post(JOB_APP_ENDPOINT, body);
+  const response = await new axios.put(JOB_APP_ENDPOINT, body);
   return response;
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 
-import { getJobApps, getUser } from "api";
+import { getJobApps, getUser, updateJobApp } from "api";
 import { JobAppStatus } from "common/jobAppStatus";
 import {
   getUserIdFromLocalStorage,
@@ -141,10 +141,12 @@ const useJobApps = () => {
       jobApp.lastContactDate = null;
     }
 
-    jobApp.status = parseInt(newStatus);
+    jobApp.status = newStatus;
     // TODO: Update Job from database with new status
-
-    refreshJobApps();
+    console.log(jobApp);
+    updateJobApp(getUserIdFromLocalStorage(), jobApp).catch((err) => {
+      console.error(err);
+    });
   };
 
   const handleDeleteJobApp = (rawStatusType, jobAppIndex, jobAppId) => {
