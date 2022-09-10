@@ -10,8 +10,16 @@ export const styles = {
     flexDirection: "column",
     alignItems: "flex-start",
   },
+  singleContactDetails: {
+    marginTop: 1,
+    marginBottom: 1,
+
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+  },
   formItem: {
-    width: "90%",
+    width: "100%",
   },
   button: {
     margin: 1,

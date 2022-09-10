@@ -15,6 +15,7 @@ const Layout = () => {
     handleClickOpen: handleClickCreate,
     handleClose,
     handleCreateJobApp,
+    formContactSuite,
   } = useCreateDialog();
 
   return (
@@ -43,6 +44,7 @@ const Layout = () => {
         dialogProps={createDialogProps}
         handleClose={handleClose}
         handleCreateJobApp={handleCreateJobApp}
+        formContactSuite={formContactSuite}
       />
     </Box>
   );

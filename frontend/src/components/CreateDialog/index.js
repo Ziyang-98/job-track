@@ -9,13 +9,18 @@ import CreateForm from "components/CreateForm";
 
 import { styles } from "./styles";
 
-const CreateDialog = ({ dialogProps, handleClose, handleCreateJobApp }) => {
+const CreateDialog = ({
+  dialogProps,
+  handleClose,
+  handleCreateJobApp,
+  formContactSuite,
+}) => {
   return (
     <form onSubmit={handleCreateJobApp}>
       <Dialog {...dialogProps} maxWidth={"sm"} fullWidth disablePortal>
         <DialogTitle>Create an entry for Job Application</DialogTitle>
         <DialogContent>
-          <CreateForm />
+          <CreateForm formContactSuite={formContactSuite} />
         </DialogContent>
         <DialogActions>
           <Button sx={styles.button} onClick={handleClose}>

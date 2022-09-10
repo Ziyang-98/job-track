@@ -17,10 +17,17 @@ import { styles } from "./styles";
 
 const statues = Object.values(jobAppStatusMap);
 
-const CreateForm = () => {
+const CreateForm = ({ formContactSuite }) => {
   const [status, setStatus] = React.useState(0);
   const [dateApplied, setDateApplied] = React.useState(null);
   const [lastContactDate, setLastContactDate] = React.useState(null);
+
+  const {
+    contacts,
+    handleAddContact,
+    handleDeleteContact,
+    handleUpdateContacts,
+  } = formContactSuite;
 
   const hasApplied = () => {
     return status !== 0;
@@ -83,7 +90,12 @@ const CreateForm = () => {
         sx={styles.formItem}
       />
 
-      <ContactsSection />
+      <ContactsSection
+        contacts={contacts}
+        handleAddContact={handleAddContact}
+        handleDeleteContact={handleDeleteContact}
+        handleUpdateContacts={handleUpdateContacts}
+      />
       <TextField
         autoFocus
         margin="dense"
