@@ -8,7 +8,11 @@ const Footer = () => {
   return (
     <Box sx={styles.footer}>
       Copyright © 2022 Made by{" "}
-      {<Link href="https://limziyang.com/">Lim Zi Yang</Link>}
+      {
+        <Link href="https://limziyang.com/" target="_blank">
+          Lim Zi Yang
+        </Link>
+      }
     </Box>
   );
 };

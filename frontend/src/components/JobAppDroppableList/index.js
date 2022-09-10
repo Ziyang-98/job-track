@@ -10,7 +10,7 @@ import { jobAppStatusMap } from "common/jobAppStatus";
 import useEditDialog from "hooks/useEditDialog";
 import EditDialog from "components/CreateOrEditDialog";
 
-import { styles } from "./styles";
+import { useStyles } from "./styles";
 
 const JobAppDroppableList = ({
   jobApps,
@@ -27,6 +27,7 @@ const JobAppDroppableList = ({
     formContactSuite,
   } = useEditDialog(refreshJobApps);
 
+  const styles = useStyles(rawStatusType);
   return (
     <Box sx={styles.mainList}>
       <Typography sx={styles.listTitle} variant="h6">
@@ -36,7 +37,7 @@ const JobAppDroppableList = ({
         {(provided, snapshot) => (
           <Box
             ref={provided.innerRef}
-            sx={styles.useListStyle(snapshot.isDraggingOver)}
+            sx={styles.droppableList}
             {...provided.droppableProps}
           >
             {jobApps.map((jobApp, index) => (
@@ -56,7 +57,9 @@ const JobAppDroppableList = ({
                     )}
                   >
                     <Box sx={styles.draggableContent}>
-                      <Typography>{jobApp.company}</Typography>
+                      <Typography variant={"body1"} sx={styles.itemText}>
+                        {jobApp.company}
+                      </Typography>
 
                       <Box>
                         <IconButton

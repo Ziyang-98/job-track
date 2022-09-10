@@ -1,6 +1,8 @@
 const grid = 4;
 
-const getItemStyle = (isDragging, draggableStyle) => ({
+const colorTheme = ["planning", "applied", "interview", "offered", "rejected"];
+
+const getItemStyle = (isDragging, draggableStyle, index) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
   p: 2,
@@ -13,15 +15,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle,
 });
 
-const getListStyle = (isDraggingOver) => ({
-  bgcolor: "primary.light",
-  marginBottom: 2,
-  height: "100%",
-  width: "90%",
-  overflow: "auto",
-});
-
-export const styles = {
+export const useStyles = (index) => ({
   mainList: {
     bgcolor: "primary.light",
     display: "flex",
@@ -32,29 +26,44 @@ export const styles = {
     minWidth: 160,
 
     minHeight: 300,
-    height: 400,
-    maxHeight: 500,
+    height: 500,
+    maxHeight: 700,
 
     borderRadius: 1.5,
   },
   listTitle: {
-    color: "secondary.dark",
+    color: colorTheme[index],
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     height: "10%",
     width: "100%",
-    paddingBottom: 2,
+    paddingTop: 1,
+    paddingBottom: 1,
+    fontSize: "18px",
+    fontWeight: "800",
   },
-  useListStyle: getListStyle,
+
+  droppableList: {
+    bgcolor: "primary.less",
+    marginBottom: 2,
+    height: "100%",
+    width: "90%",
+    overflow: "auto",
+  },
+
   useItemStyle: getItemStyle,
   draggableContent: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    color: "primary.dark",
+  },
+  itemText: {
+    // fontSize: "16px",
   },
   button: {
     padding: 0,
-    marginLeft: 1,
+    marginLeft: "4px",
   },
-};
+});
