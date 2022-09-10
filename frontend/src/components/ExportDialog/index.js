@@ -1,33 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import Link from "@mui/material/Link";
+
+import Notification from "components/Notification";
+import useNotification from "hooks/useNotification";
 
 import { styles } from "./styles";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
 const ExportDialog = ({ dialogProps, handleClose, userId }) => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopied = () => {
-    setCopied(true);
-  };
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setCopied(false);
-  };
+  const { copied, handleCopied, handleCloseNotification } = useNotification();
 
   return (
     <>
@@ -52,16 +38,13 @@ const ExportDialog = ({ dialogProps, handleClose, userId }) => {
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
-        open={copied}
-        autoHideDuration={2000}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        onClose={handleCloseSnackbar}
-      >
-        <Alert onClose={handleCloseSnackbar} severity="success">
-          User ID copied to clipboard!
-        </Alert>
-      </Snackbar>
+      <Notification
+        type="success"
+        message="User ID copied to clipboard!"
+        timeout={2000}
+        copied={copied}
+        handleCloseNotification={handleCloseNotification}
+      />
     </>
   );
 };
