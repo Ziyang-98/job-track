@@ -1,15 +1,25 @@
 import { useState } from "react";
 import { DEFAULT_CONTACT } from "common/constants";
+import { createJobApp } from "api";
+import { getUserIdFromLocalStorage } from "common/utils";
 
 const useCreateDialog = (refreshJobApps) => {
   const [open, setOpen] = useState(false);
   const [contacts, setContacts] = useState([{ ...DEFAULT_CONTACT }]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleOpenCreateDialog = () => {
     setOpen(true);
   };
 
+  const reset = () => {
+    setContacts([{ ...DEFAULT_CONTACT }]);
+    setLoading(false);
+    setError(false);
+  };
   const handleClose = () => {
+    reset();
     setOpen(false);
   };
 
@@ -35,6 +45,7 @@ const useCreateDialog = (refreshJobApps) => {
 
   const handleCreateJobApp = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const data = new FormData(event.currentTarget);
     const body = {
       company: data.get("company"),
@@ -48,10 +59,16 @@ const useCreateDialog = (refreshJobApps) => {
       notes: data.get("notes"),
     };
 
+    await createJobApp(getUserIdFromLocalStorage(), body).catch((err) => {
+      console.error(err);
+      setError(true);
+    });
+
     // TODO: Create Job App through backend
-    console.log(body);
 
     await refreshJobApps();
+    setLoading(false);
+
     handleClose();
   };
 
@@ -63,6 +80,8 @@ const useCreateDialog = (refreshJobApps) => {
     handleClose,
     handleOpenCreateDialog,
     handleCreateJobApp,
+    loading,
+    error,
     formContactSuite: {
       contacts,
       handleAddContact,

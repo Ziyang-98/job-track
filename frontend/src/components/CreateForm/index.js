@@ -37,7 +37,7 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
   const hasApplied = () => {
     const statusToCheck = type === "create" ? status : jobApp.status;
 
-    return statusToCheck !== JobAppStatus.planning;
+    return parseInt(statusToCheck) !== JobAppStatus.planning;
   };
 
   const handleChange = (event) => {
