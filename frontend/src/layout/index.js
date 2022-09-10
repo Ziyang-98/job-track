@@ -13,17 +13,22 @@ import ImportDialog from "components/ImportDialog";
 import useImportDialog from "hooks/useImportDialog";
 import useJobApps from "hooks/useJobApps";
 import Footer from "components/Footer";
+import Notification from "components/Notification";
 
 import { styles } from "./styles";
+import useNotification from "hooks/useNotification";
 
 const Layout = () => {
+  const { handleOpenNotification, snackbarProps, alertProps, message } =
+    useNotification();
+
   const {
     jobApps,
     setJobApps,
     updateStatus,
     handleDeleteJobApp,
     refreshJobApps,
-  } = useJobApps();
+  } = useJobApps(handleOpenNotification);
 
   const {
     createDialogProps,
@@ -31,16 +36,16 @@ const Layout = () => {
     handleClose: handleCreateDialogClose,
     handleCreateJobApp,
     formContactSuite,
-  } = useCreateDialog(refreshJobApps);
+    loading: createLoading,
+  } = useCreateDialog(refreshJobApps, handleOpenNotification);
 
   const {
     importDialogProps,
     handleOpenImportDialog,
     handleClose: handleImportDialogClose,
     handleImportData,
-    error: importError,
     loading: importLoading,
-  } = useImportDialog(refreshJobApps);
+  } = useImportDialog(refreshJobApps, handleOpenNotification);
 
   const {
     exportDialogProps,
@@ -92,13 +97,17 @@ const Layout = () => {
         dialogProps={importDialogProps}
         handleClose={handleImportDialogClose}
         handleImportData={handleImportData}
-        error={importError}
         loading={importLoading}
       />
       <ExportDialog
         dialogProps={exportDialogProps}
         userId={userId}
         handleClose={handleExportDialogClose}
+      />
+      <Notification
+        snackbarProps={snackbarProps}
+        alertProps={alertProps}
+        message={message}
       />
       <Footer />
     </Box>

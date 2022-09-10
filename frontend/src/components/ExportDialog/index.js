@@ -13,7 +13,8 @@ import useNotification from "hooks/useNotification";
 import { styles } from "./styles";
 
 const ExportDialog = ({ dialogProps, handleClose, userId }) => {
-  const { open, handleOpen, handleCloseNotification } = useNotification();
+  const { handleOpenNotification, snackbarProps, alertProps, message } =
+    useNotification();
 
   return (
     <>
@@ -27,7 +28,11 @@ const ExportDialog = ({ dialogProps, handleClose, userId }) => {
               underline="none"
               onClick={() => {
                 navigator.clipboard.writeText(userId);
-                handleOpen();
+                const message = "User ID copied to clipboard!";
+                const timeout = 1500;
+                const type = "success";
+
+                handleOpenNotification(message, timeout, type);
               }}
             >
               {userId}
@@ -39,11 +44,9 @@ const ExportDialog = ({ dialogProps, handleClose, userId }) => {
         </DialogActions>
       </Dialog>
       <Notification
-        type="success"
-        message="User ID copied to clipboard!"
-        timeout={1500}
-        open={open}
-        handleCloseNotification={handleCloseNotification}
+        snackbarProps={snackbarProps}
+        alertProps={alertProps}
+        message={message}
       />
     </>
   );

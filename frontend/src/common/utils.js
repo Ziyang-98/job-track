@@ -23,6 +23,5 @@ export const formatRawJobAppData = (rawJobApps) => {
   rawJobApps.forEach((rawJobApp) => {
     newJobApps[rawJobApp.status].push({ ...rawJobApp });
   });
-  console.log(newJobApps);
   return newJobApps;
 };

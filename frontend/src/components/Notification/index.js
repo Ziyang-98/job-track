@@ -6,23 +6,13 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const Notification = ({
-  message,
-  type,
-  timeout,
-  open,
-  handleCloseNotification,
-}) => {
+const Notification = ({ snackbarProps, alertProps, message }) => {
   return (
     <Snackbar
-      open={open}
-      autoHideDuration={timeout}
+      {...snackbarProps}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      onClose={handleCloseNotification}
     >
-      <Alert onClose={handleCloseNotification} severity={type}>
-        {message}
-      </Alert>
+      <Alert {...alertProps}>{message}</Alert>
     </Snackbar>
   );
 };

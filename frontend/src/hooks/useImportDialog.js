@@ -2,9 +2,8 @@ import { getJobApps } from "api";
 import { storeUserIdFromLocalStorage } from "common/utils";
 import { useState } from "react";
 
-const useImportDialog = (refreshJobApps) => {
+const useImportDialog = (refreshJobApps, handleOpenNotification) => {
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleClose = () => {
@@ -28,13 +27,24 @@ const useImportDialog = (refreshJobApps) => {
     await getJobApps(newUserId)
       .then(() => {
         storeUserIdFromLocalStorage(newUserId);
+        refreshJobApps().then(() => {
+          handleOpenNotification(
+            "Successfully imported data!",
+            2000,
+            "success"
+          );
+        });
       })
       .catch((err) => {
-        setError(true);
-        console.err(err);
+        // setError(true);
+        handleOpenNotification(
+          "Error importing data. Please check if the userId is correct, or if your connection is stable!",
+          5000,
+          "error"
+        );
+        console.error(err);
       });
 
-    await refreshJobApps();
     setLoading(false);
     handleClose();
   };
@@ -47,7 +57,6 @@ const useImportDialog = (refreshJobApps) => {
     handleOpenImportDialog,
     handleClose,
     handleImportData,
-    error,
     loading,
   };
 };
