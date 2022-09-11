@@ -32,6 +32,6 @@ functions.http("formatJobApps", async (req, res) => {
     .catch((err) => {
       console.error(err);
       const { msg = "Encountered error contacting server!" } = err;
-      res.send(msg).status(400).json({ msg });
+      res.status(400).json({ msg });
     });
 });

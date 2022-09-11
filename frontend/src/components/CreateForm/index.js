@@ -51,10 +51,11 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
         margin="dense"
         name="company"
         id="company"
-        label="Company"
+        label="Company (Max 20 Characters)"
         type="company"
         variant="outlined"
         defaultValue={jobApp.company}
+        inputProps={{ maxLength: 12 }}
         sx={styles.formItem}
       />
       <FormControl sx={styles.formItem}>
