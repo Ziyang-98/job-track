@@ -18,15 +18,6 @@ export const storeUserIdFromLocalStorage = (userId) => {
   localStorage.setItem(LOCAL_STORAGE_USER_ID, userId);
 };
 
-export const formatRawJobAppData = (rawJobApps) => {
-  const newJobApps = [[], [], [], [], []];
-
-  rawJobApps.forEach((rawJobApp) => {
-    newJobApps[rawJobApp.status].push({ ...rawJobApp });
-  });
-  return newJobApps;
-};
-
 const isContactEqual = (contact1, contact2) => {
   return (
     contact1.name === contact2.name &&

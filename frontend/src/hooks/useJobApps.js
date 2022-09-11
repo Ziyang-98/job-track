@@ -6,7 +6,6 @@ import { JobAppStatus } from "common/jobAppStatus";
 import {
   getUserIdFromLocalStorage,
   storeUserIdFromLocalStorage,
-  formatRawJobAppData,
 } from "common/utils";
 
 const defaultJobApps = [[], [], [], [], []];
@@ -20,8 +19,8 @@ const useJobApps = (handleOpenNotification) => {
     getJobApps(userId)
       .then((res) => {
         const { jobApps } = res.data;
-        const formattedJobApps = formatRawJobAppData(jobApps);
-        setJobApps(formattedJobApps);
+        console.log(jobApps);
+        setJobApps(jobApps);
       })
       .catch((err) => {
         console.error(err);
