@@ -1,11 +1,11 @@
-export const styles = {
+export const useStyles = (isSmall) => ({
   form: {
     display: "flex",
     flexDirection: "column",
-    width: "70%",
+    width: isSmall ? "100%" : "70%",
   },
 
   formItem: {
     margin: 1,
   },
-};
+});

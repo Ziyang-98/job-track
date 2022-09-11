@@ -11,6 +11,7 @@ import useEditDialog from "hooks/useEditDialog";
 import EditDialog from "components/CreateOrEditDialog";
 import useNotification from "hooks/useNotification";
 import Notification from "components/Notification";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { useStyles } from "./styles";
 
@@ -33,7 +34,12 @@ const JobAppDroppableList = ({
     loading: editLoading,
   } = useEditDialog(refreshJobApps, handleOpenNotification);
 
-  const styles = useStyles(rawStatusType);
+  const isSmall = useMediaQuery("(max-width:600px)");
+
+  const isMedium = useMediaQuery("(max-width:1070px)");
+
+  const styles = useStyles(rawStatusType, isSmall, isMedium);
+
   return (
     <Box sx={styles.mainList}>
       <Typography sx={styles.listTitle} variant="h6">
@@ -57,17 +63,15 @@ const JobAppDroppableList = ({
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    sx={styles.useItemStyle(
-                      snapshot.isDragging,
-                      provided.draggableProps.style
-                    )}
+                    sx={styles.useItemStyle(provided.draggableProps.style)}
                   >
                     <Box sx={styles.draggableContent}>
-                      <Typography variant={"body1"} sx={styles.itemText}>
-                        {jobApp.company}
-                      </Typography>
-
-                      <Box>
+                      <Box sx={styles.itemText}>
+                        <Typography variant={"body1"}>
+                          {jobApp.company}
+                        </Typography>
+                      </Box>
+                      <Box sx={styles.buttons}>
                         <IconButton
                           onClick={() => {
                             handleOpenEditDialog(jobApp);

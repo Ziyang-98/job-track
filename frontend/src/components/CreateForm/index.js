@@ -11,10 +11,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { JobAppStatus, jobAppStatusMap } from "common/jobAppStatus";
 import { convertStringToDayjs } from "common/utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import ContactsSection from "./ContactsSection";
 
-import { styles } from "./styles";
+import { useStyles } from "./styles";
 
 const statues = Object.values(jobAppStatusMap);
 
@@ -26,7 +27,9 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
   const [lastContactDate, setLastContactDate] = React.useState(
     convertStringToDayjs(jobApp.lastContactDate)
   );
+  const isSmall = useMediaQuery("(max-width:550px)");
 
+  const styles = useStyles(isSmall);
   const {
     contacts,
     handleAddContact,
@@ -55,7 +58,7 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
         type="company"
         variant="outlined"
         defaultValue={jobApp.company}
-        inputProps={{ maxLength: 12 }}
+        inputProps={{ maxLength: 20 }}
         sx={styles.formItem}
       />
       <FormControl sx={styles.formItem}>

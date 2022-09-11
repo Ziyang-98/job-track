@@ -2,7 +2,7 @@ const grid = 4;
 
 const colorTheme = ["planning", "applied", "interview", "offered", "rejected"];
 
-const getItemStyle = (isDragging, draggableStyle, index) => ({
+const getItemStyle = (draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
   p: 2,
@@ -15,7 +15,7 @@ const getItemStyle = (isDragging, draggableStyle, index) => ({
   ...draggableStyle,
 });
 
-export const useStyles = (index) => ({
+export const useStyles = (index, isSmall, isMedium) => ({
   mainList: {
     bgcolor: "primary.light",
     display: "flex",
@@ -23,11 +23,9 @@ export const useStyles = (index) => ({
     alignItems: "center",
     margin: "8px 8px",
     width: "15%",
-    minWidth: 180,
+    minWidth: 200,
 
-    minHeight: 300,
-    height: 500,
-    maxHeight: 700,
+    height: isSmall ? 360 : isMedium ? 420 : 500,
 
     borderRadius: 1.5,
   },
@@ -60,10 +58,19 @@ export const useStyles = (index) => ({
     color: "primary.dark",
   },
   itemText: {
-    // fontSize: "16px",
+    display: "flex",
+    justifyContent: "flex-start",
+
+    overflowX: "hidden",
   },
   button: {
     padding: 0,
     marginLeft: "4px",
+  },
+  buttons: {
+    display: "flex",
+    justifyContent: "flex-end",
+    width: "40%",
+    paddingLeft: "8px",
   },
 });
