@@ -14,7 +14,7 @@ const useCreateDialog = (refreshJobApps, handleOpenNotification) => {
   };
 
   const reset = () => {
-    setContacts([]);
+    setContacts([{ ...DEFAULT_CONTACT }]);
     setLoading(false);
     setError(false);
   };

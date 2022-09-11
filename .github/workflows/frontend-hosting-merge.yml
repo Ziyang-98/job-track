@@ -19,6 +19,8 @@ jobs:
           envkey_ENV: "PROD"
           envkey_REACT_APP_DEV_SERVER: "http://localhost:8000"
           envkey_REACT_APP_PROD_SERVER: "https://job-application-tracker-361814.as.r.appspot.com"
+          envkey_REACT_APP_SEVERLESS_FUNCTION_ENDPOINT: "https://asia-southeast1-job-application-tracker-361814.cloudfunctions.net"
+
           file_name: .env
           directory: frontend
           fail_on_empty: false
@@ -29,3 +31,5 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JOB_TRACK_9C538 }}'
           channelId: live
           projectId: job-track-9c538
+          entryPoint: frontend
+
