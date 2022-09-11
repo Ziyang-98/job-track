@@ -8,6 +8,7 @@ import {
   addContactForJobApp,
   updateContactForJobApp,
   deleteContactForJobApp,
+  deleteUser,
 } from "./models/repository.js";
 import express from "express";
 import cors from "cors";
@@ -37,9 +38,24 @@ app.get("/user", async (req, res) => {
   res.status(200).json({ msg, userId: user.userId });
 });
 
+app.delete("/user", async (req, res) => {
+  try {
+    let { userId } = req.body;
+    let user = await deleteUser({ userId });
+    let msg = "User deleted!";
+
+    res.status(200).json({ msg, userId: user.userId });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(400)
+      .json({ msg: "Encountered error getting job applications!" });
+  }
+});
+
 app.get("/user/job-apps", async (req, res) => {
   try {
-    const { userId } = req.query;
+    const { userId = "" } = req.query;
     const jobApps = await getJobApplicationsForUser({ userId });
     res.status(200).json({ jobApps });
   } catch (err) {

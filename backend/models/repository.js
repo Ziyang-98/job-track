@@ -67,6 +67,12 @@ export async function getUser(params) {
   return user;
 }
 
+export async function deleteUser(params) {
+  const user = await findUser(params);
+  await UserModel.deleteOne(params);
+  return user;
+}
+
 export async function getJobApplicationsForUser(userParams) {
   const user = await findUser(userParams);
   return user.jobApplications;
