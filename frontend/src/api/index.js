@@ -11,6 +11,12 @@ export async function getUser(userId) {
   return response;
 }
 
+export async function deleteUser(userId) {
+  const body = { userId };
+  const response = await new axios.delete(`${USER_ENDPOINT}`, { data: body });
+  return response;
+}
+
 export async function getJobApps(userId) {
   const response = await new axios.get(
     `${JOB_APP_ENDPOINT}?userId=${userId ?? ""}`

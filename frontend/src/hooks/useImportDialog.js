@@ -1,5 +1,8 @@
-import { getJobApps } from "api";
-import { storeUserIdFromLocalStorage } from "common/utils";
+import { deleteUser, getJobApps } from "api";
+import {
+  getUserIdFromLocalStorage,
+  storeUserIdFromLocalStorage,
+} from "common/utils";
 import { useState } from "react";
 
 const useImportDialog = (refreshJobApps, handleOpenNotification) => {
@@ -18,11 +21,15 @@ const useImportDialog = (refreshJobApps, handleOpenNotification) => {
     event.preventDefault();
     setLoading(true);
     const data = new FormData(event.currentTarget);
+    const oldUserId = getUserIdFromLocalStorage();
     const newUserId = data.get("userId");
 
     await getJobApps(newUserId)
       .then(() => {
         storeUserIdFromLocalStorage(newUserId);
+
+        deleteUser(oldUserId);
+
         refreshJobApps().then(() => {
           handleOpenNotification(
             "Successfully imported data!",
