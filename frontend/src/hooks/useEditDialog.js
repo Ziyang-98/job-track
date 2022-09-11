@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { DEFAULT_CONTACT, DEFAULT_JOB_APP } from "common/constants";
 import { updateJobApp } from "api";
-import { getUserIdFromLocalStorage } from "common/utils";
+import { formatContacts, getUserIdFromLocalStorage } from "common/utils";
 
 const useEditDialog = (refreshJobApps, handleOpenNotification) => {
   const [open, setOpen] = useState(false);
@@ -57,15 +57,15 @@ const useEditDialog = (refreshJobApps, handleOpenNotification) => {
     const data = new FormData(event.currentTarget);
 
     const body = {
-      company: data.get("company"),
+      company: data.get("company").trim(),
       status: jobApp.status,
-      role: data.get("role"),
-      location: data.get("location"),
-      contacts: jobApp.contacts,
-      jobPosting: data.get("jobPosting"),
+      role: data.get("role").trim(),
+      location: data.get("location").trim(),
+      contacts: formatContacts(jobApp.contacts),
+      jobPosting: data.get("jobPosting").trim(),
       dateApplied: data.get("dateApplied"),
       lastContactDate: data.get("lastContactDate"),
-      notes: data.get("notes"),
+      notes: data.get("notes").trim(),
       _id: jobApp._id,
     };
 

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { DEFAULT_CONTACT } from "common/constants";
 import { createJobApp } from "api";
-import { getUserIdFromLocalStorage } from "common/utils";
+import { formatContacts, getUserIdFromLocalStorage } from "common/utils";
 
 const useCreateDialog = (refreshJobApps, handleOpenNotification) => {
   const [open, setOpen] = useState(false);
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState([{ ...DEFAULT_CONTACT }]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -48,15 +48,15 @@ const useCreateDialog = (refreshJobApps, handleOpenNotification) => {
     setLoading(true);
     const data = new FormData(event.currentTarget);
     const body = {
-      company: data.get("company"),
+      company: data.get("company").trim(),
       status: data.get("status"),
-      role: data.get("role"),
-      location: data.get("location"),
-      contacts,
-      jobPosting: data.get("jobPosting"),
+      role: data.get("role").trim(),
+      location: data.get("location").trim(),
+      contacts: formatContacts(contacts),
+      jobPosting: data.get("jobPosting").trim(),
       dateApplied: data.get("dateApplied"),
       lastContactDate: data.get("lastContactDate"),
-      notes: data.get("notes"),
+      notes: data.get("notes").trim(),
     };
 
     await createJobApp(getUserIdFromLocalStorage(), body)

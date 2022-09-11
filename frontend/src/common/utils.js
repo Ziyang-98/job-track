@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { LOCAL_STORAGE_USER_ID } from "./config";
+import { DEFAULT_CONTACT } from "./constants";
 
 export const convertStringToDayjs = (string) => {
   if (string === null) {
@@ -24,4 +25,30 @@ export const formatRawJobAppData = (rawJobApps) => {
     newJobApps[rawJobApp.status].push({ ...rawJobApp });
   });
   return newJobApps;
+};
+
+const isContactEqual = (contact1, contact2) => {
+  return (
+    contact1.name === contact2.name &&
+    contact1.email === contact2.email &&
+    contact1.role === contact2.role &&
+    contact1.met === contact2.met
+  );
+};
+
+const filterDefaultContacts = (contacts) => {
+  return contacts.filter((c) => !isContactEqual(c, DEFAULT_CONTACT));
+};
+
+export const formatContacts = (contacts) => {
+  let newContacts = [...contacts];
+  newContacts = newContacts.map((c) => ({
+    name: c.name.trim(),
+    email: c.name.trim(),
+    role: c.name.trim(),
+    met: c.met.trim(),
+  }));
+
+  newContacts = filterDefaultContacts(newContacts);
+  return newContacts;
 };
