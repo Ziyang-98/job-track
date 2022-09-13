@@ -35,8 +35,8 @@ export const formatContacts = (contacts) => {
   let newContacts = [...contacts];
   newContacts = newContacts.map((c) => ({
     name: c.name.trim(),
-    email: c.name.trim(),
-    role: c.name.trim(),
+    email: c.email.trim(),
+    role: c.role.trim(),
     met: c.met.trim(),
   }));
 
