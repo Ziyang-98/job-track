@@ -17,11 +17,13 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Google App Engine
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GOOGLE_APP_ENGINE_JSON }}'
+    - id: 'deploy'
       uses: google-github-actions/deploy-appengine@v0
       with:
         project_id: job-application-tracker-361814
         working_directory: backend
-        credentials: ${{secrets.GOOGLE_APP_ENGINE_KEY}}
         deliverables: app.yaml
-        
