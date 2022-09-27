@@ -1,6 +1,6 @@
 export const styles = {
   footer: {
-    position: "fixed",
+    position: "absolute",
     width: "100%",
     textAlign: "center",
     bottom: "0",
