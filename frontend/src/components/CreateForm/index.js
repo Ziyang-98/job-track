@@ -168,7 +168,7 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
         variant="outlined"
         name="notes"
         multiline
-        rows={2}
+        minRows={2}
         defaultValue={jobApp.notes}
         sx={styles.formItem}
       />
