@@ -1,4 +1,4 @@
-- name: Deploy to Back4App
+name: Deploy to Back4App
 on:
   push:
     branches:
