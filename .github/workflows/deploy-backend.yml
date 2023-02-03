@@ -14,12 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: back4app Deploy Action
-      # You may pin to the exact commit or the version.
-      # uses: heinrichcoetzee/back4app-deploy-action@cfc55c9caf12ecac112e559c3ff7252eb1c69304
-      uses: heinrichcoetzee/back4app-deploy-action@v4
+    - name: Automated Back4App B4a deployment
+      # uses: rimonhanna/github-action-b4a-deploy@522814cdc5bcdc820d6782113c56eb4dffb57c2a
+      uses: rimonhanna/github-action-b4a-deploy@v1.0.20
       with:
-        # project name of b4app deploy
-        project: job-track-functions
-        # AccountKey of B4App account
-        accountKey: '${{ secrets.BACK4APP_ACCOUNT_KEY }}'
+        # Back4App api key
+        B4A_API_KEY: '${{ secrets.BACK4APP_ACCOUNT_KEY }}'
+        # Name of the app to deploy to, deploys to default if left empty
+        APP_NAME: job-track-functions
