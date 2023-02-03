@@ -1,0 +1,25 @@
+- name: Deploy to Back4App
+on:
+  push:
+    branches:
+    - main
+  
+defaults:
+  run:
+    working-directory: backend
+jobs:
+  deploy:
+    environment: Secrets
+    name: Deploy to Back4App
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: back4app Deploy Action
+      # You may pin to the exact commit or the version.
+      # uses: heinrichcoetzee/back4app-deploy-action@cfc55c9caf12ecac112e559c3ff7252eb1c69304
+      uses: heinrichcoetzee/back4app-deploy-action@v4
+      with:
+        # project name of b4app deploy
+        project: job-track-functions
+        # AccountKey of B4App account
+        accountKey: ${{ secrets.BACK4APP_ACCOUNT_KEY }}
