@@ -43,3 +43,12 @@ export const formatContacts = (contacts) => {
   newContacts = filterDefaultContacts(newContacts);
   return newContacts;
 };
+
+export const formatRawJobAppData = (rawJobApps) => {
+  const newJobApps = [[], [], [], [], []];
+
+  rawJobApps.forEach((rawJobApp) => {
+    newJobApps[parseInt(rawJobApp.status)].push({ ...rawJobApp });
+  });
+  return newJobApps;
+};
