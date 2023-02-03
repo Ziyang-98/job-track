@@ -22,4 +22,4 @@ jobs:
         # project name of b4app deploy
         project: job-track-functions
         # AccountKey of B4App account
-        accountKey: ${{ secrets.BACK4APP_ACCOUNT_KEY }}
+        accountKey: '${{ secrets.BACK4APP_ACCOUNT_KEY }}'
