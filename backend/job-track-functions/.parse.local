@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "job-track-functions"
+    },
+    "job-track-functions": {
+      "applicationId": "UaXkWvEA79Qg4F7WthOzd2Mj6I224il0s1cy4Ht1"
+    }
+  }
+}

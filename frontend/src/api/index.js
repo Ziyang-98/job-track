@@ -1,9 +1,5 @@
 import axios from "axios";
-import {
-  USER_ENDPOINT,
-  JOB_APP_ENDPOINT,
-  FORMAT_JOB_APP_ENDPOINT,
-} from "common/config";
+import { USER_ENDPOINT, JOB_APP_ENDPOINT } from "common/config";
 
 export async function getUser(userId) {
   let response = null;
@@ -23,7 +19,7 @@ export async function deleteUser(userId) {
 
 export async function getJobApps(userId) {
   const response = await new axios.get(
-    `${FORMAT_JOB_APP_ENDPOINT}?userId=${userId ?? ""}`
+    `${JOB_APP_ENDPOINT}?userId=${userId ?? ""}`
   );
   return response;
 }

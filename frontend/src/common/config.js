@@ -8,6 +8,3 @@ export const USER_ENDPOINT = BACKEND_SERVER + "/user";
 export const JOB_APP_ENDPOINT = USER_ENDPOINT + "/job-apps";
 
 export const LOCAL_STORAGE_USER_ID = "job-track-user-id";
-
-export const FORMAT_JOB_APP_ENDPOINT =
-  process.env.REACT_APP_SEVERLESS_FUNCTION_ENDPOINT + "/formatJobApps";

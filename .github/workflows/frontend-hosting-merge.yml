@@ -18,8 +18,7 @@ jobs:
         with:
           envkey_ENV: "PROD"
           envkey_REACT_APP_DEV_SERVER: "http://localhost:8000"
-          envkey_REACT_APP_PROD_SERVER: "https://job-application-tracker-361814.as.r.appspot.com"
-          envkey_REACT_APP_SEVERLESS_FUNCTION_ENDPOINT: "https://asia-southeast1-job-application-tracker-361814.cloudfunctions.net"
+          envkey_REACT_APP_PROD_SERVER: "https://jobtrackfunctions.b4a.app"
 
           file_name: .env
           directory: frontend

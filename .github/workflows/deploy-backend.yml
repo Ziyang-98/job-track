@@ -1,5 +1,4 @@
-name: Deployment
-
+- name: Deploy to Back4App
 on:
   push:
     branches:
@@ -11,19 +10,16 @@ defaults:
 jobs:
   deploy:
     environment: Secrets
-    name: Deploy to App Engine
+    name: Deploy to Back4App
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v0'
+    - name: back4app Deploy Action
+      # You may pin to the exact commit or the version.
+      # uses: heinrichcoetzee/back4app-deploy-action@cfc55c9caf12ecac112e559c3ff7252eb1c69304
+      uses: heinrichcoetzee/back4app-deploy-action@v4
       with:
-        credentials_json: '${{ secrets.GOOGLE_APP_ENGINE_JSON }}'
-    - id: 'deploy'
-      uses: google-github-actions/deploy-appengine@v0
-      with:
-        project_id: job-application-tracker-361814
-        working_directory: backend
-        deliverables: app.yaml
+        # project name of b4app deploy
+        project: job-track-functions
+        # AccountKey of B4App account
+        accountKey: ${{ secrets.BACK4APP_ACCOUNT_KEY }}
