@@ -1,9 +1,7 @@
-const BACKEND_SERVER =
-  process.env.REACT_APP_ENV === "DEV"
-    ? process.env.REACT_APP_DEV_SERVER
-    : process.env.REACT_APP_PROD_SERVER;
+const BACKEND_SERVER_ENDPOINT = process.env.REACT_APP_SERVER_ENDPOINT;
 
-export const USER_ENDPOINT = BACKEND_SERVER + "/user";
+console.log(process.env.REACT_APP_SERVER_ENDPOINT);
+export const USER_ENDPOINT = BACKEND_SERVER_ENDPOINT + "/user";
 
 export const JOB_APP_ENDPOINT = USER_ENDPOINT + "/job-apps";
 
