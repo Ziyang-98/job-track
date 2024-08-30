@@ -9,10 +9,20 @@ import {
   updateContactForJobApp,
   deleteContactForJobApp,
   deleteUser,
-} from "./models/repository.js";
+} from "./database/helpers/user-model.js";
 import express from "express";
 import cors from "cors";
 import { v4 } from "uuid";
+import mongoose from "mongoose";
+
+// Connect to db
+const mongoDBURI =
+  process.env.ENV === "PROD"
+    ? process.env.DB_CLOUD_URI
+    : process.env.DB_LOCAL_URI;
+
+console.log("Connecting to DB:", mongoDBURI);
+mongoose.connect(mongoDBURI);
 
 const app = express();
 
