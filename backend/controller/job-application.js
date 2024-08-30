@@ -41,7 +41,7 @@ const JobApplicationController = {
         .json({ msg: "Encountered error adding job application!" });
     }
   },
-  updateJobApplicationForUser: async (req, res) => {
+  updateJobApplication: async (req, res) => {
     try {
       const { jobApp } = req.body;
       await updateJobApplicationForUser(jobApp);
@@ -53,7 +53,7 @@ const JobApplicationController = {
         .json({ msg: "Encountered error updating job application!" });
     }
   },
-  deleteJobApplicationForUser: async (req, res) => {
+  deleteJobApplication: async (req, res) => {
     try {
       const { userId, jobAppId } = req.body;
       await deleteJobApplicationForUser({ userId }, { _id: jobAppId });

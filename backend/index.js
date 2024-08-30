@@ -36,12 +36,9 @@ app.post(
   JobApplicationController.createJobApplicationForUser
 );
 
-app.put("/user/job-apps", JobApplicationController.updateJobApplicationForUser);
+app.put("/user/job-apps", JobApplicationController.updateJobApplication);
 
-app.delete(
-  "/user/job-apps",
-  JobApplicationController.deleteJobApplicationForUser
-);
+app.delete("/user/job-apps", JobApplicationController.deleteJobApplication);
 
 app.post(
   "/user/job-apps/contacts",
