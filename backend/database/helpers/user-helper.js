@@ -1,3 +1,4 @@
+import jobApplicationModel from "../models/job-application-model.js";
 import UserModel from "../models/user-model.js";
 import { findUser } from "./utils.js";
 
@@ -14,6 +15,10 @@ export async function getUser(params) {
 
 export async function deleteUser(params) {
   const user = await findUser(params);
+  // Delete all job applications of user
+  for (const jobAppId of user.jobApplications) {
+    await jobApplicationModel.findByIdAndDelete(jobAppId);
+  }
   await UserModel.deleteOne(params);
   return user;
 }
