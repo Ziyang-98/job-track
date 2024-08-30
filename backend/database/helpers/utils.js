@@ -1,3 +1,4 @@
+import jobApplicationModel from "../models/job-application-model.js";
 import UserModel from "../models/user-model.js";
 
 export async function findUser({ userId }) {
@@ -6,6 +7,18 @@ export async function findUser({ userId }) {
     throw new Error("Invalid user id provided, unable to find user");
   }
   return user;
+}
+
+export async function findJobApplication({ jobAppId }) {
+  const jobApplication = await jobApplicationModel.findById({
+    jobAppId,
+  });
+  if (!jobApplication) {
+    throw new Error(
+      "Invalid job application id provided, unable to find job application"
+    );
+  }
+  return jobApplication;
 }
 
 export function replaceDoc(docArray, newParams) {

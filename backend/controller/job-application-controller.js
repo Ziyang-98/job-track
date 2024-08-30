@@ -55,8 +55,8 @@ const JobApplicationController = {
   },
   deleteJobApplication: async (req, res) => {
     try {
-      const { userId, jobAppId } = req.body;
-      await deleteJobApplicationForUser({ userId }, { _id: jobAppId });
+      const { jobAppId } = req.body;
+      await deleteJobApplicationForUser(jobAppId);
       res.status(200).json({ msg: "Job application deleted!" });
     } catch (err) {
       console.error(err);
