@@ -21,37 +21,36 @@ app.use(express.json());
 app.use(cors()); // config cors so that front-end can use
 app.options("*", cors());
 
+/* Healthcheck Endpoints */
 app.get("/", (req, res) => {
   res.send("Hello World from job tracker backend");
 });
 
+/* User Endpoints */
 app.get("/user", UserController.getUser);
-
 app.delete("/user", UserController.deleteUser);
 
-app.get("/user/job-apps", JobApplicationController.findJobApplicationsForUser);
-
+/* Job Application Endpoints */
+app.get(
+  "/job-application",
+  JobApplicationController.findJobApplicationsForUser
+);
 app.post(
-  "/user/job-apps",
+  "/job-application",
   JobApplicationController.createJobApplicationForUser
 );
-
-app.put("/user/job-apps", JobApplicationController.updateJobApplication);
-
-app.delete("/user/job-apps", JobApplicationController.deleteJobApplication);
-
+app.put("/job-application", JobApplicationController.updateJobApplication);
+app.delete("/job-application", JobApplicationController.deleteJobApplication);
 app.post(
-  "/user/job-apps/contacts",
+  "/job-application/contacts",
   JobApplicationController.createContactForJobApplication
 );
-
 app.put(
-  "/user/job-apps/contacts",
+  "/job-application/contacts",
   JobApplicationController.updateContactForJobApplication
 );
-
 app.delete(
-  "/user/job-apps/contacts",
+  "/job-application/contacts",
   JobApplicationController.deleteContactForJobApplication
 );
 
