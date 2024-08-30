@@ -3,14 +3,18 @@ import JobApplicationModel from "../models/job-application.js";
 
 export async function getJobApplicationsForUser(userParams) {
   const user = await findUser(userParams);
+  await user.populate("jobApplications");
   return user.jobApplications;
 }
 
 export async function addJobApplicationForUser(userParams, newJobAppParams) {
   const user = await findUser(userParams);
+  const currentDatetime = new Date().toISOString();
   const newJobApp = new JobApplicationModel({
     userId: user._id,
     ...newJobAppParams,
+    datetimeLastUpdated: currentDatetime,
+    datetimeCreated: currentDatetime,
   });
   await newJobApp.save();
   user.jobApplications.push(newJobApp);

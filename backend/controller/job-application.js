@@ -6,7 +6,7 @@ import {
   getJobApplicationsForUser,
   updateContactForJobApp,
   updateJobApplicationForUser,
-} from "../database/helpers/job-application-model";
+} from "../database/helpers/job-application.js";
 
 const JobApplicationController = {
   findJobApplicationsForUser: async (req, res) => {
@@ -27,7 +27,9 @@ const JobApplicationController = {
       const { userId, jobApp } = req.body;
       const newJobApp = await addJobApplicationForUser(
         { userId },
-        { ...jobApp }
+        {
+          ...jobApp,
+        }
       );
       res
         .status(200)

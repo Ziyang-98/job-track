@@ -51,11 +51,13 @@ const JobApplicationModelSchema = new Schema({
   notes: {
     type: String,
   },
-  dateTimeLastUpdated: {
+  datetimeLastUpdated: {
     type: String,
+    required: true,
   },
-  dateTimeCreated: {
+  datetimeCreated: {
     type: String,
+    required: true,
   },
 });
 
