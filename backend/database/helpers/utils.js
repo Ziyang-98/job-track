@@ -10,7 +10,6 @@ export async function findUser({ userId }) {
 }
 
 export async function findJobApplication(jobAppId) {
-  console.log(jobAppId);
   const jobApplication = await JobApplicationModel.findById(jobAppId);
   if (!jobApplication) {
     throw new Error(
