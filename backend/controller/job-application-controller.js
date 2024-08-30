@@ -79,12 +79,8 @@ const JobApplicationController = {
 
   updateContactForJobApplication: async (req, res) => {
     try {
-      const { userId, jobAppId, contact } = req.body;
-      await updateContactForJobApp(
-        { userId },
-        { _id: jobAppId },
-        { ...contact }
-      );
+      const { jobAppId, contact } = req.body;
+      await updateContactForJobApp(jobAppId, contact);
       res.status(200).json({ msg: "Contact updated!" });
     } catch (err) {
       console.error(err);

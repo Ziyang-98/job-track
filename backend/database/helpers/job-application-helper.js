@@ -76,15 +76,10 @@ export async function addContactForJobApp(jobAppId, newContactParams) {
   return newContact;
 }
 
-export async function updateContactForJobApp(
-  userParams,
-  jobAppParams,
-  newContactParams
-) {
-  const user = await findUser(userParams);
-  const jobApp = findDoc(user.jobApplications, jobAppParams);
+export async function updateContactForJobApp(jobAppId, newContactParams) {
+  const jobApp = await findJobApplication(jobAppId);
   jobApp.contacts = replaceDoc(jobApp.contacts, newContactParams);
-  await user.save();
+  await jobApp.save();
 }
 
 export async function deleteContactForJobApp(
