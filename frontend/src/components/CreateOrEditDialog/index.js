@@ -14,10 +14,11 @@ import { styles } from "./styles";
 const CreateOrEditDialog = ({
   dialogProps,
   handleClose,
+  handleDeleteJobApp,
   onSubmit,
   formContactSuite,
   type,
-  loading,
+  loadingUpdate,
   jobApp = DEFAULT_JOB_APP,
 }) => {
   return (
@@ -36,10 +37,25 @@ const CreateOrEditDialog = ({
           />
         </DialogContent>
         <DialogActions>
+          {type === "edit" && (
+            <LoadingButton
+              sx={styles.deleteButton}
+              onClick={() => {
+                handleDeleteJobApp();
+                handleClose();
+              }}
+            >
+              Delete
+            </LoadingButton>
+          )}
           <Button sx={styles.button} onClick={handleClose}>
             Cancel
           </Button>
-          <LoadingButton loading={loading} sx={styles.button} type="submit">
+          <LoadingButton
+            loading={loadingUpdate}
+            sx={styles.button}
+            type="submit"
+          >
             {type === "create" ? "Create" : "Update"}
           </LoadingButton>
         </DialogActions>

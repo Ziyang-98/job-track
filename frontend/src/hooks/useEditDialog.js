@@ -6,10 +6,10 @@ import { formatContacts } from "common/utils";
 const useEditDialog = (refreshJobApps, handleOpenNotification) => {
   const [open, setOpen] = useState(false);
   const [jobApp, setJobApp] = useState({ ...DEFAULT_JOB_APP });
-  const [loading, setLoading] = useState(false);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
 
   const handleReset = () => {
-    setLoading(false);
+    setLoadingUpdate(false);
     setJobApp({ ...DEFAULT_JOB_APP });
   };
 
@@ -53,7 +53,7 @@ const useEditDialog = (refreshJobApps, handleOpenNotification) => {
 
   const handleUpdate = async (event) => {
     event.preventDefault();
-    setLoading(true);
+    setLoadingUpdate(true);
     const data = new FormData(event.currentTarget);
 
     const body = {
@@ -88,7 +88,7 @@ const useEditDialog = (refreshJobApps, handleOpenNotification) => {
         );
       });
 
-    setLoading(false);
+    setLoadingUpdate(false);
     handleClose();
   };
 
@@ -101,7 +101,7 @@ const useEditDialog = (refreshJobApps, handleOpenNotification) => {
     handleOpenEditDialog,
     handleUpdate,
     jobApp,
-    loading,
+    loadingUpdate,
     formContactSuite: {
       contacts: jobApp.contacts,
       handleAddContact,
