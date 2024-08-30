@@ -69,7 +69,7 @@ const useJobApps = (handleOpenNotification) => {
     newJobApps[rawStatusType].splice(jobAppIndex, 1);
     setJobApps(newJobApps);
 
-    deleteJobApp(getUserIdFromLocalStorage(), jobAppId)
+    deleteJobApp(jobAppId)
       .then(() => {
         handleOpenNotification("Entry deleted successfully", 1500, "success");
       })

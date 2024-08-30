@@ -22,7 +22,7 @@ export const useStyles = (index, isSmall, isMedium) => ({
     flexDirection: "column",
     alignItems: "center",
     margin: "8px 8px",
-    width: "15%",
+    width: "16%",
     minWidth: 200,
 
     height: isSmall ? 360 : isMedium ? 420 : 500,
@@ -58,19 +58,9 @@ export const useStyles = (index, isSmall, isMedium) => ({
     color: "primary.dark",
   },
   itemText: {
-    display: "flex",
-    justifyContent: "flex-start",
-
     overflowX: "hidden",
   },
-  button: {
-    padding: 0,
-    marginLeft: "4px",
-  },
-  buttons: {
-    display: "flex",
-    justifyContent: "flex-end",
-    width: "40%",
-    paddingLeft: "8px",
+  title: {
+    fontWeight: "bold",
   },
 });

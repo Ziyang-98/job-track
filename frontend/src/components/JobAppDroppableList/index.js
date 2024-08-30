@@ -2,7 +2,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -15,12 +14,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { useStyles } from "./styles";
 
-const JobAppDroppableList = ({
-  jobApps,
-  rawStatusType,
-  handleDeleteJobApp,
-  refreshJobApps,
-}) => {
+const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
     useNotification();
 
@@ -67,32 +61,24 @@ const JobAppDroppableList = ({
                   >
                     <Box sx={styles.draggableContent}>
                       <Box sx={styles.itemText}>
-                        <Typography variant={"body1"}>
+                        <Typography
+                          variant={"body1"}
+                          sx={styles.title}
+                          textAlign={"left"}
+                        >
+                          {jobApp.role}
+                        </Typography>
+                        <Typography variant={"body2"} textAlign={"left"}>
                           {jobApp.company}
                         </Typography>
                       </Box>
-                      <Box sx={styles.buttons}>
-                        <IconButton
-                          onClick={() => {
-                            handleOpenEditDialog(jobApp);
-                          }}
-                          sx={styles.button}
-                        >
-                          <InfoOutlinedIcon />
-                        </IconButton>
-                        <IconButton
-                          onClick={() => {
-                            handleDeleteJobApp(
-                              rawStatusType,
-                              index,
-                              jobApp._id
-                            );
-                          }}
-                          sx={styles.button}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Box>
+                      <IconButton
+                        onClick={() => {
+                          handleOpenEditDialog(jobApp);
+                        }}
+                      >
+                        <InfoOutlinedIcon fontSize="medium" />
+                      </IconButton>
                     </Box>
                   </Box>
                 )}

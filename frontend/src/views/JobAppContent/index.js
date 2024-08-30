@@ -12,7 +12,6 @@ const JobAppContent = ({
   jobApps,
   setJobApps,
   updateStatus,
-  handleDeleteJobApp,
   refreshJobApps,
 }) => {
   const { onDragEnd } = useDnd(jobApps, setJobApps, updateStatus);
@@ -24,7 +23,6 @@ const JobAppContent = ({
             key={ind}
             jobApps={jobAppsSameStatus}
             rawStatusType={ind}
-            handleDeleteJobApp={handleDeleteJobApp}
             refreshJobApps={refreshJobApps}
           />
         ))}

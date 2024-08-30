@@ -81,7 +81,6 @@ const Layout = () => {
             jobApps={jobApps}
             setJobApps={setJobApps}
             updateStatus={updateStatus}
-            handleDeleteJobApp={handleDeleteJobApp}
             refreshJobApps={refreshJobApps}
           />
         </Grid>
