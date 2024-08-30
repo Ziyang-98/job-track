@@ -22,10 +22,14 @@ export async function addJobApplicationForUser(userParams, newJobAppParams) {
   return newJobApp;
 }
 
-export async function updateJobApplicationForUser(userParams, newJobAppParams) {
-  const user = await findUser(userParams);
-  user.jobApplications = replaceDoc(user.jobApplications, newJobAppParams);
-  await user.save();
+export async function updateJobApplicationForUser(newJobAppParams) {
+  const currentDatetime = new Date().toISOString();
+  await JobApplicationModel.updateOne(
+    {
+      _id: newJobAppParams._id,
+    },
+    { ...newJobAppParams, datetimeLastUpdated: currentDatetime }
+  );
 }
 
 export async function deleteJobApplicationForUser(userParams, jobAppParams) {
