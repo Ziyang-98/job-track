@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { DEFAULT_CONTACT, DEFAULT_JOB_APP } from "common/constants";
 import { updateJobApp } from "api";
-import { formatContacts, getUserIdFromLocalStorage } from "common/utils";
+import { formatContacts } from "common/utils";
 
 const useEditDialog = (refreshJobApps, handleOpenNotification) => {
   const [open, setOpen] = useState(false);
@@ -69,7 +69,7 @@ const useEditDialog = (refreshJobApps, handleOpenNotification) => {
       _id: jobApp._id,
     };
 
-    await updateJobApp(getUserIdFromLocalStorage(), body)
+    await updateJobApp(body)
       .then(() => {
         refreshJobApps().then(() => {
           handleOpenNotification(

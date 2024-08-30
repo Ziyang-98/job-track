@@ -54,7 +54,7 @@ const useJobApps = (handleOpenNotification) => {
     }
 
     jobApp.status = newStatus;
-    updateJobApp(getUserIdFromLocalStorage(), jobApp).catch((err) => {
+    updateJobApp(jobApp).catch((err) => {
       console.error(err);
       handleOpenNotification(
         "Error updating status. Please refresh and try again later!",
