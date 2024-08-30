@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
-import UserController from "./controller/user.js";
-import JobApplicationController from "./controller/job-application.js";
+import UserController from "./controller/user-controller.js";
+import JobApplicationController from "./controller/job-application-controller.js";
 
 // Connect to db
 const mongoDBURI =

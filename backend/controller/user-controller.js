@@ -1,5 +1,9 @@
 import { v4 } from "uuid";
-import { createUser, deleteUser, getUser } from "../database/helpers/user.js";
+import {
+  createUser,
+  deleteUser,
+  getUser,
+} from "../database/helpers/user-helper.js";
 
 const UserController = {
   getUser: async (req, res) => {

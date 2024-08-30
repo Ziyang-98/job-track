@@ -6,7 +6,7 @@ import {
   getJobApplicationsForUser,
   updateContactForJobApp,
   updateJobApplicationForUser,
-} from "../database/helpers/job-application.js";
+} from "../database/helpers/job-application-helper.js";
 
 const JobApplicationController = {
   findJobApplicationsForUser: async (req, res) => {

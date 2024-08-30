@@ -1,5 +1,5 @@
 import { findDoc, findUser, removeDoc, replaceDoc } from "./utils.js";
-import JobApplicationModel from "../models/job-application.js";
+import JobApplicationModel from "../models/job-application-model.js";
 
 export async function getJobApplicationsForUser(userParams) {
   const user = await findUser(userParams);

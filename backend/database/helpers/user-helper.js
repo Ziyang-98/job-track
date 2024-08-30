@@ -1,4 +1,4 @@
-import UserModel from "../models/user.js";
+import UserModel from "../models/user-model.js";
 import { findUser } from "./utils.js";
 
 export async function createUser(params) {
