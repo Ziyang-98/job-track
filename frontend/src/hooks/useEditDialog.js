@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { DEFAULT_CONTACT, DEFAULT_JOB_APP } from "common/constants";
-import { updateJobApp } from "api";
+import { deleteJobApp, updateJobApp } from "api";
 import { formatContacts } from "common/utils";
 
 const useEditDialog = (refreshJobApps, handleOpenNotification) => {
   const [open, setOpen] = useState(false);
   const [jobApp, setJobApp] = useState({ ...DEFAULT_JOB_APP });
   const [loadingUpdate, setLoadingUpdate] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
 
   const handleReset = () => {
     setLoadingUpdate(false);
@@ -92,6 +93,30 @@ const useEditDialog = (refreshJobApps, handleOpenNotification) => {
     handleClose();
   };
 
+  const handleDelete = () => {
+    setLoadingDelete(true);
+    deleteJobApp(jobApp._id)
+      .then(() => {
+        refreshJobApps().then(() => {
+          handleOpenNotification(
+            "Job Application deleted successfully!",
+            1500,
+            "success"
+          );
+          setOpen(false);
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        handleOpenNotification(
+          "Error deleting entry. Please refresh and try again later!",
+          4000,
+          "error"
+        );
+      })
+      .finally(() => setLoadingDelete(false));
+  };
+
   return {
     editDialogProps: {
       open,
@@ -108,6 +133,8 @@ const useEditDialog = (refreshJobApps, handleOpenNotification) => {
       handleDeleteContact,
       handleUpdateContacts,
     },
+    handleDelete,
+    loadingDelete,
   };
 };
 

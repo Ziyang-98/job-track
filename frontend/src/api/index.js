@@ -32,12 +32,10 @@ export async function createJobApp(userId, jobAppBody) {
 
 export async function updateJobApp(jobAppBody) {
   const body = { jobApp: jobAppBody };
-  const response = await new axios.put(JOB_APP_ENDPOINT, body);
-  return response;
+  return axios.put(JOB_APP_ENDPOINT, body);
 }
 
 export async function deleteJobApp(jobAppId) {
   const body = { jobAppId: jobAppId };
-  const response = await new axios.delete(JOB_APP_ENDPOINT, { data: body });
-  return response;
+  return axios.delete(JOB_APP_ENDPOINT, { data: body });
 }

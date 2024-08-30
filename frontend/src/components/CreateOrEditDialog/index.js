@@ -14,12 +14,13 @@ import { styles } from "./styles";
 const CreateOrEditDialog = ({
   dialogProps,
   handleClose,
-  handleDeleteJobApp,
   onSubmit,
   formContactSuite,
   type,
-  loadingUpdate,
+  loadingSubmit,
   jobApp = DEFAULT_JOB_APP,
+  handleDeleteJobApp,
+  loadingDelete,
 }) => {
   return (
     <form onSubmit={onSubmit}>
@@ -40,10 +41,8 @@ const CreateOrEditDialog = ({
           {type === "edit" && (
             <LoadingButton
               sx={styles.deleteButton}
-              onClick={() => {
-                handleDeleteJobApp();
-                handleClose();
-              }}
+              loading={loadingDelete}
+              onClick={handleDeleteJobApp}
             >
               Delete
             </LoadingButton>
@@ -52,7 +51,7 @@ const CreateOrEditDialog = ({
             Cancel
           </Button>
           <LoadingButton
-            loading={loadingUpdate}
+            loading={loadingSubmit}
             sx={styles.button}
             type="submit"
           >

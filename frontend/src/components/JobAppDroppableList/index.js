@@ -23,9 +23,11 @@ const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
     handleClose,
     handleOpenEditDialog,
     handleUpdate,
+    loadingUpdate,
+    handleDelete,
+    loadingDelete,
     jobApp,
     formContactSuite,
-    loadingUpdate,
   } = useEditDialog(refreshJobApps, handleOpenNotification);
 
   const isSmall = useMediaQuery("(max-width:600px)");
@@ -94,8 +96,10 @@ const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
         onSubmit={handleUpdate}
         formContactSuite={formContactSuite}
         jobApp={jobApp}
-        loadingUpdate={loadingUpdate}
+        loadingSubmit={loadingUpdate}
         type={"edit"}
+        handleDeleteJobApp={handleDelete}
+        loadingDelete={loadingDelete}
       />
       <Notification
         snackbarProps={snackbarProps}

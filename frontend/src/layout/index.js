@@ -36,7 +36,7 @@ const Layout = () => {
     handleClose: handleCreateDialogClose,
     handleCreateJobApp,
     formContactSuite,
-    loading: createLoading,
+    loading: loadingCreate,
   } = useCreateDialog(refreshJobApps, handleOpenNotification);
 
   const {
@@ -88,9 +88,10 @@ const Layout = () => {
       <CreateDialog
         dialogProps={createDialogProps}
         handleClose={handleCreateDialogClose}
+        handleDeleteJobApp={handleDeleteJobApp}
         onSubmit={handleCreateJobApp}
         formContactSuite={formContactSuite}
-        loading={createLoading}
+        loadingSubmit={loadingCreate}
         type={"create"}
       />
       <ImportDialog
