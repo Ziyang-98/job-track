@@ -1,4 +1,10 @@
-import { findDoc, findUser, removeDoc, replaceDoc } from "./utils.js";
+import {
+  findDoc,
+  findJobApplication,
+  findUser,
+  removeDoc,
+  replaceDoc,
+} from "./utils.js";
 import JobApplicationModel from "../models/job-application-model.js";
 import UserModel from "../models/user-model.js";
 import mongoose from "mongoose";
@@ -62,16 +68,11 @@ export async function deleteJobApplicationForUser(jobAppId) {
     });
 }
 
-export async function addContactForJobApp(
-  userParams,
-  jobAppParams,
-  newContactParams
-) {
-  const user = await findUser(userParams);
-  const jobApp = findDoc(user.jobApplications, jobAppParams);
+export async function addContactForJobApp(jobAppId, newContactParams) {
+  const jobApp = await findJobApplication(jobAppId);
   const newContact = jobApp.contacts.create(newContactParams);
   jobApp.contacts.push(newContact);
-  await user.save();
+  await jobApp.save();
   return newContact;
 }
 

@@ -68,12 +68,8 @@ const JobApplicationController = {
 
   createContactForJobApplication: async (req, res) => {
     try {
-      const { userId, jobAppId, contact } = req.body;
-      const newContact = await addContactForJobApp(
-        { userId },
-        { _id: jobAppId },
-        { ...contact }
-      );
+      const { jobAppId, contact } = req.body;
+      const newContact = await addContactForJobApp(jobAppId, contact);
       res.status(200).json({ msg: "Contact added!", contact: newContact });
     } catch (err) {
       console.error(err);
