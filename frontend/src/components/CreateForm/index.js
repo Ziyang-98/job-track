@@ -52,6 +52,17 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
         autoFocus={type === "create"}
         required
         margin="dense"
+        name="role"
+        id="role"
+        label="Role"
+        type="role"
+        variant="outlined"
+        defaultValue={jobApp.role}
+        sx={styles.formItem}
+      />
+      <TextField
+        required
+        margin="dense"
         name="company"
         id="company"
         label="Company (Max 20 Characters)"
@@ -81,17 +92,6 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
           ))}
         </Select>
       </FormControl>
-      <TextField
-        required
-        margin="dense"
-        name="role"
-        id="role"
-        label="Role"
-        type="role"
-        variant="outlined"
-        defaultValue={jobApp.role}
-        sx={styles.formItem}
-      />
 
       <TextField
         margin="dense"
