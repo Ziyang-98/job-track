@@ -50,6 +50,12 @@ const JobApplicationModelSchema = new Schema({
   notes: {
     type: String,
   },
+  dateTimeLastUpdated: {
+    type: String,
+  },
+  dateTimeCreated: {
+    type: String,
+  },
 });
 
 export default mongoose.model("JobApplication", JobApplicationModelSchema);
