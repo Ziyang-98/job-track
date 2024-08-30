@@ -65,7 +65,6 @@ const JobApplicationController = {
         .json({ msg: "Encountered error deleting job application!" });
     }
   },
-
   createContactForJobApplication: async (req, res) => {
     try {
       const { jobAppId, contact } = req.body;
@@ -76,7 +75,6 @@ const JobApplicationController = {
       res.status(400).json({ msg: "Encountered error adding contact!" });
     }
   },
-
   updateContactForJobApplication: async (req, res) => {
     try {
       const { jobAppId, contact } = req.body;
@@ -89,12 +87,8 @@ const JobApplicationController = {
   },
   deleteContactForJobApplication: async (req, res) => {
     try {
-      const { userId, jobAppId, contactId } = req.body;
-      await deleteContactForJobApp(
-        { userId },
-        { _id: jobAppId },
-        { _id: contactId }
-      );
+      const { jobAppId, contactId } = req.body;
+      await deleteContactForJobApp(jobAppId, contactId);
       res.status(200).json({ msg: "Contact deleted!" });
     } catch (err) {
       console.error(err);

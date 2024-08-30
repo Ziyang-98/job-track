@@ -1,5 +1,4 @@
 import {
-  findDoc,
   findJobApplication,
   findUser,
   removeDoc,
@@ -82,14 +81,8 @@ export async function updateContactForJobApp(jobAppId, newContactParams) {
   await jobApp.save();
 }
 
-export async function deleteContactForJobApp(
-  userParams,
-  jobAppParams,
-  contactParams
-) {
-  const user = await findUser(userParams);
-  const jobApp = findDoc(user.jobApplications, jobAppParams);
-
-  jobApp.contacts = removeDoc(jobApp.contacts, contactParams);
-  await user.save();
+export async function deleteContactForJobApp(jobAppId, contactId) {
+  const jobApp = await findJobApplication(jobAppId);
+  jobApp.contacts = removeDoc(jobApp.contacts, { _id: contactId });
+  await jobApp.save();
 }
