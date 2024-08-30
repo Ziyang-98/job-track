@@ -9,4 +9,4 @@ const UserModelSchema = new Schema({
   jobApplications: [{ type: Schema.Types.ObjectId, ref: "JobApplication" }],
 });
 
-export default mongoose.model("UserModel", UserModelSchema);
+export default mongoose.model("User", UserModelSchema);
