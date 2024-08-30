@@ -1,4 +1,5 @@
 import { findDoc, findUser, removeDoc, replaceDoc } from "./utils.js";
+import JobApplicationModel from "../models/job-application.js";
 
 export async function getJobApplicationsForUser(userParams) {
   const user = await findUser(userParams);
@@ -7,9 +8,11 @@ export async function getJobApplicationsForUser(userParams) {
 
 export async function addJobApplicationForUser(userParams, newJobAppParams) {
   const user = await findUser(userParams);
-  // const newJobApp = await UserModel(params);
-
-  const newJobApp = user.jobApplications.create(newJobAppParams);
+  const newJobApp = new JobApplicationModel({
+    userId: user._id,
+    ...newJobAppParams,
+  });
+  await newJobApp.save();
   user.jobApplications.push(newJobApp);
   await user.save();
   return newJobApp;

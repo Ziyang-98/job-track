@@ -1,9 +1,4 @@
 import {
-  getUser,
-  createUser,
-  deleteUser,
-} from "./database/helpers/user-model.js";
-import {
   getJobApplicationsForUser,
   addJobApplicationForUser,
   deleteJobApplicationForUser,
@@ -14,8 +9,8 @@ import {
 } from "./database/helpers/job-application-model.js";
 import express from "express";
 import cors from "cors";
-import { v4 } from "uuid";
 import mongoose from "mongoose";
+import UserController from "./controller/user.js";
 
 // Connect to db
 const mongoDBURI =
@@ -37,33 +32,9 @@ app.get("/", (req, res) => {
   res.send("Hello World from job tracker backend");
 });
 
-app.get("/user", async (req, res) => {
-  let { userId = "" } = req.query;
-  let user = await getUser({ userId });
-  let msg = "User retrieved!";
-  if (!user) {
-    userId = v4();
-    user = await createUser({ userId });
-    msg = "New user created!";
-  }
+app.get("/user", UserController.getUser);
 
-  res.status(200).json({ msg, userId: user.userId });
-});
-
-app.delete("/user", async (req, res) => {
-  try {
-    let { userId } = req.body;
-    let user = await deleteUser({ userId });
-    let msg = "User deleted!";
-
-    res.status(200).json({ msg, userId: user.userId });
-  } catch (err) {
-    console.error(err);
-    res
-      .status(400)
-      .json({ msg: "Encountered error getting job applications!" });
-  }
-});
+app.delete("/user", UserController.deleteUser);
 
 app.get("/user/job-apps", async (req, res) => {
   try {
