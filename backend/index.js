@@ -1,6 +1,9 @@
 import {
   getUser,
   createUser,
+  deleteUser,
+} from "./database/helpers/user-model.js";
+import {
   getJobApplicationsForUser,
   addJobApplicationForUser,
   deleteJobApplicationForUser,
@@ -8,8 +11,7 @@ import {
   addContactForJobApp,
   updateContactForJobApp,
   deleteContactForJobApp,
-  deleteUser,
-} from "./database/helpers/user-model.js";
+} from "./database/helpers/job-application-model.js";
 import express from "express";
 import cors from "cors";
 import { v4 } from "uuid";
