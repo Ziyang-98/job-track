@@ -10,13 +10,14 @@ import { styles } from "./styles.js";
 import SortingMenu from "components/SortingMenu/index.js";
 
 const CreateButton = ({
+  handleSortJobApps,
   handleClickCreate,
   handleClickImport,
   handleClickExport,
 }) => {
   return (
     <Box>
-      <SortingMenu />
+      <SortingMenu handleSortJobApps={handleSortJobApps} />
       <Tooltip title="Add new Job Application">
         <IconButton
           aria-label="create"

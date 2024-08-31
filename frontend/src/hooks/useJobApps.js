@@ -95,12 +95,17 @@ const useJobApps = (handleOpenNotification) => {
       });
   };
 
+  const handleSortJobApps = (sortingFn) => {
+    setJobApps(sortJobApps(jobApps, sortingFn));
+  };
+
   return {
     jobApps,
     setJobApps,
     updateStatus,
     handleDeleteJobApp,
     refreshJobApps,
+    handleSortJobApps,
   };
 };
 
