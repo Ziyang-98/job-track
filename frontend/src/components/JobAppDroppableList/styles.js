@@ -5,7 +5,8 @@ const colorTheme = ["planning", "applied", "interview", "offered", "rejected"];
 const getItemStyle = (draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
-  p: 2,
+  p: 1.5,
+  pr: 0.5,
   m: `0 0 ${grid}px 0`,
   borderRadius: 2,
   // change background colour if dragging
@@ -36,8 +37,7 @@ export const useStyles = (index, isSmall, isMedium) => ({
     alignItems: "center",
     height: "10%",
     width: "100%",
-    paddingTop: 1,
-    paddingBottom: 1,
+    py: 1.5,
     fontSize: "18px",
     fontWeight: "800",
   },
@@ -53,12 +53,14 @@ export const useStyles = (index, isSmall, isMedium) => ({
   useItemStyle: getItemStyle,
   draggableContent: {
     display: "flex",
-    justifyContent: "space-between",
     alignItems: "center",
     color: "primary.dark",
   },
-  itemText: {
+  itemTextHolder: {
     overflowX: "hidden",
+  },
+  iconHolder: {
+    marginLeft: "auto",
   },
   title: {
     fontWeight: "bold",

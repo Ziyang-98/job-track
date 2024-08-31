@@ -62,7 +62,7 @@ const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
                     sx={styles.useItemStyle(provided.draggableProps.style)}
                   >
                     <Box sx={styles.draggableContent}>
-                      <Box sx={styles.itemText}>
+                      <Box sx={styles.itemTextHolder}>
                         <Typography
                           variant={"body1"}
                           sx={styles.title}
@@ -75,6 +75,7 @@ const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
                         </Typography>
                       </Box>
                       <IconButton
+                        sx={styles.iconHolder}
                         onClick={() => {
                           handleOpenEditDialog(jobApp);
                         }}
