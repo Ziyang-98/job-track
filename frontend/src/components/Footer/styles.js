@@ -6,5 +6,7 @@ export const styles = {
     bottom: "0",
     color: "secondary.dark",
     bgcolor: "primary.light",
+    fontFamily: "monospace",
+    fontSize: "16px",
   },
 };
