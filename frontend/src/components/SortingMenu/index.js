@@ -6,7 +6,10 @@ import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { styles } from "./styles.js";
 import { jobAppOptionTextToValueMap } from "common/sortingOption.js";
 
-export default function SortingMenu({ sortingOption, handleSetSortingOption }) {
+export default function SortingMenu({
+  activeSortingOption,
+  handleSetActiveSortingOption,
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -46,12 +49,13 @@ export default function SortingMenu({ sortingOption, handleSetSortingOption }) {
           <MenuItem
             key={jobAppOptionText}
             sx={
-              sortingOption === jobAppOptionTextToValueMap[jobAppOptionText]
+              activeSortingOption ===
+              jobAppOptionTextToValueMap[jobAppOptionText]
                 ? styles.highlighedMenu
                 : null
             }
             onClick={() => {
-              handleSetSortingOption(
+              handleSetActiveSortingOption(
                 jobAppOptionTextToValueMap[jobAppOptionText]
               );
               handleClose();

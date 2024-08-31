@@ -14,7 +14,6 @@ export const styles = {
   },
 
   menuList: {
-    py: 0,
     borderRadius: "50%",
   },
 };

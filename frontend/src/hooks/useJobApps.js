@@ -18,11 +18,12 @@ const defaultSortingOption = sortingOption["newestLastUpdated"];
 
 const useJobApps = (handleOpenNotification) => {
   const [jobApps, setJobApps] = useState(defaultJobApps);
-  const [sortingOption, setSortingOption] = useState(defaultSortingOption);
+  const [activeSortingOption, setActiveSortingOption] =
+    useState(defaultSortingOption);
 
   const refreshJobApps = async () => {
     const userId = getUserIdFromLocalStorage();
-    const sortingFunction = getSortingFunction(sortingOption);
+    const sortingFunction = getSortingFunction(activeSortingOption);
 
     getJobApps(userId)
       .then((res) => {
@@ -45,7 +46,7 @@ const useJobApps = (handleOpenNotification) => {
     // Set user's stored sorting option
     const sortingOptionFromLocalStorage = getSortingOptionFromLocalStorage();
     sortingOptionFromLocalStorage &&
-      setSortingOption(sortingOptionFromLocalStorage);
+      setActiveSortingOption(sortingOptionFromLocalStorage);
 
     // Fetch user from stored user id
     const userId = getUserIdFromLocalStorage();
@@ -59,7 +60,7 @@ const useJobApps = (handleOpenNotification) => {
           const { jobApps } = res.data;
           const formattedJobApps = formatRawJobAppData(jobApps);
           const sortingFunction = getSortingFunction(
-            sortingOptionFromLocalStorage ?? sortingOption
+            sortingOptionFromLocalStorage ?? activeSortingOption
           );
 
           setJobApps(sortJobApps(formattedJobApps, sortingFunction));
@@ -105,10 +106,10 @@ const useJobApps = (handleOpenNotification) => {
       });
   };
 
-  const handleSetSortingOption = (option) => {
+  const handleSetActiveSortingOption = (option) => {
     const sortingFunction = getSortingFunction(option);
     setJobApps(sortJobApps(jobApps, sortingFunction));
-    setSortingOption(option);
+    setActiveSortingOption(option);
     storeSortingOptionFromLocalStorage(option);
   };
 
@@ -118,8 +119,8 @@ const useJobApps = (handleOpenNotification) => {
     updateStatus,
     handleDeleteJobApp,
     refreshJobApps,
-    sortingOption,
-    handleSetSortingOption,
+    activeSortingOption,
+    handleSetActiveSortingOption: handleSetActiveSortingOption,
   };
 };
 
