@@ -28,7 +28,7 @@ const Layout = () => {
     updateStatus,
     handleDeleteJobApp,
     refreshJobApps,
-    handleSortJobApps,
+    handleSetSortingOption,
   } = useJobApps(handleOpenNotification);
 
   const {
@@ -70,7 +70,7 @@ const Layout = () => {
         <Grid xs={10} container item justifyContent={"flex-end"}>
           <Grid item>
             <ActionButtons
-              handleSortJobApps={handleSortJobApps}
+              handleSetSortingOption={handleSetSortingOption}
               handleClickCreate={handleOpenCreateDialog}
               handleClickImport={handleOpenImportDialog}
               handleClickExport={handleOpenExportDialog}

@@ -4,9 +4,9 @@ import MenuItem from "@mui/material/MenuItem";
 import { IconButton, Tooltip } from "@mui/material";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { styles } from "./styles.js";
-import useSortJobAppsMenu from "hooks/useSortJobAppsMenu.js";
+import { jobAppOptionTextToValueMap } from "common/sortingOption.js";
 
-export default function SortingMenu({ handleSortJobApps }) {
+export default function SortingMenu({ handleSetSortingOption }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -15,15 +15,6 @@ export default function SortingMenu({ handleSortJobApps }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const {
-    sortByLatestDatetimeUpdated,
-    sortByOldestDatetimeUpdated,
-    sortByLatestDatetimeCreated,
-    sortByOldestDatetimeCreated,
-    sortByRole,
-    sortByCompany,
-  } = useSortJobAppsMenu(handleSortJobApps, handleClose);
 
   return (
     <>
@@ -50,20 +41,18 @@ export default function SortingMenu({ handleSortJobApps }) {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={sortByLatestDatetimeUpdated}>
-          Date Updated: Latest
-        </MenuItem>
-        <MenuItem onClick={sortByOldestDatetimeUpdated}>
-          Date Updated: Oldest
-        </MenuItem>
-        <MenuItem onClick={sortByLatestDatetimeCreated}>
-          Date Created: Latest
-        </MenuItem>
-        <MenuItem onClick={sortByOldestDatetimeCreated}>
-          Date Created: Oldest
-        </MenuItem>
-        <MenuItem onClick={sortByRole}>Role</MenuItem>
-        <MenuItem onClick={sortByCompany}>Company</MenuItem>
+        {Object.keys(jobAppOptionTextToValueMap).map((jobAppOptionText) => (
+          <MenuItem
+            key={jobAppOptionText}
+            onClick={() =>
+              handleSetSortingOption(
+                jobAppOptionTextToValueMap[jobAppOptionText]
+              )
+            }
+          >
+            {jobAppOptionText}
+          </MenuItem>
+        ))}
       </Menu>
     </>
   );

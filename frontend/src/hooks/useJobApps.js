@@ -8,20 +8,27 @@ import {
   storeUserIdFromLocalStorage,
   formatRawJobAppData,
   sortJobApps,
+  getSortingOptionFromLocalStorage,
+  storeSortingOptionFromLocalStorage,
 } from "common/utils";
+import { getSortingFunction, sortingOption } from "common/sortingOption";
 
 const defaultJobApps = [[], [], [], [], []];
+const defaultSortingOption = sortingOption["newestLastUpdated"];
 
 const useJobApps = (handleOpenNotification) => {
   const [jobApps, setJobApps] = useState(defaultJobApps);
+  const [sortingOption, setSortingOption] = useState(defaultSortingOption);
 
   const refreshJobApps = async () => {
     const userId = getUserIdFromLocalStorage();
+    const sortingFunction = getSortingFunction(sortingOption);
 
     getJobApps(userId)
       .then((res) => {
         const { jobApps } = res.data;
-        setJobApps(formatRawJobAppData(jobApps));
+        const formattedJobApps = formatRawJobAppData(jobApps);
+        setJobApps(sortJobApps(formattedJobApps, sortingFunction));
       })
       .catch((err) => {
         console.error(err);
@@ -33,7 +40,14 @@ const useJobApps = (handleOpenNotification) => {
       });
   };
 
+  // Run on app start up
   useEffect(() => {
+    // Set user's stored sorting option
+    const sortingOptionFromLocalStorage = getSortingOptionFromLocalStorage();
+    sortingOptionFromLocalStorage &&
+      setSortingOption(sortingOptionFromLocalStorage);
+
+    // Fetch user from stored user id
     const userId = getUserIdFromLocalStorage();
     getUser(userId)
       .then((res) => {
@@ -44,15 +58,11 @@ const useJobApps = (handleOpenNotification) => {
         getJobApps(userId).then((res) => {
           const { jobApps } = res.data;
           const formattedJobApps = formatRawJobAppData(jobApps);
-          // Sort by last datetime updated first
-          setJobApps(
-            sortJobApps(
-              formattedJobApps,
-              (a, b) =>
-                new Date(b.datetimeLastUpdated) -
-                new Date(a.datetimeLastUpdated)
-            )
+          const sortingFunction = getSortingFunction(
+            sortingOptionFromLocalStorage ?? sortingOption
           );
+
+          setJobApps(sortJobApps(formattedJobApps, sortingFunction));
         });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -95,8 +105,11 @@ const useJobApps = (handleOpenNotification) => {
       });
   };
 
-  const handleSortJobApps = (sortingFn) => {
-    setJobApps(sortJobApps(jobApps, sortingFn));
+  const handleSetSortingOption = (option) => {
+    const sortingFunction = getSortingFunction(option);
+    setJobApps(sortJobApps(jobApps, sortingFunction));
+    setSortingOption(option);
+    storeSortingOptionFromLocalStorage(option);
   };
 
   return {
@@ -105,7 +118,7 @@ const useJobApps = (handleOpenNotification) => {
     updateStatus,
     handleDeleteJobApp,
     refreshJobApps,
-    handleSortJobApps,
+    handleSetSortingOption,
   };
 };
 

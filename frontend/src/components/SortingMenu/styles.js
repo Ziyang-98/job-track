@@ -7,4 +7,10 @@ export const styles = {
       bgcolor: "primary.main",
     },
   },
+
+  highlighedMenu: {
+    "&:hover": {
+      bgcolor: "primary.light",
+    },
+  },
 };

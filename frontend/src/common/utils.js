@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { LOCAL_STORAGE_USER_ID } from "./config";
+import { LOCAL_STORAGE_SORTING_OPTION, LOCAL_STORAGE_USER_ID } from "./config";
 import { DEFAULT_CONTACT } from "./constants";
 
 export const convertStringToDayjs = (string) => {
@@ -16,6 +16,14 @@ export const getUserIdFromLocalStorage = () => {
 
 export const storeUserIdFromLocalStorage = (userId) => {
   localStorage.setItem(LOCAL_STORAGE_USER_ID, userId);
+};
+
+export const getSortingOptionFromLocalStorage = () => {
+  return localStorage.getItem(LOCAL_STORAGE_SORTING_OPTION);
+};
+
+export const storeSortingOptionFromLocalStorage = (sortingOption) => {
+  localStorage.setItem(LOCAL_STORAGE_SORTING_OPTION, sortingOption);
 };
 
 const isContactEqual = (contact1, contact2) => {
