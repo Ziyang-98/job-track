@@ -120,7 +120,7 @@ const useJobApps = (handleOpenNotification) => {
     handleDeleteJobApp,
     refreshJobApps,
     activeSortingOption,
-    handleSetActiveSortingOption: handleSetActiveSortingOption,
+    handleSetActiveSortingOption,
   };
 };
 
