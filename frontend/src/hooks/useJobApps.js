@@ -44,7 +44,7 @@ const useJobApps = (handleOpenNotification) => {
         getJobApps(userId).then((res) => {
           const { jobApps } = res.data;
           const formattedJobApps = formatRawJobAppData(jobApps);
-          // Sort by last date updated
+          // Sort by last datetime updated first
           setJobApps(
             sortJobApps(
               formattedJobApps,

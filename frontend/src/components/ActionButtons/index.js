@@ -7,6 +7,7 @@ import ExportIcon from "@mui/icons-material/FileDownloadOutlined";
 import Tooltip from "@mui/material/Tooltip";
 
 import { styles } from "./styles.js";
+import SortingMenu from "components/SortingMenu/index.js";
 
 const CreateButton = ({
   handleClickCreate,
@@ -15,6 +16,7 @@ const CreateButton = ({
 }) => {
   return (
     <Box>
+      <SortingMenu />
       <Tooltip title="Add new Job Application">
         <IconButton
           aria-label="create"
