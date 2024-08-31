@@ -118,6 +118,7 @@ const useJobApps = (handleOpenNotification) => {
     updateStatus,
     handleDeleteJobApp,
     refreshJobApps,
+    sortingOption,
     handleSetSortingOption,
   };
 };

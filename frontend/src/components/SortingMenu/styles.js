@@ -9,8 +9,12 @@ export const styles = {
   },
 
   highlighedMenu: {
-    "&:hover": {
-      bgcolor: "primary.light",
-    },
+    bgcolor: "secondary.light",
+    borderRadius: "5%",
+  },
+
+  menuList: {
+    py: 0,
+    borderRadius: "50%",
   },
 };
