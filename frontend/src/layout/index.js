@@ -24,7 +24,6 @@ const Layout = () => {
 
   const {
     jobApps,
-    jobAppsNumbers,
     setJobApps,
     updateStatus,
     handleDeleteJobApp,
@@ -80,7 +79,6 @@ const Layout = () => {
         <Grid item xs={11}>
           <JobAppContent
             jobApps={jobApps}
-            jobAppsNumbers={jobAppsNumbers}
             setJobApps={setJobApps}
             updateStatus={updateStatus}
             refreshJobApps={refreshJobApps}

@@ -10,7 +10,6 @@ import { styles } from "./styles";
 
 const JobAppContent = ({
   jobApps,
-  jobAppsNumbers,
   setJobApps,
   updateStatus,
   refreshJobApps,
@@ -23,7 +22,6 @@ const JobAppContent = ({
           <JobAppDroppableList
             key={ind}
             jobApps={jobAppsSameStatus}
-            jobAppNumberForList={jobAppsNumbers[ind]}
             rawStatusType={ind}
             refreshJobApps={refreshJobApps}
           />

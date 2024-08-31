@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 
 import { deleteJobApp, getJobApps, getUser, updateJobApp } from "api";
@@ -46,11 +46,6 @@ const useJobApps = (handleOpenNotification) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const jobAppsNumbers = useMemo(
-    () => jobApps.map((ja) => ja.length),
-    [jobApps]
-  );
-
   const updateStatus = (jobApp, newStatus) => {
     if (jobApp.status === JobAppStatus.planning) {
       // Set date applied as current date if job app is moved from planning status
@@ -90,7 +85,6 @@ const useJobApps = (handleOpenNotification) => {
 
   return {
     jobApps,
-    jobAppsNumbers,
     setJobApps,
     updateStatus,
     handleDeleteJobApp,

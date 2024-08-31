@@ -14,12 +14,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { useStyles } from "./styles";
 
-const JobAppDroppableList = ({
-  jobApps,
-  jobAppNumberForList,
-  rawStatusType,
-  refreshJobApps,
-}) => {
+const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
     useNotification();
 
@@ -44,7 +39,7 @@ const JobAppDroppableList = ({
   return (
     <Box sx={styles.mainList}>
       <Typography sx={styles.listTitle} variant="h6">
-        {jobAppStatusMap[rawStatusType]} ({jobAppNumberForList})
+        {jobAppStatusMap[rawStatusType]} ({jobApps.length})
       </Typography>
       <Droppable key={rawStatusType} droppableId={`${rawStatusType}`}>
         {(provided, snapshot) => (
