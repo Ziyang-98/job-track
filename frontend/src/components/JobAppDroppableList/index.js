@@ -78,6 +78,7 @@ const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
                         onClick={() => {
                           handleOpenEditDialog(jobApp);
                         }}
+                        size="large"
                       >
                         <InfoOutlinedIcon fontSize="medium" />
                       </IconButton>
