@@ -52,3 +52,7 @@ export const formatRawJobAppData = (rawJobApps) => {
   });
   return newJobApps;
 };
+
+export const sortJobApps = (jobApps, sortingFn) => {
+  return jobApps.map((jobAppList) => jobAppList.sort(sortingFn));
+};

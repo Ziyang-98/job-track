@@ -7,6 +7,7 @@ import {
   getUserIdFromLocalStorage,
   storeUserIdFromLocalStorage,
   formatRawJobAppData,
+  sortJobApps,
 } from "common/utils";
 
 const defaultJobApps = [[], [], [], [], []];
@@ -38,10 +39,21 @@ const useJobApps = (handleOpenNotification) => {
       .then((res) => {
         const { userId } = res.data;
         storeUserIdFromLocalStorage(userId);
-        refreshJobApps();
       })
-      .catch(() => {
-        refreshJobApps();
+      .finally(() => {
+        getJobApps(userId).then((res) => {
+          const { jobApps } = res.data;
+          const formattedJobApps = formatRawJobAppData(jobApps);
+          // Sort by last date updated
+          setJobApps(
+            sortJobApps(
+              formattedJobApps,
+              (a, b) =>
+                new Date(b.datetimeLastUpdated) -
+                new Date(a.datetimeLastUpdated)
+            )
+          );
+        });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
