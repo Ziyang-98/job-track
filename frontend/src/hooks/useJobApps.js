@@ -20,7 +20,6 @@ const useJobApps = (handleOpenNotification) => {
   const [jobApps, setJobApps] = useState(defaultJobApps);
   const [activeSortingOption, setActiveSortingOption] =
     useState(defaultSortingOption);
-
   const refreshJobApps = async () => {
     const userId = getUserIdFromLocalStorage();
     const sortingFunction = getSortingFunction(activeSortingOption);

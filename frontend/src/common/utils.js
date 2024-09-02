@@ -86,6 +86,14 @@ export const isValidDate = (dateString) => {
   return true;
 };
 
+export const toDate = (dateString) => {
+  const dateParts = dateString.split("/");
+  const day = parseInt(dateParts[0]);
+  const month = parseInt(dateParts[1]);
+  const year = parseInt(dateParts[2]);
+  return new Date(year, month - 1, day);
+};
+
 export const convertDDMMYYYYToDdMmmYYYYformat = (dateString) => {
   const dateParts = dateString.split("/");
   const day = parseInt(dateParts[0]);
