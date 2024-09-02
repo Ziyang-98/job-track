@@ -71,6 +71,7 @@ const Layout = () => {
         <Grid xs={10} container item justifyContent={"flex-end"}>
           <Grid item>
             <ActionButtons
+              jobApps={jobApps}
               activeSortingOption={activeSortingOption}
               handleSetActiveSortingOption={handleSetActiveSortingOption}
               handleClickCreate={handleOpenCreateDialog}
