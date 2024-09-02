@@ -73,6 +73,15 @@ const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
                         <Typography variant={"body2"} textAlign={"left"}>
                           {jobApp.company}
                         </Typography>
+                        {jobApp.dateApplied && (
+                          <Typography
+                            sx={styles.dateAppliedText}
+                            variant={"body2"}
+                            textAlign={"left"}
+                          >
+                            {jobApp.dateApplied}
+                          </Typography>
+                        )}
                       </Box>
                       <IconButton
                         sx={styles.iconHolder}

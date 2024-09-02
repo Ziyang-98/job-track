@@ -65,4 +65,7 @@ export const useStyles = (index, isSmall, isMedium) => ({
   title: {
     fontWeight: "bold",
   },
+  dateAppliedText: {
+    mt: 0.5,
+  },
 });
