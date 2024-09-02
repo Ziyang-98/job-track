@@ -9,8 +9,8 @@ import CreateDialog from "components/CreateOrEditDialog";
 import useCreateDialog from "hooks/useCreateDialog";
 import UniqueIdDialog from "components/UniqueIdDialog";
 import useUniqueIdDialog from "hooks/useUniqueIdDialog";
-import ImportDialog from "components/ImportDialog";
-import useImportDialog from "hooks/useImportDialog";
+import SyncDataDialog from "components/SyncDataDialog";
+import useSyncDataDialog from "hooks/useSyncDataDialog";
 import useJobApps from "hooks/useJobApps";
 import Footer from "components/Footer";
 import Notification from "components/Notification";
@@ -42,12 +42,12 @@ const Layout = () => {
   } = useCreateDialog(refreshJobApps, handleOpenNotification);
 
   const {
-    importDialogProps,
-    handleOpenImportDialog,
-    handleClose: handleImportDialogClose,
-    handleImportData,
-    loading: importLoading,
-  } = useImportDialog(refreshJobApps, handleOpenNotification);
+    syncDataDialogProps,
+    handleOpenSyncDataDialog,
+    handleClose: handleSyncDataDialogClose,
+    handleSyncData,
+    loading: syncDataLoading,
+  } = useSyncDataDialog(refreshJobApps, handleOpenNotification);
 
   const {
     uniqueIdDialogProps,
@@ -75,7 +75,7 @@ const Layout = () => {
               activeSortingOption={activeSortingOption}
               handleSetActiveSortingOption={handleSetActiveSortingOption}
               handleClickCreate={handleOpenCreateDialog}
-              handleClickImport={handleOpenImportDialog}
+              handleClickSyncData={handleOpenSyncDataDialog}
               handleClickGetUniqueId={handleOpenUniqueIdDialog}
             />
           </Grid>
@@ -99,11 +99,11 @@ const Layout = () => {
         loadingSubmit={loadingCreate}
         type={"create"}
       />
-      <ImportDialog
-        dialogProps={importDialogProps}
-        handleClose={handleImportDialogClose}
-        handleImportData={handleImportData}
-        loading={importLoading}
+      <SyncDataDialog
+        dialogProps={syncDataDialogProps}
+        handleClose={handleSyncDataDialogClose}
+        handleSyncData={handleSyncData}
+        loading={syncDataLoading}
       />
       <UniqueIdDialog
         dialogProps={uniqueIdDialogProps}

@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
-import ImportIcon from "@mui/icons-material/FileUploadOutlined";
+import SyncIcon from "@mui/icons-material/Sync";
 import ExportIcon from "@mui/icons-material/FileDownloadOutlined";
 import PersonIcon from "@mui/icons-material/Person";
 import Tooltip from "@mui/material/Tooltip";
@@ -16,7 +16,7 @@ const CreateButton = ({
   activeSortingOption,
   handleSetActiveSortingOption,
   handleClickCreate,
-  handleClickImport,
+  handleClickSyncData,
   handleClickGetUniqueId,
 }) => {
   return (
@@ -35,14 +35,14 @@ const CreateButton = ({
           <AddIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Import existing data">
+      <Tooltip title="Sync existing data">
         <IconButton
-          aria-label="import"
+          aria-label="sync-data"
           size="large"
           sx={styles.button}
-          onClick={handleClickImport}
+          onClick={handleClickSyncData}
         >
-          <ImportIcon />
+          <SyncIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="Get unique ID">
