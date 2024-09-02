@@ -65,6 +65,7 @@ export const useStyles = (index, isSmall, isMedium) => ({
     marginLeft: "auto",
     width: "25%",
     height: "5rem",
+    py: 0.5,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -81,6 +82,7 @@ export const useStyles = (index, isSmall, isMedium) => ({
     fontWeight: "bold",
   },
   dateAppliedText: {
-    mt: 0.5,
+    mt: 1,
+    color: "black",
   },
 });

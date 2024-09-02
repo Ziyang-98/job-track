@@ -129,11 +129,9 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
               onChange={(newValue) => {
                 setDateApplied(newValue);
               }}
-              defaultValue={jobApp.dateApplied}
-              inputFormat={"DD/MM/YYYY"}
+              format={"DD/MM/YYYY"}
               sx={styles.formItem}
               name="dateApplied"
-              renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -143,11 +141,9 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
               onChange={(newValue) => {
                 setLastContactDate(newValue);
               }}
-              defaultValue={jobApp.lastContactDate}
-              inputFormat={"DD/MM/YYYY"}
+              format={"DD/MM/YYYY"}
               sx={styles.formItem}
               name="lastContactDate"
-              renderInput={(params) => <TextField autoFocus {...params} />}
             />
           </LocalizationProvider>
         </>

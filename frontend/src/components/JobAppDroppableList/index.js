@@ -12,6 +12,7 @@ import Notification from "components/Notification";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { useStyles } from "./styles";
+import { convertDDMMYYYYToDdMmmYYYYformat, isValidDate } from "common/utils";
 
 const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
@@ -72,15 +73,18 @@ const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
                         <Typography variant={"body2"} textAlign={"left"}>
                           {jobApp.company}
                         </Typography>
-                        {jobApp.dateApplied && (
-                          <Typography
-                            sx={styles.dateAppliedText}
-                            variant={"body2"}
-                            textAlign={"left"}
-                          >
-                            {jobApp.dateApplied}
-                          </Typography>
-                        )}
+                        {jobApp.dateApplied &&
+                          isValidDate(jobApp.dateApplied) && (
+                            <Typography
+                              sx={styles.dateAppliedText}
+                              variant={"body2"}
+                              textAlign={"left"}
+                            >
+                              {convertDDMMYYYYToDdMmmYYYYformat(
+                                jobApp.dateApplied
+                              )}
+                            </Typography>
+                          )}
                       </Box>
                       <Box
                         sx={styles.iconHolder}
