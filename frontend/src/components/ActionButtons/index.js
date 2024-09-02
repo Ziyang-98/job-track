@@ -17,7 +17,7 @@ const CreateButton = ({
   handleSetActiveSortingOption,
   handleClickCreate,
   handleClickImport,
-  handleClickExport,
+  handleClickGetUniqueId,
 }) => {
   return (
     <Box>
@@ -50,7 +50,7 @@ const CreateButton = ({
           aria-label="get-id"
           size="large"
           sx={styles.button}
-          onClick={handleClickExport}
+          onClick={handleClickGetUniqueId}
         >
           <PersonIcon />
         </IconButton>

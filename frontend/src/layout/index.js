@@ -7,8 +7,8 @@ import ActionButtons from "components/ActionButtons";
 import JobAppContent from "views/JobAppContent";
 import CreateDialog from "components/CreateOrEditDialog";
 import useCreateDialog from "hooks/useCreateDialog";
-import ExportDialog from "components/ExportDialog";
-import useExportDialog from "hooks/useExportDialog";
+import UniqueIdDialog from "components/UniqueIdDialog";
+import useUniqueIdDialog from "hooks/useUniqueIdDialog";
 import ImportDialog from "components/ImportDialog";
 import useImportDialog from "hooks/useImportDialog";
 import useJobApps from "hooks/useJobApps";
@@ -50,11 +50,11 @@ const Layout = () => {
   } = useImportDialog(refreshJobApps, handleOpenNotification);
 
   const {
-    exportDialogProps,
-    handleOpenExportDialog,
-    handleClose: handleExportDialogClose,
+    uniqueIdDialogProps,
+    handleOpenUniqueIdDialog,
+    handleClose: handleUniqueIdDialogClose,
     userId,
-  } = useExportDialog();
+  } = useUniqueIdDialog();
 
   return (
     <Box sx={styles.mainContainer}>
@@ -76,7 +76,7 @@ const Layout = () => {
               handleSetActiveSortingOption={handleSetActiveSortingOption}
               handleClickCreate={handleOpenCreateDialog}
               handleClickImport={handleOpenImportDialog}
-              handleClickExport={handleOpenExportDialog}
+              handleClickGetUniqueId={handleOpenUniqueIdDialog}
             />
           </Grid>
         </Grid>
@@ -105,10 +105,10 @@ const Layout = () => {
         handleImportData={handleImportData}
         loading={importLoading}
       />
-      <ExportDialog
-        dialogProps={exportDialogProps}
+      <UniqueIdDialog
+        dialogProps={uniqueIdDialogProps}
         userId={userId}
-        handleClose={handleExportDialogClose}
+        handleClose={handleUniqueIdDialogClose}
       />
       <Notification
         snackbarProps={snackbarProps}
