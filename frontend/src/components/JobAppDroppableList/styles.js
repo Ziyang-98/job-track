@@ -52,11 +52,12 @@ export const useStyles = (index, isSmall, isMedium) => ({
   useItemStyle: getItemStyle,
   draggableContent: {
     display: "flex",
-    alignItems: "center",
+    alignItems: "stretch",
     color: "primary.dark",
   },
   itemTextHolder: {
     overflowX: "hidden",
+    py: 1,
   },
   icon: {
     fontSize: "1.5rem",
@@ -64,8 +65,7 @@ export const useStyles = (index, isSmall, isMedium) => ({
   iconHolder: {
     marginLeft: "auto",
     width: "25%",
-    height: "5rem",
-    py: 0.5,
+    // height: "100%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
