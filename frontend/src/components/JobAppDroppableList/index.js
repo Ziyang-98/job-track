@@ -1,7 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -83,15 +82,14 @@ const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
                           </Typography>
                         )}
                       </Box>
-                      <IconButton
+                      <Box
                         sx={styles.iconHolder}
                         onClick={() => {
                           handleOpenEditDialog(jobApp);
                         }}
-                        size="large"
                       >
-                        <InfoOutlinedIcon fontSize="medium" />
-                      </IconButton>
+                        <InfoOutlinedIcon sx={styles.icon} />
+                      </Box>
                     </Box>
                   </Box>
                 )}
