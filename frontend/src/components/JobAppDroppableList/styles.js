@@ -64,8 +64,7 @@ export const useStyles = (index, isSmall, isMedium) => ({
   },
   iconHolder: {
     marginLeft: "auto",
-    width: "25%",
-    // height: "100%",
+    minWidth: isMedium ? "40%" : "30%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
