@@ -17,6 +17,8 @@ import Notification from "components/Notification";
 
 import { styles } from "./styles";
 import useNotification from "hooks/useNotification";
+import SearchBar from "components/SearchBar";
+import { useMediaQuery } from "@mui/material";
 
 const Layout = () => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
@@ -56,6 +58,8 @@ const Layout = () => {
     userId,
   } = useUniqueIdDialog();
 
+  const isSearchBarAndActionButtonsOverlapping =
+    useMediaQuery("(max-width:750px)");
   return (
     <Box sx={styles.mainContainer}>
       <Grid
@@ -68,8 +72,19 @@ const Layout = () => {
           <Title />
         </Grid>
 
-        <Grid xs={10} container item justifyContent={"flex-end"}>
-          <Grid item>
+        <Grid xs={9.5} container item justifyContent={"space-between"}>
+          <Grid
+            xs={isSearchBarAndActionButtonsOverlapping && 12}
+            item
+            sx={styles.searchBarHolder}
+          >
+            <SearchBar />
+          </Grid>
+          <Grid
+            xs={isSearchBarAndActionButtonsOverlapping && 12}
+            item
+            sx={isSearchBarAndActionButtonsOverlapping && { py: 2 }}
+          >
             <ActionButtons
               jobApps={jobApps}
               activeSortingOption={activeSortingOption}
