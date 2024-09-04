@@ -90,7 +90,7 @@ const Layout = () => {
           <Grid
             xs={isSearchBarAndActionButtonsOverlapping && 12}
             item
-            sx={isSearchBarAndActionButtonsOverlapping && { py: 2 }}
+            sx={isSearchBarAndActionButtonsOverlapping ? { py: 2 } : {}}
           >
             <ActionButtons
               jobApps={jobApps}

@@ -3,7 +3,6 @@ import InputAdornment from "@mui/material/InputAdornment";
 
 const SearchBar = ({ searchFilter, setSearchFilter }) => (
   <TextField
-    id="search-bar"
     className="text"
     onInput={(e) => {
       setSearchFilter(e.target.value);
@@ -13,7 +12,7 @@ const SearchBar = ({ searchFilter, setSearchFilter }) => (
     size="small"
     sx={{ width: "20rem" }}
     value={searchFilter}
-    slotProps={{
+    slotprops={{
       input: {
         endAdornment: <InputAdornment position="end">kg</InputAdornment>,
       },
