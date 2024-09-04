@@ -12,18 +12,13 @@ const useFilteredJobApps = (jobApps, debounceDuration = 200) => {
 
   const filterJobAppsBasedOnRoleAndCompany = useCallback(
     (jobApps, searchFilter) => {
-      const filteredJobApps = jobApps
-        .map((a) => {
-          return [...a];
-        })
-        .map((jobAppList) =>
-          jobAppList.filter(
-            (jobApp) =>
-              jobApp.role.toLowerCase().includes(searchFilter.toLowerCase()) ||
-              jobApp.company.toLowerCase().includes(searchFilter.toLowerCase())
-          )
-        );
-      return filteredJobApps;
+      return jobApps.map((jobAppList) =>
+        jobAppList.filter(
+          (jobApp) =>
+            jobApp.role.toLowerCase().includes(searchFilter.toLowerCase()) ||
+            jobApp.company.toLowerCase().includes(searchFilter.toLowerCase())
+        )
+      );
     },
     []
   );
