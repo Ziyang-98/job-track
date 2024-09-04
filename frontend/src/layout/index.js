@@ -19,6 +19,7 @@ import { styles } from "./styles";
 import useNotification from "hooks/useNotification";
 import SearchBar from "components/SearchBar";
 import { useMediaQuery } from "@mui/material";
+import useFilteredJobApps from "hooks/useFilteredJobApps";
 
 const Layout = () => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
@@ -33,6 +34,9 @@ const Layout = () => {
     activeSortingOption,
     handleSetActiveSortingOption,
   } = useJobApps(handleOpenNotification);
+
+  const { filteredJobApps, searchFilter, setSearchFilter } =
+    useFilteredJobApps(jobApps);
 
   const {
     createDialogProps,
@@ -59,7 +63,7 @@ const Layout = () => {
   } = useUniqueIdDialog();
 
   const isSearchBarAndActionButtonsOverlapping =
-    useMediaQuery("(max-width:750px)");
+    useMediaQuery("(max-width:840px)");
   return (
     <Box sx={styles.mainContainer}>
       <Grid
@@ -78,7 +82,10 @@ const Layout = () => {
             item
             sx={styles.searchBarHolder}
           >
-            <SearchBar />
+            <SearchBar
+              searchFilter={searchFilter}
+              setSearchFilter={setSearchFilter}
+            />
           </Grid>
           <Grid
             xs={isSearchBarAndActionButtonsOverlapping && 12}
@@ -98,7 +105,7 @@ const Layout = () => {
 
         <Grid item xs={11}>
           <JobAppContent
-            jobApps={jobApps}
+            jobApps={filteredJobApps}
             setJobApps={setJobApps}
             updateStatus={updateStatus}
             refreshJobApps={refreshJobApps}
