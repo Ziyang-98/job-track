@@ -105,7 +105,8 @@ const Layout = () => {
 
         <Grid item xs={11}>
           <JobAppContent
-            jobApps={filteredJobApps}
+            jobApps={jobApps}
+            filteredJobApps={filteredJobApps}
             setJobApps={setJobApps}
             updateStatus={updateStatus}
             refreshJobApps={refreshJobApps}

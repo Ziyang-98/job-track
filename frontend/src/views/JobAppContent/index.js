@@ -10,6 +10,7 @@ import { styles } from "./styles";
 
 const JobAppContent = ({
   jobApps,
+  filteredJobApps,
   setJobApps,
   updateStatus,
   refreshJobApps,
@@ -18,7 +19,7 @@ const JobAppContent = ({
   return (
     <Box sx={styles.contentContainer}>
       <DragDropContext onDragEnd={onDragEnd}>
-        {jobApps.map((jobAppsSameStatus, ind) => (
+        {filteredJobApps.map((jobAppsSameStatus, ind) => (
           <JobAppDroppableList
             key={ind}
             jobApps={jobAppsSameStatus}
