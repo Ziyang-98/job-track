@@ -1,25 +1,25 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import { styles } from "./styles";
+import { useMediaQuery } from "@mui/material";
 
 import Title from "components/Title";
 import ActionButtons from "components/ActionButtons";
 import JobAppContent from "views/JobAppContent";
 import CreateDialog from "components/CreateOrEditDialog";
-import useCreateDialog from "hooks/useCreateDialog";
-import UniqueIdDialog from "components/UniqueIdDialog";
-import useUniqueIdDialog from "hooks/useUniqueIdDialog";
+import ManageProfileDialog from "components/ManageProfileDialog";
 import SyncDataDialog from "components/SyncDataDialog";
-import useSyncDataDialog from "hooks/useSyncDataDialog";
-import useJobApps from "hooks/useJobApps";
+import SearchBar from "components/SearchBar";
 import Footer from "components/Footer";
 import Notification from "components/Notification";
 
-import { styles } from "./styles";
-import useNotification from "hooks/useNotification";
-import SearchBar from "components/SearchBar";
-import { useMediaQuery } from "@mui/material";
+import useJobApps from "hooks/useJobApps";
+import useCreateDialog from "hooks/useCreateDialog";
 import useFilteredJobApps from "hooks/useFilteredJobApps";
+import useSyncDataDialog from "hooks/useSyncDataDialog";
+import useManageProfileDialog from "hooks/useManageProfileDialog";
+import useNotification from "hooks/useNotification";
 
 const Layout = () => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
@@ -60,7 +60,7 @@ const Layout = () => {
     handleOpenUniqueIdDialog,
     handleClose: handleUniqueIdDialogClose,
     userId,
-  } = useUniqueIdDialog();
+  } = useManageProfileDialog();
 
   const isSearchBarAndActionButtonsOverlapping =
     useMediaQuery("(max-width:840px)");
@@ -128,7 +128,7 @@ const Layout = () => {
         handleSyncData={handleSyncData}
         loading={syncDataLoading}
       />
-      <UniqueIdDialog
+      <ManageProfileDialog
         dialogProps={uniqueIdDialogProps}
         userId={userId}
         handleClose={handleUniqueIdDialogClose}

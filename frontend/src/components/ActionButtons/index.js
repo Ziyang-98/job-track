@@ -35,16 +35,6 @@ const CreateButton = ({
           <AddIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Sync existing data">
-        <IconButton
-          aria-label="sync-data"
-          size="large"
-          sx={styles.button}
-          onClick={handleClickSyncData}
-        >
-          <SyncIcon />
-        </IconButton>
-      </Tooltip>
       <Tooltip title="Manage Job Track profile">
         <IconButton
           aria-label="get-id"
@@ -53,6 +43,16 @@ const CreateButton = ({
           onClick={handleClickGetUniqueId}
         >
           <PersonIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Sync existing data">
+        <IconButton
+          aria-label="sync-data"
+          size="large"
+          sx={styles.button}
+          onClick={handleClickSyncData}
+        >
+          <SyncIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="Export to CSV">

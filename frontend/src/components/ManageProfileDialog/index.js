@@ -14,7 +14,7 @@ import { styles } from "./styles";
 import { LoadingButton } from "@mui/lab";
 import { Tooltip } from "@mui/material";
 
-const UniqueIdDialog = ({ dialogProps, handleClose, userId }) => {
+const ManageProfileDialog = ({ dialogProps, handleClose, userId }) => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
     useNotification();
 
@@ -49,10 +49,10 @@ const UniqueIdDialog = ({ dialogProps, handleClose, userId }) => {
             <LoadingButton sx={styles.deleteButton}>Delete</LoadingButton>
           </Tooltip>
 
+          <Button onClick={handleClose}>Cancel</Button>
           <Tooltip title="Get a new profile and unique ID" placement="top">
             <Button onClick={handleClose}>Reset ID</Button>
           </Tooltip>
-          <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
       <Notification
@@ -64,4 +64,4 @@ const UniqueIdDialog = ({ dialogProps, handleClose, userId }) => {
   );
 };
 
-export default UniqueIdDialog;
+export default ManageProfileDialog;

@@ -1,4 +1,4 @@
-import { deleteUser, getJobApps } from "api";
+import { getJobApps } from "api";
 import {
   getUserIdFromLocalStorage,
   storeUserIdFromLocalStorage,
@@ -31,8 +31,6 @@ const useSyncDataDialog = (refreshJobApps, handleOpenNotification) => {
       await getJobApps(newUserId)
         .then((res) => {
           storeUserIdFromLocalStorage(newUserId);
-          deleteUser(oldUserId);
-
           refreshJobApps().then(() => {
             handleOpenNotification(
               "Successfully imported data!",
