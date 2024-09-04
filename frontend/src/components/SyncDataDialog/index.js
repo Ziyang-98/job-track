@@ -21,7 +21,8 @@ const SyncDataDialog = ({
           <DialogTitle>Enter your unique ID to sync data</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Your current job track will be deleted if data sync is successful!
+              Check your profile with the job applications to find your unique
+              ID.
             </DialogContentText>
 
             <TextField
