@@ -18,7 +18,7 @@ const SyncDataDialog = ({
     <>
       <form onSubmit={handleSyncData}>
         <Dialog {...dialogProps} maxWidth={"sm"} fullWidth disablePortal>
-          <DialogTitle>Enter a User ID to sync data</DialogTitle>
+          <DialogTitle>Enter your unique ID to sync data</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Your current job track will be deleted if data sync is successful!

@@ -9,4 +9,11 @@ export const styles = {
     border: 1,
     borderColor: "primary.light",
   },
+  deleteButton: {
+    marginRight: "auto",
+    color: "warning.dark",
+    "&:hover": {
+      bgcolor: "warning.light",
+    },
+  },
 };

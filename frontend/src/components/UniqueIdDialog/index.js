@@ -11,6 +11,8 @@ import Notification from "components/Notification";
 import useNotification from "hooks/useNotification";
 
 import { styles } from "./styles";
+import { LoadingButton } from "@mui/lab";
+import { Tooltip } from "@mui/material";
 
 const UniqueIdDialog = ({ dialogProps, handleClose, userId }) => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
@@ -40,6 +42,16 @@ const UniqueIdDialog = ({ dialogProps, handleClose, userId }) => {
           </Box>
         </DialogContent>
         <DialogActions>
+          <Tooltip
+            title="Delete all job applications and profile"
+            placement="top"
+          >
+            <LoadingButton sx={styles.deleteButton}>Delete</LoadingButton>
+          </Tooltip>
+
+          <Tooltip title="Get a new profile and unique ID" placement="top">
+            <Button onClick={handleClose}>Reset ID</Button>
+          </Tooltip>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>

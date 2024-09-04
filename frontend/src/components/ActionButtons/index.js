@@ -45,7 +45,7 @@ const CreateButton = ({
           <SyncIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Get unique ID">
+      <Tooltip title="Manage Job Track profile">
         <IconButton
           aria-label="get-id"
           size="large"
