@@ -34,7 +34,7 @@ export const useStyles = (index, isSmall, isMedium) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "10%",
+    minHeight: "10%",
     width: "100%",
     py: 1.5,
     fontSize: "18px",
@@ -57,14 +57,15 @@ export const useStyles = (index, isSmall, isMedium) => ({
   },
   itemTextHolder: {
     overflowX: "hidden",
-    py: 1,
+    py: 1.5,
+    maxWidth: isMedium ? "60%" : "70%",
   },
   icon: {
     fontSize: "1.5rem",
   },
   iconHolder: {
     marginLeft: "auto",
-    minWidth: isMedium ? "40%" : "30%",
+    minWidth: isMedium ? "40%" : "25%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
