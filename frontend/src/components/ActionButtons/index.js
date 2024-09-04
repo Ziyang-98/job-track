@@ -17,7 +17,7 @@ const CreateButton = ({
   handleSetActiveSortingOption,
   handleClickCreate,
   handleClickSyncData,
-  handleClickGetUniqueId,
+  handleOpenManageProfileDialog,
 }) => {
   return (
     <Box>
@@ -40,7 +40,7 @@ const CreateButton = ({
           aria-label="get-id"
           size="large"
           sx={styles.button}
-          onClick={handleClickGetUniqueId}
+          onClick={handleOpenManageProfileDialog}
         >
           <PersonIcon />
         </IconButton>

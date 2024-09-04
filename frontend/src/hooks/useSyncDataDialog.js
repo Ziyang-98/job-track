@@ -40,7 +40,6 @@ const useSyncDataDialog = (refreshJobApps, handleOpenNotification) => {
           });
         })
         .catch((err) => {
-          // setError(true);
           handleOpenNotification(
             "Error importing data. Please check if the user ID is correct, or if your connection is stable!",
             5000,

@@ -14,7 +14,15 @@ import { styles } from "./styles";
 import { LoadingButton } from "@mui/lab";
 import { Tooltip } from "@mui/material";
 
-const ManageProfileDialog = ({ dialogProps, handleClose, userId }) => {
+const ManageProfileDialog = ({
+  dialogProps,
+  handleClose,
+  userId,
+  handleDeleteUser,
+  loadingDeleteUser,
+  handleResetUserId,
+  loadingResetUserId,
+}) => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
     useNotification();
 
@@ -46,12 +54,23 @@ const ManageProfileDialog = ({ dialogProps, handleClose, userId }) => {
             title="Delete all job applications and profile"
             placement="top"
           >
-            <LoadingButton sx={styles.deleteButton}>Delete</LoadingButton>
+            <LoadingButton
+              sx={styles.deleteButton}
+              loading={loadingDeleteUser}
+              onClick={handleDeleteUser}
+            >
+              Delete
+            </LoadingButton>
           </Tooltip>
 
           <Button onClick={handleClose}>Cancel</Button>
           <Tooltip title="Get a new profile and unique ID" placement="top">
-            <Button onClick={handleClose}>Reset ID</Button>
+            <LoadingButton
+              onClick={handleResetUserId}
+              loading={loadingResetUserId}
+            >
+              Reset ID
+            </LoadingButton>
           </Tooltip>
         </DialogActions>
       </Dialog>

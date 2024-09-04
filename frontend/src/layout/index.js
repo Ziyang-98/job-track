@@ -56,11 +56,15 @@ const Layout = () => {
   } = useSyncDataDialog(refreshJobApps, handleOpenNotification);
 
   const {
-    uniqueIdDialogProps,
-    handleOpenUniqueIdDialog,
-    handleClose: handleUniqueIdDialogClose,
+    manageProfileProps,
+    handleOpenManageProfileDialog,
+    handleClose: handleManageProfileDialogClose,
     userId,
-  } = useManageProfileDialog();
+    handleDeleteUser,
+    loadingDeleteUser,
+    handleResetUserId,
+    loadingResetUserId,
+  } = useManageProfileDialog(refreshJobApps, handleOpenNotification);
 
   const isSearchBarAndActionButtonsOverlapping =
     useMediaQuery("(max-width:840px)");
@@ -98,7 +102,7 @@ const Layout = () => {
               handleSetActiveSortingOption={handleSetActiveSortingOption}
               handleClickCreate={handleOpenCreateDialog}
               handleClickSyncData={handleOpenSyncDataDialog}
-              handleClickGetUniqueId={handleOpenUniqueIdDialog}
+              handleOpenManageProfileDialog={handleOpenManageProfileDialog}
             />
           </Grid>
         </Grid>
@@ -129,9 +133,13 @@ const Layout = () => {
         loading={syncDataLoading}
       />
       <ManageProfileDialog
-        dialogProps={uniqueIdDialogProps}
+        dialogProps={manageProfileProps}
         userId={userId}
-        handleClose={handleUniqueIdDialogClose}
+        handleClose={handleManageProfileDialogClose}
+        handleDeleteUser={handleDeleteUser}
+        loadingDeleteUser={loadingDeleteUser}
+        handleResetUserId={handleResetUserId}
+        loadingResetUserId={loadingResetUserId}
       />
       <Notification
         snackbarProps={snackbarProps}
