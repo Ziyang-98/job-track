@@ -1,8 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
+import useDebounce from "./useDebounce";
 
-const useFilteredJobApps = (jobApps) => {
+const useFilteredJobApps = (jobApps, debounceDuration = 200) => {
   const [filteredJobApps, setFilteredJobApps] = useState(jobApps);
   const [searchFilter, setSearchFilter] = useState("");
+
+  const { debouncedValue: debouncedSearchFilter } = useDebounce(
+    searchFilter,
+    debounceDuration
+  );
 
   const filterJobAppsBasedOnRoleAndCompany = useCallback(
     (jobApps, searchFilter) => {
@@ -24,11 +30,11 @@ const useFilteredJobApps = (jobApps) => {
 
   useEffect(() => {
     const filteredJobApps =
-      searchFilter.length !== 0
-        ? filterJobAppsBasedOnRoleAndCompany(jobApps, searchFilter)
+      debouncedSearchFilter.length !== 0
+        ? filterJobAppsBasedOnRoleAndCompany(jobApps, debouncedSearchFilter)
         : jobApps;
     setFilteredJobApps(filteredJobApps);
-  }, [jobApps, filterJobAppsBasedOnRoleAndCompany, searchFilter]);
+  }, [jobApps, filterJobAppsBasedOnRoleAndCompany, debouncedSearchFilter]);
 
   return { filteredJobApps, searchFilter, setSearchFilter };
 };
