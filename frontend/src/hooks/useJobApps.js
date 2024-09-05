@@ -7,20 +7,28 @@ import {
   getUserIdFromLocalStorage,
   storeUserIdFromLocalStorage,
   formatRawJobAppData,
+  sortJobApps,
+  getSortingOptionFromLocalStorage,
+  storeSortingOptionFromLocalStorage,
 } from "common/utils";
+import { getSortingFunction, sortingOption } from "common/sortingOption";
 
 const defaultJobApps = [[], [], [], [], []];
+const defaultSortingOption = sortingOption["newestLastUpdated"];
 
 const useJobApps = (handleOpenNotification) => {
   const [jobApps, setJobApps] = useState(defaultJobApps);
-
+  const [activeSortingOption, setActiveSortingOption] =
+    useState(defaultSortingOption);
   const refreshJobApps = async () => {
     const userId = getUserIdFromLocalStorage();
+    const sortingFunction = getSortingFunction(activeSortingOption);
 
     getJobApps(userId)
       .then((res) => {
         const { jobApps } = res.data;
-        setJobApps(formatRawJobAppData(jobApps));
+        const formattedJobApps = formatRawJobAppData(jobApps);
+        setJobApps(sortJobApps(formattedJobApps, sortingFunction));
       })
       .catch((err) => {
         console.error(err);
@@ -32,16 +40,30 @@ const useJobApps = (handleOpenNotification) => {
       });
   };
 
+  // Run on app start up
   useEffect(() => {
+    // Set user's stored sorting option
+    const sortingOptionFromLocalStorage = getSortingOptionFromLocalStorage();
+    sortingOptionFromLocalStorage &&
+      setActiveSortingOption(sortingOptionFromLocalStorage);
+
+    // Fetch user from stored user id
     const userId = getUserIdFromLocalStorage();
     getUser(userId)
       .then((res) => {
         const { userId } = res.data;
         storeUserIdFromLocalStorage(userId);
-        refreshJobApps();
       })
-      .catch(() => {
-        refreshJobApps();
+      .finally(() => {
+        getJobApps(userId).then((res) => {
+          const { jobApps } = res.data;
+          const formattedJobApps = formatRawJobAppData(jobApps);
+          const sortingFunction = getSortingFunction(
+            sortingOptionFromLocalStorage ?? activeSortingOption
+          );
+
+          setJobApps(sortJobApps(formattedJobApps, sortingFunction));
+        });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -54,7 +76,7 @@ const useJobApps = (handleOpenNotification) => {
     }
 
     jobApp.status = newStatus;
-    updateJobApp(getUserIdFromLocalStorage(), jobApp).catch((err) => {
+    updateJobApp(jobApp).catch((err) => {
       console.error(err);
       handleOpenNotification(
         "Error updating status. Please refresh and try again later!",
@@ -69,7 +91,7 @@ const useJobApps = (handleOpenNotification) => {
     newJobApps[rawStatusType].splice(jobAppIndex, 1);
     setJobApps(newJobApps);
 
-    deleteJobApp(getUserIdFromLocalStorage(), jobAppId)
+    deleteJobApp(jobAppId)
       .then(() => {
         handleOpenNotification("Entry deleted successfully", 1500, "success");
       })
@@ -83,12 +105,21 @@ const useJobApps = (handleOpenNotification) => {
       });
   };
 
+  const handleSetActiveSortingOption = (option) => {
+    const sortingFunction = getSortingFunction(option);
+    setJobApps(sortJobApps(jobApps, sortingFunction));
+    setActiveSortingOption(option);
+    storeSortingOptionFromLocalStorage(option);
+  };
+
   return {
     jobApps,
     setJobApps,
     updateStatus,
     handleDeleteJobApp,
     refreshJobApps,
+    activeSortingOption,
+    handleSetActiveSortingOption,
   };
 };
 

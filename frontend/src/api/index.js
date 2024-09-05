@@ -30,14 +30,12 @@ export async function createJobApp(userId, jobAppBody) {
   return response;
 }
 
-export async function updateJobApp(userId, jobAppBody) {
-  const body = { userId, jobApp: jobAppBody };
-  const response = await new axios.put(JOB_APP_ENDPOINT, body);
-  return response;
+export async function updateJobApp(jobAppBody) {
+  const body = { jobApp: jobAppBody };
+  return axios.put(JOB_APP_ENDPOINT, body);
 }
 
-export async function deleteJobApp(userId, jobAppId) {
-  const body = { userId, jobAppId: jobAppId };
-  const response = await new axios.delete(JOB_APP_ENDPOINT, { data: body });
-  return response;
+export async function deleteJobApp(jobAppId) {
+  const body = { jobAppId: jobAppId };
+  return axios.delete(JOB_APP_ENDPOINT, { data: body });
 }

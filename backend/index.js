@@ -1,18 +1,18 @@
-import {
-  getUser,
-  createUser,
-  getJobApplicationsForUser,
-  addJobApplicationForUser,
-  deleteJobApplicationForUser,
-  updateJobApplicationForUser,
-  addContactForJobApp,
-  updateContactForJobApp,
-  deleteContactForJobApp,
-  deleteUser,
-} from "./models/repository.js";
 import express from "express";
 import cors from "cors";
-import { v4 } from "uuid";
+import mongoose from "mongoose";
+
+import UserController from "./controller/user-controller.js";
+import JobApplicationController from "./controller/job-application-controller.js";
+
+// Connect to db
+const mongoDBURI =
+  process.env.ENV === "PROD"
+    ? process.env.DB_CLOUD_URI
+    : process.env.DB_LOCAL_URI;
+
+console.log("Connecting to DB:", mongoDBURI);
+mongoose.connect(mongoDBURI);
 
 const app = express();
 
@@ -21,128 +21,38 @@ app.use(express.json());
 app.use(cors()); // config cors so that front-end can use
 app.options("*", cors());
 
+/* Healthcheck Endpoints */
 app.get("/", (req, res) => {
   res.send("Hello World from job tracker backend");
 });
 
-app.get("/user", async (req, res) => {
-  let { userId = "" } = req.query;
-  let user = await getUser({ userId });
-  let msg = "User retrieved!";
-  if (!user) {
-    userId = v4();
-    user = await createUser({ userId });
-    msg = "New user created!";
-  }
+/* User Endpoints */
+app.get("/user", UserController.getUser);
+app.delete("/user", UserController.deleteUser);
 
-  res.status(200).json({ msg, userId: user.userId });
-});
-
-app.delete("/user", async (req, res) => {
-  try {
-    let { userId } = req.body;
-    let user = await deleteUser({ userId });
-    let msg = "User deleted!";
-
-    res.status(200).json({ msg, userId: user.userId });
-  } catch (err) {
-    console.error(err);
-    res
-      .status(400)
-      .json({ msg: "Encountered error getting job applications!" });
-  }
-});
-
-app.get("/user/job-apps", async (req, res) => {
-  try {
-    const { userId = "" } = req.query;
-    const jobApps = await getJobApplicationsForUser({ userId });
-    res.status(200).json({ jobApps });
-  } catch (err) {
-    console.error(err);
-    res
-      .status(400)
-      .json({ msg: "Encountered error getting job applications!" });
-  }
-});
-
-app.post("/user/job-apps", async (req, res) => {
-  try {
-    const { userId, jobApp } = req.body;
-    const newJobApp = await addJobApplicationForUser({ userId }, { ...jobApp });
-    res.status(200).json({ msg: "Job application added!", jobApp: newJobApp });
-  } catch (err) {
-    console.error(err);
-    res.status(400).json({ msg: "Encountered error adding job application!" });
-  }
-});
-
-app.put("/user/job-apps", async (req, res) => {
-  try {
-    const { userId, jobApp } = req.body;
-    await updateJobApplicationForUser({ userId }, { ...jobApp });
-    res.status(200).json({ msg: "Job application updated!" });
-  } catch (err) {
-    console.error(err);
-    res
-      .status(400)
-      .json({ msg: "Encountered error updating job application!" });
-  }
-});
-
-app.delete("/user/job-apps", async (req, res) => {
-  try {
-    const { userId, jobAppId } = req.body;
-    await deleteJobApplicationForUser({ userId }, { _id: jobAppId });
-    res.status(200).json({ msg: "Job application deleted!" });
-  } catch (err) {
-    console.error(err);
-    res
-      .status(400)
-      .json({ msg: "Encountered error deleting job application!" });
-  }
-});
-
-app.post("/user/job-apps/contacts", async (req, res) => {
-  try {
-    const { userId, jobAppId, contact } = req.body;
-    const newContact = await addContactForJobApp(
-      { userId },
-      { _id: jobAppId },
-      { ...contact }
-    );
-    res.status(200).json({ msg: "Contact added!", contact: newContact });
-  } catch (err) {
-    console.error(err);
-    res.status(400).json({ msg: "Encountered error adding contact!" });
-  }
-});
-
-app.put("/user/job-apps/contacts", async (req, res) => {
-  try {
-    const { userId, jobAppId, contact } = req.body;
-    await updateContactForJobApp({ userId }, { _id: jobAppId }, { ...contact });
-    res.status(200).json({ msg: "Contact updated!" });
-  } catch (err) {
-    console.error(err);
-    res.status(400).json({ msg: "Encountered error updating contact!" });
-  }
-});
-
-app.delete("/user/job-apps/contacts", async (req, res) => {
-  try {
-    const { userId, jobAppId, contactId } = req.body;
-    await deleteContactForJobApp(
-      { userId },
-      { _id: jobAppId },
-      { _id: contactId }
-    );
-    res.status(200).json({ msg: "Contact deleted!" });
-  } catch (err) {
-    console.error(err);
-    res.status(400).json({ msg: "Encountered error deleting contact!" });
-  }
-});
+/* Job Application Endpoints */
+app.get(
+  "/job-application",
+  JobApplicationController.findJobApplicationsForUser
+);
+app.post(
+  "/job-application",
+  JobApplicationController.createJobApplicationForUser
+);
+app.put("/job-application", JobApplicationController.updateJobApplication);
+app.delete("/job-application", JobApplicationController.deleteJobApplication);
+app.post(
+  "/job-application/contacts",
+  JobApplicationController.createContactForJobApplication
+);
+app.put(
+  "/job-application/contacts",
+  JobApplicationController.updateContactForJobApplication
+);
+app.delete(
+  "/job-application/contacts",
+  JobApplicationController.deleteContactForJobApplication
+);
 
 const port = process.env.PORT || 8000;
 

@@ -1,8 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -14,13 +12,9 @@ import Notification from "components/Notification";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { useStyles } from "./styles";
+import { convertDDMMYYYYToDdMmmYYYYformat, isValidDate } from "common/utils";
 
-const JobAppDroppableList = ({
-  jobApps,
-  rawStatusType,
-  handleDeleteJobApp,
-  refreshJobApps,
-}) => {
+const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
     useNotification();
 
@@ -29,9 +23,11 @@ const JobAppDroppableList = ({
     handleClose,
     handleOpenEditDialog,
     handleUpdate,
+    loadingUpdate,
+    handleDelete,
+    loadingDelete,
     jobApp,
     formContactSuite,
-    loading: editLoading,
   } = useEditDialog(refreshJobApps, handleOpenNotification);
 
   const isSmall = useMediaQuery("(max-width:600px)");
@@ -43,7 +39,7 @@ const JobAppDroppableList = ({
   return (
     <Box sx={styles.mainList}>
       <Typography sx={styles.listTitle} variant="h6">
-        {jobAppStatusMap[rawStatusType]}
+        {jobAppStatusMap[rawStatusType]} ({jobApps.length})
       </Typography>
       <Droppable key={rawStatusType} droppableId={`${rawStatusType}`}>
         {(provided, snapshot) => (
@@ -66,32 +62,37 @@ const JobAppDroppableList = ({
                     sx={styles.useItemStyle(provided.draggableProps.style)}
                   >
                     <Box sx={styles.draggableContent}>
-                      <Box sx={styles.itemText}>
-                        <Typography variant={"body1"}>
+                      <Box sx={styles.itemTextHolder}>
+                        <Typography
+                          variant={"body1"}
+                          sx={styles.title}
+                          textAlign={"left"}
+                        >
+                          {jobApp.role}
+                        </Typography>
+                        <Typography variant={"body2"} textAlign={"left"}>
                           {jobApp.company}
                         </Typography>
+                        {jobApp.dateApplied &&
+                          isValidDate(jobApp.dateApplied) && (
+                            <Typography
+                              sx={styles.dateAppliedText}
+                              variant={"body2"}
+                              textAlign={"left"}
+                            >
+                              {convertDDMMYYYYToDdMmmYYYYformat(
+                                jobApp.dateApplied
+                              )}
+                            </Typography>
+                          )}
                       </Box>
-                      <Box sx={styles.buttons}>
-                        <IconButton
-                          onClick={() => {
-                            handleOpenEditDialog(jobApp);
-                          }}
-                          sx={styles.button}
-                        >
-                          <InfoOutlinedIcon />
-                        </IconButton>
-                        <IconButton
-                          onClick={() => {
-                            handleDeleteJobApp(
-                              rawStatusType,
-                              index,
-                              jobApp._id
-                            );
-                          }}
-                          sx={styles.button}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
+                      <Box
+                        sx={styles.iconHolder}
+                        onClick={() => {
+                          handleOpenEditDialog(jobApp);
+                        }}
+                      >
+                        <InfoOutlinedIcon sx={styles.icon} />
                       </Box>
                     </Box>
                   </Box>
@@ -108,8 +109,10 @@ const JobAppDroppableList = ({
         onSubmit={handleUpdate}
         formContactSuite={formContactSuite}
         jobApp={jobApp}
-        loading={editLoading}
+        loadingSubmit={loadingUpdate}
         type={"edit"}
+        handleDeleteJobApp={handleDelete}
+        loadingDelete={loadingDelete}
       />
       <Notification
         snackbarProps={snackbarProps}

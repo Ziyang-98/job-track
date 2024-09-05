@@ -6,6 +6,6 @@ export const useStyles = (isSmall) => ({
   },
 
   formItem: {
-    margin: 1,
+    marginY: 1,
   },
 });

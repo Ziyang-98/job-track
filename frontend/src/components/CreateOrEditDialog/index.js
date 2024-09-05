@@ -17,8 +17,10 @@ const CreateOrEditDialog = ({
   onSubmit,
   formContactSuite,
   type,
-  loading,
+  loadingSubmit,
   jobApp = DEFAULT_JOB_APP,
+  handleDeleteJobApp,
+  loadingDelete,
 }) => {
   return (
     <form onSubmit={onSubmit}>
@@ -36,10 +38,23 @@ const CreateOrEditDialog = ({
           />
         </DialogContent>
         <DialogActions>
+          {type === "edit" && (
+            <LoadingButton
+              sx={styles.deleteButton}
+              loading={loadingDelete}
+              onClick={handleDeleteJobApp}
+            >
+              Delete
+            </LoadingButton>
+          )}
           <Button sx={styles.button} onClick={handleClose}>
             Cancel
           </Button>
-          <LoadingButton loading={loading} sx={styles.button} type="submit">
+          <LoadingButton
+            loading={loadingSubmit}
+            sx={styles.button}
+            type="submit"
+          >
             {type === "create" ? "Create" : "Update"}
           </LoadingButton>
         </DialogActions>

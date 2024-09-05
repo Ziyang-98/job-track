@@ -5,7 +5,7 @@ const colorTheme = ["planning", "applied", "interview", "offered", "rejected"];
 const getItemStyle = (draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
-  p: 2,
+  pl: 1.5,
   m: `0 0 ${grid}px 0`,
   borderRadius: 2,
   // change background colour if dragging
@@ -22,7 +22,7 @@ export const useStyles = (index, isSmall, isMedium) => ({
     flexDirection: "column",
     alignItems: "center",
     margin: "8px 8px",
-    width: "15%",
+    width: "16%",
     minWidth: 200,
 
     height: isSmall ? 360 : isMedium ? 420 : 500,
@@ -34,10 +34,9 @@ export const useStyles = (index, isSmall, isMedium) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "10%",
+    minHeight: "10%",
     width: "100%",
-    paddingTop: 1,
-    paddingBottom: 1,
+    py: 1.5,
     fontSize: "18px",
     fontWeight: "800",
   },
@@ -53,24 +52,37 @@ export const useStyles = (index, isSmall, isMedium) => ({
   useItemStyle: getItemStyle,
   draggableContent: {
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "stretch",
     color: "primary.dark",
   },
-  itemText: {
-    display: "flex",
-    justifyContent: "flex-start",
-
+  itemTextHolder: {
     overflowX: "hidden",
+    py: 1.5,
+    maxWidth: isMedium ? "60%" : "70%",
   },
-  button: {
-    padding: 0,
-    marginLeft: "4px",
+  icon: {
+    fontSize: "1.5rem",
   },
-  buttons: {
+  iconHolder: {
+    marginLeft: "auto",
+    minWidth: isMedium ? "40%" : "25%",
     display: "flex",
-    justifyContent: "flex-end",
-    width: "40%",
-    paddingLeft: "8px",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+    borderRadius: 1.5,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+    transition: "background 0.2s",
+    "&:hover": {
+      bgcolor: "primary.main",
+    },
+  },
+  title: {
+    fontWeight: "bold",
+  },
+  dateAppliedText: {
+    mt: 1,
+    color: "black",
   },
 });

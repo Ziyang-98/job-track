@@ -1,21 +1,24 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import { styles } from "./styles";
+import { useMediaQuery } from "@mui/material";
 
 import Title from "components/Title";
 import ActionButtons from "components/ActionButtons";
 import JobAppContent from "views/JobAppContent";
 import CreateDialog from "components/CreateOrEditDialog";
-import useCreateDialog from "hooks/useCreateDialog";
-import ExportDialog from "components/ExportDialog";
-import useExportDialog from "hooks/useExportDialog";
-import ImportDialog from "components/ImportDialog";
-import useImportDialog from "hooks/useImportDialog";
-import useJobApps from "hooks/useJobApps";
+import ManageProfileDialog from "components/ManageProfileDialog";
+import SyncDataDialog from "components/SyncDataDialog";
+import SearchBar from "components/SearchBar";
 import Footer from "components/Footer";
 import Notification from "components/Notification";
 
-import { styles } from "./styles";
+import useJobApps from "hooks/useJobApps";
+import useCreateDialog from "hooks/useCreateDialog";
+import useFilteredJobApps from "hooks/useFilteredJobApps";
+import useSyncDataDialog from "hooks/useSyncDataDialog";
+import useManageProfileDialog from "hooks/useManageProfileDialog";
 import useNotification from "hooks/useNotification";
 
 const Layout = () => {
@@ -28,7 +31,12 @@ const Layout = () => {
     updateStatus,
     handleDeleteJobApp,
     refreshJobApps,
+    activeSortingOption,
+    handleSetActiveSortingOption,
   } = useJobApps(handleOpenNotification);
+
+  const { filteredJobApps, searchFilter, setSearchFilter } =
+    useFilteredJobApps(jobApps);
 
   const {
     createDialogProps,
@@ -36,24 +44,30 @@ const Layout = () => {
     handleClose: handleCreateDialogClose,
     handleCreateJobApp,
     formContactSuite,
-    loading: createLoading,
+    loading: loadingCreate,
   } = useCreateDialog(refreshJobApps, handleOpenNotification);
 
   const {
-    importDialogProps,
-    handleOpenImportDialog,
-    handleClose: handleImportDialogClose,
-    handleImportData,
-    loading: importLoading,
-  } = useImportDialog(refreshJobApps, handleOpenNotification);
+    syncDataDialogProps,
+    handleOpenSyncDataDialog,
+    handleClose: handleSyncDataDialogClose,
+    handleSyncData,
+    loading: syncDataLoading,
+  } = useSyncDataDialog(refreshJobApps, handleOpenNotification);
 
   const {
-    exportDialogProps,
-    handleOpenExportDialog,
-    handleClose: handleExportDialogClose,
+    manageProfileProps,
+    handleOpenManageProfileDialog,
+    handleClose: handleManageProfileDialogClose,
     userId,
-  } = useExportDialog();
+    handleDeleteUser,
+    loadingDeleteUser,
+    handleResetUserId,
+    loadingResetUserId,
+  } = useManageProfileDialog(refreshJobApps, handleOpenNotification);
 
+  const isSearchBarAndActionButtonsOverlapping =
+    useMediaQuery("(max-width:840px)");
   return (
     <Box sx={styles.mainContainer}>
       <Grid
@@ -66,12 +80,29 @@ const Layout = () => {
           <Title />
         </Grid>
 
-        <Grid xs={10} container item justifyContent={"flex-end"}>
-          <Grid item>
+        <Grid xs={9.5} container item justifyContent={"space-between"}>
+          <Grid
+            xs={isSearchBarAndActionButtonsOverlapping && 12}
+            item
+            sx={styles.searchBarHolder}
+          >
+            <SearchBar
+              searchFilter={searchFilter}
+              setSearchFilter={setSearchFilter}
+            />
+          </Grid>
+          <Grid
+            xs={isSearchBarAndActionButtonsOverlapping && 12}
+            item
+            sx={isSearchBarAndActionButtonsOverlapping ? { py: 2 } : {}}
+          >
             <ActionButtons
+              jobApps={jobApps}
+              activeSortingOption={activeSortingOption}
+              handleSetActiveSortingOption={handleSetActiveSortingOption}
               handleClickCreate={handleOpenCreateDialog}
-              handleClickImport={handleOpenImportDialog}
-              handleClickExport={handleOpenExportDialog}
+              handleClickSyncData={handleOpenSyncDataDialog}
+              handleOpenManageProfileDialog={handleOpenManageProfileDialog}
             />
           </Grid>
         </Grid>
@@ -79,9 +110,9 @@ const Layout = () => {
         <Grid item xs={11}>
           <JobAppContent
             jobApps={jobApps}
+            filteredJobApps={filteredJobApps}
             setJobApps={setJobApps}
             updateStatus={updateStatus}
-            handleDeleteJobApp={handleDeleteJobApp}
             refreshJobApps={refreshJobApps}
           />
         </Grid>
@@ -89,21 +120,26 @@ const Layout = () => {
       <CreateDialog
         dialogProps={createDialogProps}
         handleClose={handleCreateDialogClose}
+        handleDeleteJobApp={handleDeleteJobApp}
         onSubmit={handleCreateJobApp}
         formContactSuite={formContactSuite}
-        loading={createLoading}
+        loadingSubmit={loadingCreate}
         type={"create"}
       />
-      <ImportDialog
-        dialogProps={importDialogProps}
-        handleClose={handleImportDialogClose}
-        handleImportData={handleImportData}
-        loading={importLoading}
+      <SyncDataDialog
+        dialogProps={syncDataDialogProps}
+        handleClose={handleSyncDataDialogClose}
+        handleSyncData={handleSyncData}
+        loading={syncDataLoading}
       />
-      <ExportDialog
-        dialogProps={exportDialogProps}
+      <ManageProfileDialog
+        dialogProps={manageProfileProps}
         userId={userId}
-        handleClose={handleExportDialogClose}
+        handleClose={handleManageProfileDialogClose}
+        handleDeleteUser={handleDeleteUser}
+        loadingDeleteUser={loadingDeleteUser}
+        handleResetUserId={handleResetUserId}
+        loadingResetUserId={loadingResetUserId}
       />
       <Notification
         snackbarProps={snackbarProps}

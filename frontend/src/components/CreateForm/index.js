@@ -52,6 +52,17 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
         autoFocus={type === "create"}
         required
         margin="dense"
+        name="role"
+        id="role"
+        label="Role"
+        type="role"
+        variant="outlined"
+        defaultValue={jobApp.role}
+        sx={styles.formItem}
+      />
+      <TextField
+        required
+        margin="dense"
         name="company"
         id="company"
         label="Company (Max 20 Characters)"
@@ -81,17 +92,6 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
           ))}
         </Select>
       </FormControl>
-      <TextField
-        required
-        margin="dense"
-        name="role"
-        id="role"
-        label="Role"
-        type="role"
-        variant="outlined"
-        defaultValue={jobApp.role}
-        sx={styles.formItem}
-      />
 
       <TextField
         margin="dense"
@@ -129,15 +129,9 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
               onChange={(newValue) => {
                 setDateApplied(newValue);
               }}
-              defaultValue={jobApp.dateApplied}
-              inputFormat={"DD/MM/YYYY"}
-              renderInput={(params) => (
-                <TextField
-                  name="dateApplied"
-                  {...params}
-                  sx={styles.formItem}
-                />
-              )}
+              format={"DD/MM/YYYY"}
+              sx={styles.formItem}
+              name="dateApplied"
             />
           </LocalizationProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -147,15 +141,9 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
               onChange={(newValue) => {
                 setLastContactDate(newValue);
               }}
-              defaultValue={jobApp.lastContactDate}
-              inputFormat={"DD/MM/YYYY"}
-              renderInput={(params) => (
-                <TextField
-                  name="lastContactDate"
-                  {...params}
-                  sx={styles.formItem}
-                />
-              )}
+              format={"DD/MM/YYYY"}
+              sx={styles.formItem}
+              name="lastContactDate"
             />
           </LocalizationProvider>
         </>
