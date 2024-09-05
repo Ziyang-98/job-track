@@ -11,6 +11,10 @@ const mongoDBURI =
     ? process.env.DB_CLOUD_URI
     : process.env.DB_LOCAL_URI;
 
+const corsOptions = {
+  origin: [process.env.ALLOWED_ORIGIN],
+  optionsSuccessStatus: 200,
+};
 console.log("Connecting to DB:", mongoDBURI);
 mongoose.connect(mongoDBURI);
 
@@ -18,8 +22,8 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors()); // config cors so that front-end can use
-app.options("*", cors());
+app.use(cors(corsOptions)); // config cors so that front-end can use
+// app.options("*", cors());
 
 /* Healthcheck Endpoints */
 app.get("/", (req, res) => {
@@ -27,30 +31,43 @@ app.get("/", (req, res) => {
 });
 
 /* User Endpoints */
-app.get("/user", UserController.getUser);
+app.get("/user", cors(corsOptions), UserController.getUser);
 app.delete("/user", UserController.deleteUser);
 
 /* Job Application Endpoints */
 app.get(
   "/job-application",
+  cors(corsOptions),
   JobApplicationController.findJobApplicationsForUser
 );
 app.post(
   "/job-application",
+  cors(corsOptions),
   JobApplicationController.createJobApplicationForUser
 );
-app.put("/job-application", JobApplicationController.updateJobApplication);
-app.delete("/job-application", JobApplicationController.deleteJobApplication);
+app.put(
+  "/job-application",
+  cors(corsOptions),
+  JobApplicationController.updateJobApplication
+);
+app.delete(
+  "/job-application",
+  cors(corsOptions),
+  JobApplicationController.deleteJobApplication
+);
 app.post(
   "/job-application/contacts",
+  cors(corsOptions),
   JobApplicationController.createContactForJobApplication
 );
 app.put(
   "/job-application/contacts",
+  cors(corsOptions),
   JobApplicationController.updateContactForJobApplication
 );
 app.delete(
   "/job-application/contacts",
+  cors(corsOptions),
   JobApplicationController.deleteContactForJobApplication
 );
 
