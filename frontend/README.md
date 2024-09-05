@@ -23,3 +23,7 @@ Ensure that you have a `.env.development` file containing the following variable
 # Build production
 
 Run `npm run build` to build app for production. The build will be stored in `build` folder.
+
+# Deployment
+
+Currently the app is deployed on [Firebase](https://firebase.google.com/).
