@@ -16,6 +16,8 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 console.log("Connecting to DB:", mongoDBURI);
+console.log("Allowed Origin:", process.env.ALLOWED_ORIGIN);
+
 mongoose.connect(mongoDBURI);
 
 const app = express();
