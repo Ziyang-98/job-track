@@ -7,7 +7,7 @@ import { styles } from "./styles";
 const Footer = () => {
   return (
     <Box sx={styles.footer}>
-      Copyright © 2022 Made by{" "}
+      Copyright © 2024 Made by{" "}
       {
         <Link href="https://limziyang.com/" target="_blank">
           Lim Zi Yang
