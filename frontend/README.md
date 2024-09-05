@@ -14,6 +14,12 @@ Run `npm run start` to start app in development mode
 
 App will be hosted on `http://localhost:3000/`.
 
+# ENV Variables
+
+Ensure that you have a `.env.development` file containing the following variables:
+
+- `REACT_APP_SERVER_ENDPOINT` Your backend's server endpoint such as `http://localhost:8000`
+
 # Build production
 
 Run `npm run build` to build app for production. The build will be stored in `build` folder.
