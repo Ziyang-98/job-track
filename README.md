@@ -2,7 +2,7 @@
 
 ![image](https://github.com/user-attachments/assets/ce50ecd0-7be1-44f6-a9a5-4655ec280094)
 
-A single page application to record and track your job applications at ease. Check out the app [here](https://job-track-9c538.web.app/).
+A single page application to record and track your job applications at ease. Check out the app [here](https://job-track-9c538.web.app/). (Do note that the first action may take awhile as the free-tier Render server might be idle)
 
 ## Motivation
 The traditional way of using Microsoft Excel/Google Sheets to track job applications is boring and depressing. I wanted an aesthetic way to add, search and update job applications quickly during job hunting season. Hence, Job Track was borned!
