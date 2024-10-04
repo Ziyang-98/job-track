@@ -67,6 +67,7 @@ const JobAppDroppableList = ({ jobApps, rawStatusType, refreshJobApps }) => {
                           variant={"body1"}
                           sx={styles.title}
                           textAlign={"left"}
+                          noWrap
                         >
                           {jobApp.role}
                         </Typography>
