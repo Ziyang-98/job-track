@@ -5,7 +5,7 @@ import { deleteJobApp, getJobApps, getUser, updateJobApp } from "api";
 import { JobAppStatus } from "common/jobAppStatus";
 import {
   getUserIdFromLocalStorage,
-  storeUserIdFromLocalStorage,
+  storeUserIdInLocalStorage,
   formatRawJobAppData,
   sortJobApps,
   getSortingOptionFromLocalStorage,
@@ -20,6 +20,8 @@ const useJobApps = (handleOpenNotification) => {
   const [jobApps, setJobApps] = useState(defaultJobApps);
   const [activeSortingOption, setActiveSortingOption] =
     useState(defaultSortingOption);
+  const [isFetchingJobApps, setIsFetchingJobApps] = useState(false);
+
   const refreshJobApps = async () => {
     const userId = getUserIdFromLocalStorage();
     const sortingFunction = getSortingFunction(activeSortingOption);
@@ -40,31 +42,37 @@ const useJobApps = (handleOpenNotification) => {
       });
   };
 
-  // Run on app start up
-  useEffect(() => {
+  async function fetchJobAppOnFirstLoad() {
     // Set user's stored sorting option
     const sortingOptionFromLocalStorage = getSortingOptionFromLocalStorage();
     sortingOptionFromLocalStorage &&
       setActiveSortingOption(sortingOptionFromLocalStorage);
-
-    // Fetch user from stored user id
     const userId = getUserIdFromLocalStorage();
-    getUser(userId)
-      .then((res) => {
-        const { userId } = res.data;
-        storeUserIdFromLocalStorage(userId);
-      })
-      .finally(() => {
-        getJobApps(userId).then((res) => {
-          const { jobApps } = res.data;
-          const formattedJobApps = formatRawJobAppData(jobApps);
-          const sortingFunction = getSortingFunction(
-            sortingOptionFromLocalStorage ?? activeSortingOption
-          );
-
-          setJobApps(sortJobApps(formattedJobApps, sortingFunction));
-        });
-      });
+    try {
+      const userRes = await getUser(userId);
+      const { userId: receivedUserId } = userRes.data;
+      storeUserIdInLocalStorage(receivedUserId);
+      const jobAppsRes = await getJobApps(receivedUserId);
+      const { jobApps } = jobAppsRes.data;
+      const formattedJobApps = formatRawJobAppData(jobApps);
+      const sortingFunction = getSortingFunction(
+        sortingOptionFromLocalStorage ?? activeSortingOption
+      );
+      setJobApps(sortJobApps(formattedJobApps, sortingFunction));
+    } catch (err) {
+      console.error(err);
+      handleOpenNotification(
+        "Error connecting to server. Please refresh and try again later!",
+        4000,
+        "error"
+      );
+    } finally {
+      setIsFetchingJobApps(false);
+    }
+  }
+  // Run on app start up
+  useEffect(() => {
+    fetchJobAppOnFirstLoad();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -120,6 +128,7 @@ const useJobApps = (handleOpenNotification) => {
     refreshJobApps,
     activeSortingOption,
     handleSetActiveSortingOption,
+    isFetchingJobApps,
   };
 };
 

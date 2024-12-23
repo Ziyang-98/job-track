@@ -1,7 +1,7 @@
 import { deleteUser, getUser } from "api";
 import {
   getUserIdFromLocalStorage,
-  storeUserIdFromLocalStorage,
+  storeUserIdInLocalStorage,
 } from "common/utils";
 import { useState } from "react";
 
@@ -28,7 +28,7 @@ const useManageProfileDialog = (refreshJobApps, handleOpenNotification) => {
     getUser()
       .then((res) => {
         const { userId } = res.data;
-        storeUserIdFromLocalStorage(userId);
+        storeUserIdInLocalStorage(userId);
         refreshJobApps();
         setUserId(userId);
         handleOpenNotification(
@@ -56,7 +56,7 @@ const useManageProfileDialog = (refreshJobApps, handleOpenNotification) => {
       .then(() => {
         getUser().then((res) => {
           const { userId } = res.data;
-          storeUserIdFromLocalStorage(userId);
+          storeUserIdInLocalStorage(userId);
           refreshJobApps();
           setUserId(userId);
           handleOpenNotification(
