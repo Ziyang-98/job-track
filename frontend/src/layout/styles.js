@@ -7,6 +7,9 @@ export const styles = {
     alignItems: "center",
     bgcolor: "secondary.light",
   },
+  content: {
+    flexGrow: 1,
+  },
   searchBarHolder: {
     display: "flex",
     justifyContent: "center",

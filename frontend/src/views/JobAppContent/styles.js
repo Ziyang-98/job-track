@@ -3,6 +3,19 @@ export const styles = {
     display: "flex",
     justifyContent: "center",
     flexWrap: "wrap",
-    paddingBottom: 4,
+    position: "relative",
+  },
+  loadingOverlay: {
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "primary.light",
+    opacity: 0.6,
+  },
+  loadingIcon: {
+    color: "secondary.dark",
   },
 };

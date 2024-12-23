@@ -33,6 +33,7 @@ const Layout = () => {
     refreshJobApps,
     activeSortingOption,
     handleSetActiveSortingOption,
+    isFetchingJobApps,
   } = useJobApps(handleOpenNotification);
 
   const { filteredJobApps, searchFilter, setSearchFilter } =
@@ -70,82 +71,85 @@ const Layout = () => {
     useMediaQuery("(max-width:840px)");
   return (
     <Box sx={styles.mainContainer}>
-      <Grid
-        container
-        spacing={2}
-        justifyContent={"center"}
-        alignItems={"center"}
-      >
-        <Grid xs={11} item>
-          <Title />
-        </Grid>
-
-        <Grid xs={9.5} container item justifyContent={"space-between"}>
-          <Grid
-            xs={isSearchBarAndActionButtonsOverlapping && 12}
-            item
-            sx={styles.searchBarHolder}
-          >
-            <SearchBar
-              searchFilter={searchFilter}
-              setSearchFilter={setSearchFilter}
-            />
+      <Box sx={styles.content}>
+        <Grid
+          container
+          spacing={2}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <Grid xs={11} item>
+            <Title />
           </Grid>
-          <Grid
-            xs={isSearchBarAndActionButtonsOverlapping && 12}
-            item
-            sx={isSearchBarAndActionButtonsOverlapping ? { py: 2 } : {}}
-          >
-            <ActionButtons
+
+          <Grid xs={9.5} container item justifyContent={"space-between"}>
+            <Grid
+              xs={isSearchBarAndActionButtonsOverlapping && 12}
+              item
+              sx={styles.searchBarHolder}
+            >
+              <SearchBar
+                searchFilter={searchFilter}
+                setSearchFilter={setSearchFilter}
+              />
+            </Grid>
+            <Grid
+              xs={isSearchBarAndActionButtonsOverlapping && 12}
+              item
+              sx={isSearchBarAndActionButtonsOverlapping ? { py: 2 } : {}}
+            >
+              <ActionButtons
+                jobApps={jobApps}
+                activeSortingOption={activeSortingOption}
+                handleSetActiveSortingOption={handleSetActiveSortingOption}
+                handleClickCreate={handleOpenCreateDialog}
+                handleClickSyncData={handleOpenSyncDataDialog}
+                handleOpenManageProfileDialog={handleOpenManageProfileDialog}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid item xs={11}>
+            <JobAppContent
               jobApps={jobApps}
-              activeSortingOption={activeSortingOption}
-              handleSetActiveSortingOption={handleSetActiveSortingOption}
-              handleClickCreate={handleOpenCreateDialog}
-              handleClickSyncData={handleOpenSyncDataDialog}
-              handleOpenManageProfileDialog={handleOpenManageProfileDialog}
+              filteredJobApps={filteredJobApps}
+              setJobApps={setJobApps}
+              updateStatus={updateStatus}
+              refreshJobApps={refreshJobApps}
+              isFetchingJobApps={isFetchingJobApps}
             />
           </Grid>
         </Grid>
-
-        <Grid item xs={11}>
-          <JobAppContent
-            jobApps={jobApps}
-            filteredJobApps={filteredJobApps}
-            setJobApps={setJobApps}
-            updateStatus={updateStatus}
-            refreshJobApps={refreshJobApps}
-          />
-        </Grid>
-      </Grid>
-      <CreateDialog
-        dialogProps={createDialogProps}
-        handleClose={handleCreateDialogClose}
-        handleDeleteJobApp={handleDeleteJobApp}
-        onSubmit={handleCreateJobApp}
-        formContactSuite={formContactSuite}
-        loadingSubmit={loadingCreate}
-        type={"create"}
-      />
-      <SyncDataDialog
-        dialogProps={syncDataDialogProps}
-        handleClose={handleSyncDataDialogClose}
-        handleSyncData={handleSyncData}
-        loading={syncDataLoading}
-      />
-      <ManageProfileDialog
-        dialogProps={manageProfileProps}
-        userId={userId}
-        handleClose={handleManageProfileDialogClose}
-        handleDeleteUser={handleDeleteUser}
-        loadingDeleteUser={loadingDeleteUser}
-        handleResetUserId={handleResetUserId}
-        loadingResetUserId={loadingResetUserId}
-      />
-      <Notification
-        snackbarProps={snackbarProps}
-        alertProps={alertProps}
-        message={message}
-      />
+        <CreateDialog
+          dialogProps={createDialogProps}
+          handleClose={handleCreateDialogClose}
+          handleDeleteJobApp={handleDeleteJobApp}
+          onSubmit={handleCreateJobApp}
+          formContactSuite={formContactSuite}
+          loadingSubmit={loadingCreate}
+          type={"create"}
+        />
+        <SyncDataDialog
+          dialogProps={syncDataDialogProps}
+          handleClose={handleSyncDataDialogClose}
+          handleSyncData={handleSyncData}
+          loading={syncDataLoading}
+        />
+        <ManageProfileDialog
+          dialogProps={manageProfileProps}
+          userId={userId}
+          handleClose={handleManageProfileDialogClose}
+          handleDeleteUser={handleDeleteUser}
+          loadingDeleteUser={loadingDeleteUser}
+          handleResetUserId={handleResetUserId}
+          loadingResetUserId={loadingResetUserId}
+        />
+        <Notification
+          snackbarProps={snackbarProps}
+          alertProps={alertProps}
+          message={message}
+        />
+      </Box>
       <Footer />
     </Box>
   );
