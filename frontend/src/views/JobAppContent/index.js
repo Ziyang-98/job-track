@@ -15,11 +15,12 @@ const JobAppContent = ({
   setJobApps,
   updateStatus,
   refreshJobApps,
+  isFetchingJobApps,
 }) => {
   const { onDragEnd } = useDnd(jobApps, setJobApps, updateStatus);
   return (
     <Box sx={styles.contentContainer}>
-      {true && (
+      {isFetchingJobApps && (
         <Box sx={styles.loadingOverlay}>
           <CircularProgress sx={styles.loadingIcon} />
         </Box>
