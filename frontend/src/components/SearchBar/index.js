@@ -15,7 +15,7 @@ const SearchBar = ({ searchFilter, setSearchFilter }) => {
       variant="outlined"
       placeholder="Search Role or Company"
       size="small"
-      sx={{ width: "20rem" }}
+      sx={{ width: "100%" }}
       value={searchFilter}
       slotProps={{
         input: {

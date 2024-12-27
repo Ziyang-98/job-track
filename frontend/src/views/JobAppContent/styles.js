@@ -1,7 +1,7 @@
 export const styles = {
   contentContainer: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     flexWrap: "wrap",
     position: "relative",
   },
