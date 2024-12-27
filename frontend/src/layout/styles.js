@@ -8,9 +8,10 @@ export const styles = {
     bgcolor: "secondary.light",
   },
   content: {
-    flexGrow: 1,
+    p: 2,
     width: "80%",
-    overflow: "hidden",
+    // overflow: "hidden",
+    position: "relative",
   },
   toolBar: {
     display: "flex",
@@ -24,6 +25,20 @@ export const styles = {
     width: "20%",
     minWidth: "15rem",
   },
+  loadingOverlay: {
+    position: "absolute",
+    inset: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "primary.light",
+    opacity: 0.8,
+    zIndex: 1,
+    borderRadius: 4,
+  },
+  loadingIcon: {
+    color: "secondary.dark",
+  },
 };
 
 export const getToolBarStyles = (isSearchBarAndActionButtonsOverlapping) => {
@@ -34,7 +49,6 @@ export const getToolBarStyles = (isSearchBarAndActionButtonsOverlapping) => {
         ? "center"
         : "space-between",
       flexWrap: "wrap",
-      py: isSearchBarAndActionButtonsOverlapping ? 2 : "",
     },
   };
 };

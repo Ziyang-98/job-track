@@ -7,7 +7,6 @@ import useDnd from "hooks/useDnd";
 import JobAppDroppableList from "components/JobAppDroppableList";
 
 import { styles } from "./styles";
-import { CircularProgress } from "@mui/material";
 
 const JobAppContent = ({
   jobApps,
@@ -15,16 +14,10 @@ const JobAppContent = ({
   setJobApps,
   updateStatus,
   refreshJobApps,
-  isFetchingJobApps,
 }) => {
   const { onDragEnd } = useDnd(jobApps, setJobApps, updateStatus);
   return (
     <Box sx={styles.contentContainer}>
-      {isFetchingJobApps && (
-        <Box sx={styles.loadingOverlay}>
-          <CircularProgress sx={styles.loadingIcon} />
-        </Box>
-      )}
       <DragDropContext onDragEnd={onDragEnd}>
         {filteredJobApps.map((jobAppsSameStatus, ind) => (
           <JobAppDroppableList

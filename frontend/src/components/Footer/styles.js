@@ -1,6 +1,6 @@
 export const styles = {
   footer: {
-    // position: "absolute",
+    position: "absolute",
     width: "100%",
     textAlign: "center",
     bottom: "0",
@@ -8,5 +8,6 @@ export const styles = {
     bgcolor: "primary.light",
     fontFamily: "monospace",
     fontSize: "16px",
+    zIndex: "2",
   },
 };

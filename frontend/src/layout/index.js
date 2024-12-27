@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { styles, getToolBarStyles } from "./styles";
-import { useMediaQuery } from "@mui/material";
+import { CircularProgress, useMediaQuery } from "@mui/material";
 
 import Title from "components/Title";
 import ActionButtons from "components/ActionButtons";
@@ -76,6 +76,11 @@ const Layout = () => {
     <Box sx={styles.mainContainer}>
       <Title />
       <Box sx={styles.content}>
+        {isFetchingJobApps && (
+          <Box sx={styles.loadingOverlay}>
+            <CircularProgress sx={styles.loadingIcon} />
+          </Box>
+        )}
         <Box sx={toolBarStyles.toolBar}>
           <Box sx={styles.searchBarHolder}>
             <SearchBar
@@ -98,7 +103,6 @@ const Layout = () => {
           setJobApps={setJobApps}
           updateStatus={updateStatus}
           refreshJobApps={refreshJobApps}
-          isFetchingJobApps={isFetchingJobApps}
         />
       </Box>
       <Footer />
