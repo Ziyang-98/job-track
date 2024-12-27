@@ -1,7 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import { styles } from "./styles";
+import { styles, getToolBarStyles } from "./styles";
 import { useMediaQuery } from "@mui/material";
 
 import Title from "components/Title";
@@ -20,6 +19,7 @@ import useFilteredJobApps from "hooks/useFilteredJobApps";
 import useSyncDataDialog from "hooks/useSyncDataDialog";
 import useManageProfileDialog from "hooks/useManageProfileDialog";
 import useNotification from "hooks/useNotification";
+import LoadingScreen from "components/LoadingScreen";
 
 const Layout = () => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
@@ -33,6 +33,7 @@ const Layout = () => {
     refreshJobApps,
     activeSortingOption,
     handleSetActiveSortingOption,
+    isFetchingJobApps,
   } = useJobApps(handleOpenNotification);
 
   const { filteredJobApps, searchFilter, setSearchFilter } =
@@ -68,55 +69,40 @@ const Layout = () => {
 
   const isSearchBarAndActionButtonsOverlapping =
     useMediaQuery("(max-width:840px)");
+
+  const toolBarStyles = getToolBarStyles(
+    isSearchBarAndActionButtonsOverlapping
+  );
   return (
     <Box sx={styles.mainContainer}>
-      <Grid
-        container
-        spacing={2}
-        justifyContent={"center"}
-        alignItems={"center"}
-      >
-        <Grid xs={11} item>
-          <Title />
-        </Grid>
-
-        <Grid xs={9.5} container item justifyContent={"space-between"}>
-          <Grid
-            xs={isSearchBarAndActionButtonsOverlapping && 12}
-            item
-            sx={styles.searchBarHolder}
-          >
+      <Title />
+      <Box sx={styles.content}>
+        {isFetchingJobApps && <LoadingScreen />}
+        <Box sx={toolBarStyles.toolBar}>
+          <Box sx={styles.searchBarHolder}>
             <SearchBar
               searchFilter={searchFilter}
               setSearchFilter={setSearchFilter}
             />
-          </Grid>
-          <Grid
-            xs={isSearchBarAndActionButtonsOverlapping && 12}
-            item
-            sx={isSearchBarAndActionButtonsOverlapping ? { py: 2 } : {}}
-          >
-            <ActionButtons
-              jobApps={jobApps}
-              activeSortingOption={activeSortingOption}
-              handleSetActiveSortingOption={handleSetActiveSortingOption}
-              handleClickCreate={handleOpenCreateDialog}
-              handleClickSyncData={handleOpenSyncDataDialog}
-              handleOpenManageProfileDialog={handleOpenManageProfileDialog}
-            />
-          </Grid>
-        </Grid>
-
-        <Grid item xs={11}>
-          <JobAppContent
+          </Box>
+          <ActionButtons
             jobApps={jobApps}
-            filteredJobApps={filteredJobApps}
-            setJobApps={setJobApps}
-            updateStatus={updateStatus}
-            refreshJobApps={refreshJobApps}
+            activeSortingOption={activeSortingOption}
+            handleSetActiveSortingOption={handleSetActiveSortingOption}
+            handleClickCreate={handleOpenCreateDialog}
+            handleClickSyncData={handleOpenSyncDataDialog}
+            handleOpenManageProfileDialog={handleOpenManageProfileDialog}
           />
-        </Grid>
-      </Grid>
+        </Box>
+        <JobAppContent
+          jobApps={jobApps}
+          filteredJobApps={filteredJobApps}
+          setJobApps={setJobApps}
+          updateStatus={updateStatus}
+          refreshJobApps={refreshJobApps}
+        />
+      </Box>
+      <Footer />
       <CreateDialog
         dialogProps={createDialogProps}
         handleClose={handleCreateDialogClose}
@@ -146,7 +132,6 @@ const Layout = () => {
         alertProps={alertProps}
         message={message}
       />
-      <Footer />
     </Box>
   );
 };

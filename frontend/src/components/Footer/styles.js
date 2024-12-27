@@ -8,5 +8,6 @@ export const styles = {
     bgcolor: "primary.light",
     fontFamily: "monospace",
     fontSize: "16px",
+    zIndex: "2",
   },
 };

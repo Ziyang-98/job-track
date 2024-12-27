@@ -22,7 +22,7 @@ export const useStyles = (index, isSmall, isMedium) => ({
     flexDirection: "column",
     alignItems: "center",
     margin: "8px 8px",
-    width: "16%",
+    width: "18%",
     minWidth: 200,
 
     height: isSmall ? 360 : isMedium ? 420 : 500,
@@ -37,6 +37,7 @@ export const useStyles = (index, isSmall, isMedium) => ({
     minHeight: "10%",
     width: "100%",
     py: 1.5,
+    px: 8,
     fontSize: "18px",
     fontWeight: "800",
   },

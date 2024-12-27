@@ -1,7 +1,7 @@
 import { getJobApps } from "api";
 import {
   getUserIdFromLocalStorage,
-  storeUserIdFromLocalStorage,
+  storeUserIdInLocalStorage,
 } from "common/utils";
 import { useState } from "react";
 
@@ -30,7 +30,7 @@ const useSyncDataDialog = (refreshJobApps, handleOpenNotification) => {
     } else {
       await getJobApps(newUserId)
         .then((res) => {
-          storeUserIdFromLocalStorage(newUserId);
+          storeUserIdInLocalStorage(newUserId);
           refreshJobApps().then(() => {
             handleOpenNotification(
               "Successfully imported data!",

@@ -14,7 +14,7 @@ export const getUserIdFromLocalStorage = () => {
   return localStorage.getItem(LOCAL_STORAGE_USER_ID);
 };
 
-export const storeUserIdFromLocalStorage = (userId) => {
+export const storeUserIdInLocalStorage = (userId) => {
   localStorage.setItem(LOCAL_STORAGE_USER_ID, userId);
 };
 

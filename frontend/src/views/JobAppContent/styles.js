@@ -1,8 +1,8 @@
 export const styles = {
   contentContainer: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     flexWrap: "wrap",
-    paddingBottom: 4,
+    position: "relative",
   },
 };
