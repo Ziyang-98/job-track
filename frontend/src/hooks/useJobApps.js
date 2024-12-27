@@ -68,7 +68,7 @@ const useJobApps = (handleOpenNotification) => {
         "error"
       );
     } finally {
-      // setIsFetchingJobApps(false);
+      setIsFetchingJobApps(false);
     }
   }
   // Run on app start up
