@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { styles, getToolBarStyles } from "./styles";
-import { CircularProgress, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 import Title from "components/Title";
 import ActionButtons from "components/ActionButtons";
@@ -19,6 +19,7 @@ import useFilteredJobApps from "hooks/useFilteredJobApps";
 import useSyncDataDialog from "hooks/useSyncDataDialog";
 import useManageProfileDialog from "hooks/useManageProfileDialog";
 import useNotification from "hooks/useNotification";
+import LoadingScreen from "components/LoadingScreen";
 
 const Layout = () => {
   const { handleOpenNotification, snackbarProps, alertProps, message } =
@@ -76,11 +77,7 @@ const Layout = () => {
     <Box sx={styles.mainContainer}>
       <Title />
       <Box sx={styles.content}>
-        {isFetchingJobApps && (
-          <Box sx={styles.loadingOverlay}>
-            <CircularProgress sx={styles.loadingIcon} />
-          </Box>
-        )}
+        {isFetchingJobApps && <LoadingScreen />}
         <Box sx={toolBarStyles.toolBar}>
           <Box sx={styles.searchBarHolder}>
             <SearchBar

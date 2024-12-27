@@ -49,6 +49,7 @@ const useJobApps = (handleOpenNotification) => {
       setActiveSortingOption(sortingOptionFromLocalStorage);
     const userId = getUserIdFromLocalStorage();
     try {
+      setIsFetchingJobApps(true);
       const userRes = await getUser(userId);
       const { userId: receivedUserId } = userRes.data;
       storeUserIdInLocalStorage(receivedUserId);
@@ -67,7 +68,7 @@ const useJobApps = (handleOpenNotification) => {
         "error"
       );
     } finally {
-      setIsFetchingJobApps(false);
+      // setIsFetchingJobApps(false);
     }
   }
   // Run on app start up

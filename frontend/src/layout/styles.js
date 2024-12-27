@@ -10,7 +10,7 @@ export const styles = {
   content: {
     p: 2,
     width: "80%",
-    // overflow: "hidden",
+    overflow: "hidden",
     position: "relative",
   },
   toolBar: {
@@ -24,20 +24,6 @@ export const styles = {
     alignItems: "center",
     width: "20%",
     minWidth: "15rem",
-  },
-  loadingOverlay: {
-    position: "absolute",
-    inset: 0,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "primary.light",
-    opacity: 0.8,
-    zIndex: 1,
-    borderRadius: 4,
-  },
-  loadingIcon: {
-    color: "secondary.dark",
   },
 };
 
