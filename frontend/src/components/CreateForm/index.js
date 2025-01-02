@@ -28,7 +28,7 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
     convertStringToDayjs(jobApp.lastContactDate)
   );
   const isSmall = useMediaQuery("(max-width:550px)");
-
+  console.log(lastContactDate, dateApplied);
   const styles = useStyles(isSmall);
   const {
     contacts,
@@ -46,6 +46,7 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
   const handleChange = (event) => {
     setStatus(event.target.value);
   };
+
   return (
     <Box sx={styles.form}>
       <TextField
