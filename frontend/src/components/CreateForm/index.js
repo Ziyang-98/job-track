@@ -28,8 +28,6 @@ const CreateForm = ({ formContactSuite, type, jobApp }) => {
     convertStringToDayjs(jobApp.lastContactDate)
   );
   const isSmall = useMediaQuery("(max-width:550px)");
-  console.log(jobApp.dateApplied, lastContactDate);
-  console.log(jobApp.lastContactDate, lastContactDate);
 
   const styles = useStyles(isSmall);
   const {

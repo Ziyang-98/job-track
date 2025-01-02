@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 import { LOCAL_STORAGE_SORTING_OPTION, LOCAL_STORAGE_USER_ID } from "./config";
 import { DEFAULT_CONTACT } from "./constants";
 
@@ -6,7 +7,7 @@ export const convertStringToDayjs = (string) => {
   if (string === null) {
     return null;
   }
-
+  dayjs.extend(customParseFormat);
   return dayjs(string, "DD/MM/YYYY");
 };
 
