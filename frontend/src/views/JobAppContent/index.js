@@ -15,7 +15,12 @@ const JobAppContent = ({
   updateStatus,
   refreshJobApps,
 }) => {
-  const { onDragEnd } = useDnd(jobApps, setJobApps, updateStatus);
+  const { onDragEnd } = useDnd(
+    jobApps,
+    filteredJobApps,
+    setJobApps,
+    updateStatus
+  );
   return (
     <Box sx={styles.contentContainer}>
       <DragDropContext onDragEnd={onDragEnd}>
